@@ -63,6 +63,7 @@ const StartEnrollment = () => {
 
   const onSubmit = (data) => {
     data.email = email;
+    data.stsatus="In Progress";
     // data.date_of_birth = startDate;
     fnCreateApplication({
       ...data,

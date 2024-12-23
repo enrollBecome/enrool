@@ -44,7 +44,7 @@ navLinks = [
         </NavLink>
       ))}
       </div>
-      <button onClick={() => signOut({ redirectUrl: '/' })}><div className="items-center flex justify-center poppins-medium py-[16px] px-[25px] rounded-full gap-[10px] text-black bg-[#f8fcff]">
+      <button onClick={() => signOut({ redirectUrl: '/' })}><div className="items-center flex justify-center poppins-medium py-[16px] px-[25px] rounded-full gap-[10px] text-white  bg-[#bc9c22]">
       <LogOut strokeWidth={1} /> <p>Log Out</p>
       </div></button>
       
