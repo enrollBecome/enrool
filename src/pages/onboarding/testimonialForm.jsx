@@ -138,7 +138,7 @@ const TestimonialForm = () => {
           </div>
           <div className="border-t py-8">
 
-<div className="flex flex-col ">
+<div className="flex flex-col pb-4">
       <span className="mb-2 text-[13px] poppins-regular">
         Upload Your Recoreded Video Testimonial Here
       </span>
@@ -155,6 +155,13 @@ const TestimonialForm = () => {
         </p>
       )}
     </div>
+
+
+    <div className="border-t py-4 flex flex-col gap-4">
+<span className='text-xl  font-semibold'>Video Resume Questions</span>
+<span className=''>
+    What motivated you to pursue a Trauma Recovery Certificate, and what do you hope to achieve by completing this program? Why would you be an ideal candidate for admission into the program?
+    </span> </div>
 
 </div>
           {errorUpdateApplication?.message && (

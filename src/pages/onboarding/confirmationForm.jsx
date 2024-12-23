@@ -76,11 +76,28 @@ const ConfirmationForm = () => {
                 <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
                     Application Confirmation
                 </div>
-                <p className="font-thin mb-4">
-                    List the names and contact information of referees who are willing to complete a confidential assessment on your behalf.
-                </p>
+                
 
                 <form onSubmit={handleSubmit(onSubmit, onError)}>
+
+<div className='grid grid-cols-1 md:grid-cols-2 gap-4 my-8'>
+                <div className="flex flex-col ">
+                              <p className="text-sm font-light text-gray-400">
+                                Applicant Name
+                              </p>
+                              <p className="text-xl">
+                                {application.first_name}{" "}{application.last_name}
+                              </p>
+                            </div>
+                            <div className="flex flex-col ">
+                              <p className="text-sm font-light text-gray-400">
+                                Program
+                              </p>
+                              <p className="text-xl">
+                                {application.course_name}
+                              </p>
+                            </div>
+                            </div>
                     <div>
                         <input
                             type="checkbox"
@@ -90,9 +107,27 @@ const ConfirmationForm = () => {
                             onChange={(e) => setIsCheckboxChecked(e.target.checked)} // Update checkbox state
                         />
                         <label htmlFor="checkbox1" className="ml-2">
-                            I confirm the information provided is correct.
+                            Confirm
                         </label>
                     </div>
+                    <div className='my-4'>
+<span className=''>
+I certify that the information I have submitted on this application is accurate to the best of my knowledge. I authorize Becoming Institute’s Admissions Committee to access the information, contact my reference if required and evaluate my admissibility to the 12-month Trauma Recovery program.
+</span>
+</div>
+<div className="flex flex-col my-8">
+                              <p className="text-sm font-light text-gray-400">
+                                Enrollment Status
+                              </p>
+                              <p className="text-xl">
+                                Submitted
+                              </p>
+                            </div>
+<div className='my-8'>
+<span className=''>
+Note: you can only submit one application per term. If you require changes to your information after your application has been submitted, notify info@becomingmethod.com. If you find any errors above, please go back to make the changes necessary.
+</span>
+</div>
 
                     <div className="border-t py-8"></div>
 
