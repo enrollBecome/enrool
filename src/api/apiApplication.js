@@ -94,7 +94,8 @@ export async function updateTestimonialApplication(token, _, educationData) {
   const random = Math.floor(Math.random() * 90000);
   
   const resume = `resume-${random}-${educationData.applicationData.resume[0].name}`;
-  
+  const video = `video-${random}-${educationData.applicationData.video[0].name}`;
+
   const { error: resumeError } = await supabase.storage
   .from("uploads")
   .upload(resume, educationData.applicationData.resume[0]);
@@ -104,13 +105,25 @@ if (resumeError) throw new Error("Error uploading resume");
 
 const resumeUrl = `${supabaseUrl}/storage/v1/object/public/uploads/${resume}`;
 
+
+const { error: videoError } = await supabase.storage
+.from("uploads")
+.upload(video, educationData.applicationData.video[0]);
+
+
+if (videoError) throw new Error("Error uploading video");
+
+const videoUrl = `${supabaseUrl}/storage/v1/object/public/uploads/${video}`;
+
 const filteredData = educationData.applicationData;
 delete filteredData.resume;
+delete filteredData.video;
   const { data, error } = await supabase
     .from("applications")
     .update([{
       ...filteredData,
       resume_url:resumeUrl,
+      video_url:videoUrl,
     }])
     .eq("id",educationData.application_id)
     .select();

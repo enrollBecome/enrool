@@ -75,7 +75,7 @@ const TestimonialForm = () => {
       })
     };
     useEffect(() => {
-      if (dataUpdateApplication?.length > 0) navigate(`/term-selection-form/${applicationid}`);
+      if (dataUpdateApplication?.length > 0) navigate(`/references-form/${applicationid}`);
     }, [loadingUpdateApplication]);
     useEffect(() => {
       if (application) {

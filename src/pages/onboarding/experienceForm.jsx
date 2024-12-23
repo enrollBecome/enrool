@@ -75,7 +75,7 @@ const ExperienceForm = () => {
   };
   useEffect(() => {
     if (dataCreateExperience?.length > 0)
-      navigate(`/experienceal-background/${applicationid}`);
+      navigate(`/experience-form/${applicationid}`);
   }, [loadingCreateExperience]);
 
 const handleDelete = (experienceId)=>{

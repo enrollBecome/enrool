@@ -61,7 +61,7 @@ const PersonalStatementForm = () => {
     })
   };
   useEffect(() => {
-    if (dataUpdateApplication?.length > 0) navigate(`/term-selection-form/${applicationid}`);
+    if (dataUpdateApplication?.length > 0) navigate(`/testimonial-form/${applicationid}`);
   }, [loadingUpdateApplication]);
   useEffect(() => {
     if (application) {

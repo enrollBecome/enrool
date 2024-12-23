@@ -81,7 +81,7 @@ const ReferencesForm = () => {
     })
   };
   useEffect(() => {
-    if (dataUpdateApplication?.length > 0) navigate(`/term-selection-form/${applicationid}`);
+    if (dataUpdateApplication?.length > 0) navigate(`/confirmation-form/${applicationid}`);
   }, [loadingUpdateApplication]);
   useEffect(() => {
     if (application) {
