@@ -88,7 +88,7 @@ const StartEnrollment = () => {
             },
           })
           .then(() => {
-            navigate(`/program-selection/${newCandidateId}`);
+            navigate(`/term-selection-form/${newCandidateId}`);
           })
           .catch((err) => {
             console.error("Error updating unsafeMetadata:", err);
