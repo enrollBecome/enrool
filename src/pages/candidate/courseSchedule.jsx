@@ -29,23 +29,30 @@ const CourseSchedule = () => {
       ) : null}
       <OnboardingTopbar />
       <div className="w-full lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white h-fit">
-        {application.term === "Winter" ? (
-          <>
-            <div className="bg-[#bc9c22] text-white mt-4 py-10 rounded-[30px]">
+      <div className="bg-[#bc9c22] text-white mt-4 py-10 rounded-[30px]">
               <div className="container mx-auto text-center">
                 <h1 className="text-4xl font-bold">
-                  Course Schedule : Winter 2025
+                  Course Schedule : 2025-26
                 </h1>
-                <h2 className="text-2xl mt-2 seasons">
-                  Friday, May 9, 2025 to Friday, August 22, 2025
-                </h2>
+               
               </div>
             </div>
+    
+        
+            <div className="bg-[#3d3101] text-white mt-4 py-10 rounded-[30px] flex flex-col justify-center items-center">
+             
 
+              <span className=" sm:text-[20px] sm:text-center lg:text-left lg:mb-3 sm:mb-3 lg:text-[35px] sm:leading-tight lg:leading-none"> Course Schedule : Winter 2025</span>
+          <span className="text-2xl  seasons">
+          Friday, May 9, 2025 to Friday, August 22, 2025
+                </span>
+            </div>
+         
+       
             <div className="overflow-x-auto mt-6 ">
               <table className="w-full border-collapse border border-[#bc9c22] text-left text-gray-700 rounded-[30px]">
                 <thead>
-                  <tr className="bg-[#bc9c22]">
+                  <tr className="bg-[#3d3101]">
                     <th className="border border-[#bc9c22] text-white px-4 py-2">
                       Course Code
                     </th>
@@ -144,25 +151,23 @@ const CourseSchedule = () => {
                 </p>
               </div>
             </div>
-          </>
-        ) : null}
-        {application.term === "Spring" ? (
+          
+        
+     
           <>
-            <div className="bg-[#bc9c22] text-white mt-4 py-10 rounded-[30px]">
-              <div className="container mx-auto text-center">
-                <h1 className="text-4xl font-bold">
-                  Course Schedule : Spring 2025
-                </h1>
-                <h2 className="text-2xl mt-2 seasons">
-                Friday, September 5, 2025 to Friday, December 19, 2025
-                </h2>
-              </div>
+            <div className="bg-[#3d3101] text-white mt-4 py-10 rounded-[30px] flex flex-col justify-center items-center">
+             
+
+              <span className=" sm:text-[20px] sm:text-center lg:text-left lg:mb-3 sm:mb-3 lg:text-[35px] sm:leading-tight lg:leading-none"> Course Schedule : Spring 2025</span>
+          <span className="text-2xl  seasons">
+          Friday, September 5, 2025 to Friday, December 19, 2025
+                </span>
             </div>
 
             <div className="overflow-x-auto mt-6 ">
   <table className="w-full border-collapse border border-[#bc9c22] text-left text-gray-700 rounded-[30px]">
     <thead>
-      <tr className="bg-[#bc9c22]">
+      <tr className="bg-[#3d3101]">
         <th className="border border-[#bc9c22] text-white px-4 py-2">
           Course Code
         </th>
@@ -281,12 +286,12 @@ const CourseSchedule = () => {
 </div>
             
           </>
-        ) : null}
-        {application.term === "Fall" ? (
+       
+        
           <>
-            <div className="bg-[#bc9c22] text-white mt-4 py-10 rounded-[30px]">
+            <div className="bg-[#3d3101] text-white mt-4 py-10 rounded-[30px]">
               <div className="container mx-auto text-center">
-                <h1 className="text-4xl font-bold">
+                <h1 className="text-[35px] ">
                   Course Schedule : Fall 2025
                 </h1>
                 <h2 className="text-2xl mt-2 seasons">
@@ -298,7 +303,7 @@ const CourseSchedule = () => {
             <div className="overflow-x-auto mt-6 ">
               <table className="w-full border-collapse border border-[#bc9c22] text-left text-gray-700 rounded-[30px]">
                 <thead>
-                  <tr className="bg-[#bc9c22]">
+                  <tr className="bg-[#3d3101]">
                     <th className="border border-[#bc9c22] text-white px-4 py-2">
                       Course Code
                     </th>
@@ -412,7 +417,7 @@ const CourseSchedule = () => {
               </div>
             </div>
           </>
-        ) : null}
+        
       </div>
     </>
   );
