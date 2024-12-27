@@ -1,12 +1,12 @@
 import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from '@clerk/clerk-react'
 import React, { useEffect } from 'react'
-import logo from "./../../public/logo.png";
+import logo from "./../assets/logo.png";
 import { Button } from './ui/button';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const { isSignedIn, isLoaded, user } = useUser();
-    const candidateId =user?.unsafeMetadata?.candidateid;
+    const applicationid  = user?.unsafeMetadata?.applicationid;
     const role = user?.unsafeMetadata?.role;
     const navigate = useNavigate();
     const handleClick =() =>{
@@ -14,8 +14,8 @@ const Header = () => {
     }
 
     useEffect(() => {
-        if (candidateId) {
-          navigate("/candidate-dashboard");
+        if (applicationid) {
+          navigate(`/start-enrollment/${applicationid}`);
         }
         
         else if(role=="admin"){
@@ -25,7 +25,7 @@ const Header = () => {
         navigate("/start-enrollment");
 
        }
-      }, [candidateId,role ,isSignedIn]);
+      }, [applicationid,role ,isSignedIn]);
       
   return (
     <>

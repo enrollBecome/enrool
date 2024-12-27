@@ -1,46 +1,55 @@
-import React, { useEffect, useState } from 'react'
-import { z } from 'zod';
-import ExperienceType from '@/data/experienceType';
-import { Controller, useForm } from 'react-hook-form';
-import JoditEditor from 'jodit-react';
-import { Download, Trash2 } from 'lucide-react';
-import { addNewExperience, deleteExperience, getExperienceByApplicationId } from '@/api/apiExperience';
-import { useNavigate, useParams } from 'react-router-dom';
-import { zodResolver } from '@hookform/resolvers/zod';
-import useFetch from '@/hooks/use-fetch';
-import OnboardingTopbar from '@/layout/onboardingTopBar';
-import { Button } from '@/components/ui/button';
-import { ClipLoader } from 'react-spinners';
-
+import React, { useEffect, useState } from "react";
+import { z } from "zod";
+import ExperienceType from "@/data/experienceType";
+import { Controller, useForm } from "react-hook-form";
+import JoditEditor from "jodit-react";
+import { Download, Trash2 } from "lucide-react";
+import {
+  addNewExperience,
+  deleteExperience,
+  getExperienceByApplicationId,
+} from "@/api/apiExperience";
+import { useNavigate, useParams } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import useFetch from "@/hooks/use-fetch";
+import OnboardingTopbar from "@/layout/onboardingTopBar";
+import { Button } from "@/components/ui/button";
+import { ClipLoader } from "react-spinners";
 
 const schema = z.object({
-    start_date: z.string().date(),
-    end_date: z.string().date(),
-    type_of_experience: z.enum(ExperienceType, {
-      errorMap: () => ({ message: "Type of Experience must not be empty" }),
-    }),
-    
-    organization_name: z.string().min(3, { message: "Organization Name is required" }),
-    title: z.string().min(3, { message: "Current Professional Title is required" }),
-   nature_of_work:z.string().min(3, { message: "Nature of Work is required" }),
-  
-    
-  });
+  start_date: z.string().date(),
+  end_date: z.string().date(),
+  type_of_experience: z.enum(ExperienceType, {
+    errorMap: () => ({ message: "Type of Experience must not be empty" }),
+  }),
+
+  organization_name: z
+    .string()
+    .min(3, { message: "Organization Name is required" }),
+  title: z
+    .string()
+    .min(3, { message: "Current Professional Title is required" }),
+  nature_of_work: z.string().min(3, { message: "Nature of Work is required" }),
+});
 const ExperienceForm = () => {
-    const { applicationid } = useParams();
+  const { applicationid } = useParams();
   const [loading, setLoading] = useState(true);
 
   const [application, setApplication] = useState([]);
   const [experience, setExperience] = useState([]);
-
+  const appliedStatus = user.unsafeMetadata.applied;
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (appliedStatus === "true") {
+      navigate("/candidate-dashboard");
+    }
+  }, [appliedStatus]);
   useEffect(() => {
     getExperienceByApplicationId(applicationid)
       .then((data) => setExperience(data))
       .catch(() => setError("Failed to fetch applications."))
       .finally(() => setLoading(false));
   }, [applicationid]);
-
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -63,9 +72,6 @@ const ExperienceForm = () => {
     fn: fnCreateExperience,
   } = useFetch(addNewExperience);
 
-  
-
-
   const onSubmit = (data) => {
     fnCreateExperience({
       ...data,
@@ -78,122 +84,101 @@ const ExperienceForm = () => {
       navigate(`/experience-form/${applicationid}`);
   }, [loadingCreateExperience]);
 
-const handleDelete = (experienceId)=>{
-
-    
+  const handleDelete = (experienceId) => {
     deleteExperience(experienceId)
-    .then((response) => {
-      window.location.reload();
-      console.log(response);
-    })
-    .catch((err) => {
-      console.error("Error deleting Experience", err);
-    });
-  }
+      .then((response) => {
+        window.location.reload();
+        console.log(response);
+      })
+      .catch((err) => {
+        console.error("Error deleting Experience", err);
+      });
+  };
 
   return (
     <>
-    
-    <OnboardingTopbar />
+      <OnboardingTopbar />
       <div className="w-full  lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white h-fit ">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
           Professional Experience
         </div>
         <p className=" font-thin mb-4">
-          Please provide detailed information about your professional experience.
+          Please provide detailed information about your professional
+          experience.
         </p>
 
-
         {experience && experience.length > 0 ? (
+          <>
+            <div className=" flex w-full gap-4 flex-col ">
               <>
-                <div className=" flex w-full gap-4 flex-col ">
-                  
-                    <>
-                      {experience.map((educate, index) => (
-                        <div
-                          key={index}
-                          className="w-full rounded-[30px] bg-[#f2f7fc] flex p-10 mb-10 gap-10 items-center">
-                          <div className=" grid grid-cols-1 md:grid-cols-2 gap-4  w-11/12">
-                            <div className="flex flex-col">
-                              <p className="text-sm font-light text-gray-400">
-                                Name of Organization
-                              </p>
-                              <p className="text-xl">
-                                {educate.organization_name}
-                              </p>
-                            </div>
+                {experience.map((educate, index) => (
+                  <div
+                    key={index}
+                    className="w-full rounded-[30px] bg-[#f2f7fc] flex p-10 mb-10 gap-10 items-center">
+                    <div className=" grid grid-cols-1 md:grid-cols-2 gap-4  w-11/12">
+                      <div className="flex flex-col">
+                        <p className="text-sm font-light text-gray-400">
+                          Name of Organization
+                        </p>
+                        <p className="text-xl">{educate.organization_name}</p>
+                      </div>
 
-                            <div className="flex flex-col">
-                              <p className="text-sm font-light text-gray-400">
-                                Type of Experience
-                              </p>
-                              <p className="text-xl">
-                                {educate.type_of_experience}
-                              </p>
-                            </div>
+                      <div className="flex flex-col">
+                        <p className="text-sm font-light text-gray-400">
+                          Type of Experience
+                        </p>
+                        <p className="text-xl">{educate.type_of_experience}</p>
+                      </div>
 
-                            <div className="flex flex-col">
-                              <p className="text-sm font-light text-gray-400">
-                                Current Professional Title
-                              </p>
-                              <p className="text-xl">
-                                {educate.title}
-                              </p>
-                            </div>
-                            
-                            
-                            <div className="flex flex-col">
-                              <p className="text-sm font-light text-gray-400">
-                               Start Date
-                              </p>
-                              <p className="text-xl">
-                                {educate.start_date}
-                              </p>
-                            </div>
-                            <div className="flex flex-col">
-                              <p className="text-sm font-light text-gray-400">
-                                End Date
-                              </p>
-                              <p className="text-xl">{educate.end_date}</p>
-                            </div>
-                            
-                            <div>
-                            </div>
-                            
-                            <div className="flex flex-col">
-                              <p className="text-sm font-light text-gray-400">
-                                Nature of Work
-                              </p>
-                              <p className="text-xl">
-                                {educate.nature_of_work}
-                              </p>
-                            </div>
-                            
-                          </div>
+                      <div className="flex flex-col">
+                        <p className="text-sm font-light text-gray-400">
+                          Current Professional Title
+                        </p>
+                        <p className="text-xl">{educate.title}</p>
+                      </div>
 
-                          {experience.length <= 1 ? null : (
-                            <div
-                              className="w-1/12 bg-white rounded-full p-4 max-w-fit cursor-pointer"
-                              onClick={() => handleDelete(educate.id)}>
-                              <Trash2 color="#FF0000" />
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </>
-                 
-                </div>
+                      <div className="flex flex-col">
+                        <p className="text-sm font-light text-gray-400">
+                          Start Date
+                        </p>
+                        <p className="text-xl">{educate.start_date}</p>
+                      </div>
+                      <div className="flex flex-col">
+                        <p className="text-sm font-light text-gray-400">
+                          End Date
+                        </p>
+                        <p className="text-xl">{educate.end_date}</p>
+                      </div>
+
+                      <div></div>
+
+                      <div className="flex flex-col">
+                        <p className="text-sm font-light text-gray-400">
+                          Nature of Work
+                        </p>
+                        <p className="text-xl">{educate.nature_of_work}</p>
+                      </div>
+                    </div>
+
+                    {experience.length <= 1 ? null : (
+                      <div
+                        className="w-1/12 bg-white rounded-full p-4 max-w-fit cursor-pointer"
+                        onClick={() => handleDelete(educate.id)}>
+                        <Trash2 color="#FF0000" />
+                      </div>
+                    )}
+                  </div>
+                ))}
               </>
-            ) : null}
+            </div>
+          </>
+        ) : null}
         <form onSubmit={handleSubmit(onSubmit, onError)}>
-          
           <div className="border-t py-8">
             {/* Experience */}
-           
-
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-            <div className="flex flex-col">
+              <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   Type of Experience
                 </span>
@@ -250,8 +235,7 @@ const handleDelete = (experienceId)=>{
                   </p>
                 )}
               </div>
-              
-             
+
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   Current Professional Title
@@ -271,8 +255,6 @@ const handleDelete = (experienceId)=>{
                 )}
               </div>
 
-
-              
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   Start Date
@@ -309,26 +291,24 @@ const handleDelete = (experienceId)=>{
                   </p>
                 )}
               </div>
-              </div>
-              <div className="flex flex-col pt-4">
-  <span className="mb-2 text-[13px] poppins-regular">Nature of Work</span>
+            </div>
+            <div className="flex flex-col pt-4">
+              <span className="mb-2 text-[13px] poppins-regular">
+                Nature of Work
+              </span>
 
-  <textarea
-    className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 w-full h-40 rounded-[30px] p-4 text-base resize-none"
-    placeholder="Add Nature of Work"
-    required
-    {...register("nature_of_work")}
-  ></textarea>
-  
-  {errors.nature_of_work && (
-    <p className="text-red-400 text-sm px-4 py-2">
-      {errors.nature_of_work.message}
-    </p>
-  )}
-</div>
-             
-              
-            
+              <textarea
+                className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 w-full h-40 rounded-[30px] p-4 text-base resize-none"
+                placeholder="Add Nature of Work"
+                required
+                {...register("nature_of_work")}></textarea>
+
+              {errors.nature_of_work && (
+                <p className="text-red-400 text-sm px-4 py-2">
+                  {errors.nature_of_work.message}
+                </p>
+              )}
+            </div>
           </div>
           {errorCreateExperience?.message && (
             <p className="text-red-500">{errorCreateExperience.message}</p>
@@ -345,7 +325,7 @@ const handleDelete = (experienceId)=>{
         </form>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ExperienceForm
+export default ExperienceForm;

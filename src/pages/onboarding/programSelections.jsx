@@ -24,8 +24,14 @@ const ProgramSelection = () => {
 
   const [application , setApplication] = useState([]);
 
+  const navigate = useNavigate();
+  const appliedStatus = user.unsafeMetadata.applied;
 
-
+  useEffect(() => {
+    if (appliedStatus === "true") {
+      navigate("/candidate-dashboard");
+    }
+  }, [appliedStatus]);
 
 
  
@@ -37,7 +43,7 @@ const ProgramSelection = () => {
   }, [applicationid]);
 
   
-  const navigate = useNavigate();
+  
   const {
     register,
     handleSubmit,

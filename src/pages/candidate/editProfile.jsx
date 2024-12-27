@@ -8,13 +8,14 @@ import { useUser } from "@clerk/clerk-react";
 import { z } from "zod";
 import useFetch from "@/hooks/use-fetch";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addNewApplication, getApplicationById, updateApplication } from "@/api/apiApplication";
+
 import ImmigrationStatus from "@/data/immigrationStatus";
 import ancestryOptions from "@/data/ancestryOptions";
 import { Button } from "@/components/ui/button";
 import { ClipLoader } from "react-spinners";
 import GenderOptions from "@/data/genderOptions";
 import { useNavigate, useParams } from "react-router-dom";
+import { getApplicationById, updateApplication } from "@/api/apiApplication";
 const ancestryNames = ancestryOptions.map(option => option.name);
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
@@ -35,14 +36,13 @@ ancestry: z.enum(ancestryNames, { errorMap: () => ({ message: "Ancestry must not
 gender: z.enum(GenderOptions, { errorMap: () => ({ message: "Gender must not be empty" }) }),
 
 });
-const EditStartEnrollment = () => {
-    const { applicationid } = useParams();
+const EditProfile = () => {
+    
     const [loading, setLoading] = useState(true);
 
     const [application , setApplication] = useState([]);
   const { user } = useUser();
-  const email = user?.emailAddresses?.[0]?.emailAddress || "No email found";
-  const appliedStatus = user.unsafeMetadata.applied;
+  const applicationid = user?.unsafeMetadata?.applicationid;
   const navigate =useNavigate();
   useEffect(() => {
     getApplicationById(applicationid)
@@ -50,6 +50,7 @@ const EditStartEnrollment = () => {
       .catch(() => setError("Failed to fetch applications."))
       .finally(() => setLoading(false));
   }, [applicationid]);
+  console.log("Application : ",application)
   const {
     register,
     handleSubmit,
@@ -84,7 +85,7 @@ const EditStartEnrollment = () => {
     })
   };
   useEffect(() => {
-    if (dataUpdateApplication?.length > 0) navigate(`/term-selection-form/${applicationid}`);
+    if (dataUpdateApplication?.length > 0) navigate("/candidate-dashboard");
   }, [loadingUpdateApplication]);
   useEffect(() => {
     if (application) {
@@ -107,22 +108,21 @@ const EditStartEnrollment = () => {
 
 
 
-  useEffect(() => {
-    if (appliedStatus === "true") {
-      navigate("/candidate-dashboard");
-    }
-  }, [appliedStatus]);
-
   return (
     <>
       <OnboardingTopbar />
       <div className="w-full  lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white h-fit ">
-        <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
-          Edit Admissions Application
-        </div>
-        <p className=" font-thin mb-4">
-          Please enter your application details below:
-        </p>
+      <div className="bg-[#bc9c22] text-white mt-4 py-14 rounded-[30px]">
+              <div className="container mx-auto text-center">
+                <h1 className="text-4xl font-bold">
+                  Edit Admissions Applciation
+                </h1>
+                <h2 className="text-2xl mt-2 seasons">
+                Please enter your application details below:
+                </h2>
+              </div>
+            </div>
+       
 
         <form onSubmit={handleSubmit(onSubmit, onError)}>
           {/* Name Information */}
@@ -474,4 +474,4 @@ const EditStartEnrollment = () => {
   );
 };
 
-export default EditStartEnrollment;
+export default EditProfile;

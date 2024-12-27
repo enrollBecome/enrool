@@ -41,6 +41,14 @@ const ReferencesForm = () => {
   const { user } = useUser();
   const email = user?.emailAddresses?.[0]?.emailAddress || "No email found";
   const navigate =useNavigate();
+
+  const appliedStatus = user.unsafeMetadata.applied;
+
+  useEffect(() => {
+    if (appliedStatus === "true") {
+      navigate("/candidate-dashboard");
+    }
+  }, [appliedStatus]);
   useEffect(() => {
     getApplicationById(applicationid)
       .then((data) => setApplication(data))

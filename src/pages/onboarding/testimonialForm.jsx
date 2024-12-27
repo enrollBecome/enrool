@@ -35,6 +35,14 @@ const TestimonialForm = () => {
     const [application , setApplication] = useState([]);
 
     const navigate =useNavigate();
+
+    const appliedStatus = user.unsafeMetadata.applied;
+
+  useEffect(() => {
+    if (appliedStatus === "true") {
+      navigate("/candidate-dashboard");
+    }
+  }, [appliedStatus]);
     useEffect(() => {
       getApplicationById(applicationid)
         .then((data) => setApplication(data))

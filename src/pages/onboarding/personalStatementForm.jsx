@@ -18,9 +18,15 @@ const PersonalStatementForm = () => {
     const [loading, setLoading] = useState(true);
 
     const [application , setApplication] = useState([]);
+    const navigate =useNavigate();
+    const appliedStatus = user.unsafeMetadata.applied;
 
-
-  const navigate =useNavigate();
+    useEffect(() => {
+      if (appliedStatus === "true") {
+        navigate("/candidate-dashboard");
+      }
+    }, [appliedStatus]);
+  
   useEffect(() => {
     getApplicationById(applicationid)
       .then((data) => setApplication(data))

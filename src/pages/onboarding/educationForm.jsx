@@ -56,7 +56,13 @@ const EducationForm = () => {
 
   const [application, setApplication] = useState([]);
   const [education, setEducation] = useState([]);
-
+  const appliedStatus = user.unsafeMetadata.applied;
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (appliedStatus === "true") {
+      navigate("/candidate-dashboard");
+    }
+  }, [appliedStatus]);
   useEffect(() => {
     getEducationByApplicationId(applicationid)
       .then((data) => setEducation(data))
@@ -64,7 +70,7 @@ const EducationForm = () => {
       .finally(() => setLoading(false));
   }, [applicationid]);
 
-  const navigate = useNavigate();
+ 
   const {
     register,
     handleSubmit,

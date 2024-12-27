@@ -41,7 +41,13 @@ const StartEnrollment = () => {
   const applicationId = user?.unsafeMetadata?.applicationid;
   const [tempData, setTempData] = useState([]);
   const navigate =useNavigate();
+  const appliedStatus = user.unsafeMetadata.applied;
 
+  useEffect(() => {
+    if (appliedStatus === "true") {
+      navigate("/candidate-dashboard");
+    }
+  }, [appliedStatus]);
   const {
     register,
     handleSubmit,

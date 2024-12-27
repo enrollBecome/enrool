@@ -1,24 +1,23 @@
 import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import logoWhite from "./../assets/logo.png"
-import { Bell, BriefcaseBusiness, CircleCheckBig, FilePlus2, Files, FolderUp, GraduationCap, House, ListTodo, LogOut, User, Users, UsersRound } from 'lucide-react';
+import { Bell, BriefcaseBusiness, Calendar, CircleCheckBig, FilePlus2, Files, FolderUp, GraduationCap, House, ListTodo, LogOut, MessageSquarePlus, Receipt, ReceiptText, User, Users, UsersRound } from 'lucide-react';
 import { useUser } from '@clerk/clerk-react';
 
-const OnboardingLayout = () => {
+const CandidateLayout = () => {
   const {user} = useUser();
   const applicationid  = user.unsafeMetadata.applicationid;
 let navLinks = []
   if (applicationid){
 navLinks = [
-      { path: `/start-enrollment/${applicationid}`, icon: <User strokeWidth={1} color="#bc9c22"/>, label: "Personal Information" },
+      { path: "/candidate-dashboard", icon: <ListTodo strokeWidth={1} color="#bc9c22"/>, label: "My Application" },
       // { path: "/admin-edit-profile", icon: <UserPen strokeWidth={1} />, label: "Edit Profile" },
-      { path: `/term-selection-form/${applicationid}`, icon: <ListTodo strokeWidth={1} color="#bc9c22" />, label: "Term Selection" },
-      { path: `/education-form/${applicationid}`, icon: <GraduationCap strokeWidth={1} color="#bc9c22" />, label: "Education" },
-      { path: `/experience-form/${applicationid}`, icon: <BriefcaseBusiness strokeWidth={1} color="#bc9c22" />, label: "Experience" },
-      { path: `/personal-statement-form/${applicationid}`, icon: <Bell strokeWidth={1} color="#bc9c22" />, label: "Personal Statement" },
-      { path: `/testimonial-form/${applicationid}`, icon: <FolderUp strokeWidth={1} color="#bc9c22" />, label: "Testimonial" },
-      { path: `/references-form/${applicationid}`, icon: <UsersRound strokeWidth={1} color="#bc9c22" />, label: "References" },
-      { path: `/confirmation-form/${applicationid}`, icon: <CircleCheckBig strokeWidth={1} color="#bc9c22" />, label: "Confirmation" },
+      { path: "/edit-profile", icon: <User strokeWidth={1} color="#bc9c22" />, label: "Edit Profile" },
+      { path: "/course-enrolled", icon: <GraduationCap strokeWidth={1} color="#bc9c22" />, label: "Course Enrolled" },
+      { path: "/course-schedule", icon: <Calendar strokeWidth={1} color="#bc9c22" />, label: "Course Schedule" },
+      { path: "/submit-tickets", icon: <MessageSquarePlus strokeWidth={1} color="#bc9c22" />, label: "Submit Tickets" },
+      { path: "/invoice", icon: <ReceiptText strokeWidth={1} color="#bc9c22" />, label: "Invoice" },
+     
     ];
   }else{
      navLinks = [
@@ -60,4 +59,4 @@ navLinks = [
   )
 }
 
-export default OnboardingLayout
+export default CandidateLayout

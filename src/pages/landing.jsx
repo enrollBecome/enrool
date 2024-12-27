@@ -28,7 +28,7 @@ const LandingPage = () => {
             Thank you for choosing to apply to the Becoming Institute for your educational and professional aspirations. 
             We eagerly await the opportunity to welcome you into our community and to witness the incredible contributions you will make in the field of trauma recovery.
         </p>
-        <div class="signature">
+        <div className="signature">
             <p className='poppins-regular text-lg leading-normal text-justify pb-4'>With warm regards,</p>
             <p className='text-2xl leading-10'><strong>Dr. Joan Samuels-Dennis, Ph.D</strong></p>
             <p className='text-lg leading-normal'>Dean, School of Psychotherapeutic Innovations</p>

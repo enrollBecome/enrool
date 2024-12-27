@@ -70,7 +70,10 @@
 font-weight: 400;
 font-style: normal;
 }
+.seasons{
+  font-family: "the-seasons", sans-serif;
 
+}
 .poppins-thin {
   font-family: "Poppins", serif;
   font-weight: 100;
