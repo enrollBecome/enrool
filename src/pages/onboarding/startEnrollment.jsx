@@ -69,7 +69,7 @@ const StartEnrollment = () => {
 
   const onSubmit = (data) => {
     data.email = email;
-    data.stsatus="In Progress";
+    data.status="In Progress";
     // data.date_of_birth = startDate;
     fnCreateApplication({
       ...data,
@@ -92,6 +92,7 @@ const StartEnrollment = () => {
           .update({
             unsafeMetadata: {
               applicationid: newCandidateId,
+              // applied:"1"
             },
           })
           .then(() => {
