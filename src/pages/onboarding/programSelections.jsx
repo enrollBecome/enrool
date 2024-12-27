@@ -10,6 +10,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { getApplicationById, updateApplication } from '@/api/apiApplication';
 import useFetch from '@/hooks/use-fetch';
+import { useUser } from '@clerk/clerk-react';
 const schema = z.object({
   term:z.enum(TermOptions, { errorMap: () => ({ message: "Term must not be empty" }) }),
   course_name:z.enum(CourseOptions, { errorMap: () => ({ message: "Course must not be empty" }) }),
@@ -17,7 +18,7 @@ const schema = z.object({
 });
 const ProgramSelection = () => {
 
-
+const {user} =useUser()
 
   const { applicationid } = useParams();
   const [loading, setLoading] = useState(true);

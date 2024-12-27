@@ -31,7 +31,7 @@ import Completion from "./pages/completion";
 import TicketsThankYou from "./pages/candidate/ticketThankYou";
 
 function App() {
-  const [stripePromise, setStripePromise] = useState(null);
+  // const [stripePromise, setStripePromise] = useState(null);
   
   const router = createBrowserRouter([
     {

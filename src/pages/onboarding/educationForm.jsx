@@ -20,6 +20,7 @@ import {
   getEducationByApplicationId,
 } from "@/api/apiEducation";
 import { Download, Trash2 } from "lucide-react";
+import { useUser } from "@clerk/clerk-react";
 const schema = z.object({
   attended_from: z.string().date(),
   attended_to: z.string().date(),
@@ -53,7 +54,7 @@ const schema = z.object({
 const EducationForm = () => {
   const { applicationid } = useParams();
   const [loading, setLoading] = useState(true);
-
+const {user} = useUser();
   const [application, setApplication] = useState([]);
   const [education, setEducation] = useState([]);
   const appliedStatus = user.unsafeMetadata.applied;

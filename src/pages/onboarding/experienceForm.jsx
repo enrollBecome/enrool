@@ -15,6 +15,7 @@ import useFetch from "@/hooks/use-fetch";
 import OnboardingTopbar from "@/layout/onboardingTopBar";
 import { Button } from "@/components/ui/button";
 import { ClipLoader } from "react-spinners";
+import { useUser } from "@clerk/clerk-react";
 
 const schema = z.object({
   start_date: z.string().date(),
@@ -34,7 +35,7 @@ const schema = z.object({
 const ExperienceForm = () => {
   const { applicationid } = useParams();
   const [loading, setLoading] = useState(true);
-
+  const {user} = useUser();
   const [application, setApplication] = useState([]);
   const [experience, setExperience] = useState([]);
   const appliedStatus = user.unsafeMetadata.applied;

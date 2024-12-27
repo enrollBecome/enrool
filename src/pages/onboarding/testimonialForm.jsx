@@ -2,6 +2,7 @@ import { getApplicationById, updateApplication, updateTestimonialApplication } f
 import { Button } from '@/components/ui/button'
 import useFetch from '@/hooks/use-fetch'
 import OnboardingTopbar from '@/layout/onboardingTopBar'
+import { useUser } from '@clerk/clerk-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -31,7 +32,7 @@ const TestimonialForm = () => {
 
     const { applicationid } = useParams();
     const [loading, setLoading] = useState(true);
-
+    const {user} = useUser();
     const [application , setApplication] = useState([]);
 
     const navigate =useNavigate();
