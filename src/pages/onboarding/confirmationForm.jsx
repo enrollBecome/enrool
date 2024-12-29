@@ -22,7 +22,7 @@ const ConfirmationForm = () => {
   const [loading, setLoading] = useState(true);
   const [application, setApplication] = useState([]);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false); // State for checkbox
-  const appliedStatus = user.unsafeMetadata.applied;
+  let appliedStatus = user.unsafeMetadata.applied;
 
   const navigate = useNavigate();
 

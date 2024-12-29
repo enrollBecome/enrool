@@ -53,6 +53,23 @@ export async function getApplicationById(applicationId) {
 }
 
 
+export async function getApplications() {
+ 
+  const { data, error } = await supabase
+    .from("applications")
+    .select("*")
+    .order("applicant_id", { ascending: false }); 
+
+  if (error) {
+    console.error("Error fetching Applications:", error);
+    return null;
+  }
+
+
+  return data;
+}
+
+
 // export async function updateTestimonialApplication(token, { application_id }, applicationData) {
   
   

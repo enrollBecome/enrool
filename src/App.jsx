@@ -26,18 +26,22 @@ import CourseEnrolled from "./pages/candidate/courseEnrolled";
 import CourseSchedule from "./pages/candidate/courseSchedule";
 import SubmitTickets from "./pages/candidate/submitTickets";
 import Invoice from "./pages/candidate/invoice";
-import Payment from "./pages/payment";
+
 import Completion from "./pages/completion";
 import TicketsThankYou from "./pages/candidate/ticketThankYou";
+import PaymentSuccess from "./pages/paymentSuccess";
+import InitialPayment from "./pages/initialPayment";
+import ProtectedRouteAdmin from "./components/protectedRouteAdmin";
+import AdminLayout from "./layout/adminLayout";
+import AdminDashbaord from "./pages/admin/adminDashbaord";
+import AdminViewApplication from "./pages/admin/adminViewApplication";
 
 function App() {
   // const [stripePromise, setStripePromise] = useState(null);
   
   const router = createBrowserRouter([
-    {
-      path: "/pay",
-      element: <Payment/>, // Render Register without AppLayout
-    },
+  
+    
 
     {
       path: "/completion",
@@ -105,6 +109,22 @@ function App() {
         },
       ],
     },
+
+    {
+      element: (
+        <ProtectedRouteAdmin>
+          <AdminLayout />
+        </ProtectedRouteAdmin>
+      ),
+      children: [
+        {
+          path: "/admin-dashboard",
+          element: <AdminDashbaord/>, // Render Register without AppLayout
+        },{
+          path: "/admin-dashboard/view/:applicationid",
+          element: <AdminViewApplication/>, // Render Register without AppLayout
+        },]
+      },
     {
       element: (
         <ProtectedRouteApplicant>
@@ -112,6 +132,14 @@ function App() {
         </ProtectedRouteApplicant>
       ),
       children: [
+        {
+          path: "/pay",
+          element: <InitialPayment/>, // Render Register without AppLayout
+        },
+        {
+          path: "/success",
+          element: <PaymentSuccess/>, // Render Register without AppLayout
+        },
         {
           path: "/candidate-dashboard",
           element: <CandidateDashboard />,

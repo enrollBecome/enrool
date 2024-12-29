@@ -42,7 +42,7 @@ const ReferencesForm = () => {
   const email = user?.emailAddresses?.[0]?.emailAddress || "No email found";
   const navigate =useNavigate();
 
-  const appliedStatus = user.unsafeMetadata.applied;
+  let appliedStatus = user.unsafeMetadata.applied;
 
   useEffect(() => {
     if (appliedStatus === "true") {
@@ -88,9 +88,37 @@ const ReferencesForm = () => {
 
     })
   };
+
   useEffect(() => {
-    if (dataUpdateApplication?.length > 0) navigate(`/confirmation-form/${applicationid}`);
+    if (dataUpdateApplication?.length > 0){
+
+        const existingMetadata = user.unsafeMetadata || {};
+        if(appliedStatus<7){
+          appliedStatus=7;
+        }
+        user
+          .update({
+            unsafeMetadata: {
+              ...existingMetadata,
+              applied: appliedStatus,
+            },
+          })
+          .then(() => {
+            navigate(`/confirmation-form/${applicationid}`);
+            
+          })
+          .catch((err) => {
+            console.error("Error updating unsafeMetadata:", err);
+          });
+  
+        // Update Clerk unsafeMetadata with new candidate ID
+      }
+    
+      
   }, [loadingUpdateApplication]);
+  // useEffect(() => {
+  //   if (dataUpdateApplication?.length > 0) navigate(`/confirmation-form/${applicationid}`);
+  // }, [loadingUpdateApplication]);
   useEffect(() => {
     if (application) {
 

@@ -37,7 +37,7 @@ const TestimonialForm = () => {
 
     const navigate =useNavigate();
 
-    const appliedStatus = user.unsafeMetadata.applied;
+    let appliedStatus = user.unsafeMetadata.applied;
 
   useEffect(() => {
     if (appliedStatus === "true") {
@@ -84,8 +84,34 @@ const TestimonialForm = () => {
       })
     };
     useEffect(() => {
-      if (dataUpdateApplication?.length > 0) navigate(`/references-form/${applicationid}`);
+      if (dataUpdateApplication?.length > 0){
+  
+          const existingMetadata = user.unsafeMetadata || {};
+          if(appliedStatus<6){
+            appliedStatus=6;
+          }
+          user
+            .update({
+              unsafeMetadata: {
+                ...existingMetadata,
+                applied: appliedStatus,
+              },
+            })
+            .then(() => {
+              navigate(`/references-form/${applicationid}`);
+              
+            })
+            .catch((err) => {
+              console.error("Error updating unsafeMetadata:", err);
+            });
+    
+          // Update Clerk unsafeMetadata with new candidate ID
+        }
+      
+        
     }, [loadingUpdateApplication]);
+  
+    
     useEffect(() => {
       if (application) {
   

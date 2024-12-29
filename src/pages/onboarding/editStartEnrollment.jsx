@@ -42,7 +42,7 @@ const EditStartEnrollment = () => {
     const [application , setApplication] = useState([]);
   const { user } = useUser();
   const email = user?.emailAddresses?.[0]?.emailAddress || "No email found";
-  const appliedStatus = user.unsafeMetadata.applied;
+  let appliedStatus = user.unsafeMetadata.applied;
   const navigate =useNavigate();
   useEffect(() => {
     getApplicationById(applicationid)

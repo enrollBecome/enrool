@@ -3,7 +3,7 @@ import { z } from "zod";
 import ExperienceType from "@/data/experienceType";
 import { Controller, useForm } from "react-hook-form";
 import JoditEditor from "jodit-react";
-import { Download, Trash2 } from "lucide-react";
+import { Download, Plus, Trash2 } from "lucide-react";
 import {
   addNewExperience,
   deleteExperience,
@@ -38,13 +38,19 @@ const ExperienceForm = () => {
   const {user} = useUser();
   const [application, setApplication] = useState([]);
   const [experience, setExperience] = useState([]);
-  const appliedStatus = user.unsafeMetadata.applied;
+  const [formOpen,setFormOpen]=useState(true);
+  let appliedStatus = user.unsafeMetadata.applied;
   const navigate = useNavigate();
   useEffect(() => {
     if (appliedStatus === "true") {
       navigate("/candidate-dashboard");
     }
   }, [appliedStatus]);
+  useEffect(()=>{
+    if(experience.length>0){
+      setFormOpen(false);
+    }
+    },[experience])
   useEffect(() => {
     getExperienceByApplicationId(applicationid)
       .then((data) => setExperience(data))
@@ -80,10 +86,36 @@ const ExperienceForm = () => {
       application_id: applicationid,
     });
   };
+
+
   useEffect(() => {
-    if (dataCreateExperience?.length > 0)
-      navigate(`/experience-form/${applicationid}`);
+    if (dataCreateExperience?.length > 0){
+
+        const existingMetadata = user.unsafeMetadata || {};
+        if(appliedStatus<4){
+          appliedStatus=4;
+        }
+        user
+          .update({
+            unsafeMetadata: {
+              ...existingMetadata,
+              applied: appliedStatus,
+            },
+          })
+          .then(() => {
+            window.location.reload();
+            
+          })
+          .catch((err) => {
+            console.error("Error updating unsafeMetadata:", err);
+          });
+  
+        // Update Clerk unsafeMetadata with new candidate ID
+      }
+    
+      
   }, [loadingCreateExperience]);
+ 
 
   const handleDelete = (experienceId) => {
     deleteExperience(experienceId)
@@ -95,7 +127,14 @@ const ExperienceForm = () => {
         console.error("Error deleting Experience", err);
       });
   };
+ const handleNext=()=>{
+    navigate(`/personal-statement-form/${applicationid}`);
+  }
 
+
+  const handleFormOpen = () =>{
+    setFormOpen(true)
+  }
   return (
     <>
       <OnboardingTopbar />
@@ -174,6 +213,7 @@ const ExperienceForm = () => {
             </div>
           </>
         ) : null}
+         {formOpen? (
         <form onSubmit={handleSubmit(onSubmit, onError)}>
           <div className="border-t py-8">
             {/* Experience */}
@@ -314,6 +354,7 @@ const ExperienceForm = () => {
           {errorCreateExperience?.message && (
             <p className="text-red-500">{errorCreateExperience.message}</p>
           )}
+          <div className="flex gap-6" >
           <Button
             type="submit"
             className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center">
@@ -323,7 +364,26 @@ const ExperienceForm = () => {
               "Add"
             )}
           </Button>
-        </form>
+          {experience && experience.length > 0?(<>
+            <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Next</Button>
+          </>):null}
+          </div>
+        </form>):(<>
+        
+        <div className="flex gap-6" >
+        <Button
+          
+          className="rounded-full px-8 py-4  bg-[#bc9c22] h-12 flex justify-center items-center" onClick={handleFormOpen}>
+           <Plus strokeWidth={2} size={40} color="white" /> Add
+        </Button>
+        
+          <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Next</Button>
+       
+        
+        </div>
+      
+      
+      </>)}
       </div>
     </>
   );

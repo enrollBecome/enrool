@@ -6,6 +6,8 @@ import { useUser } from '@clerk/clerk-react';
 
 const OnboardingLayout = () => {
   const {user} = useUser();
+  let applied = parseInt(user?.unsafeMetadata?.applied || "0", 10);
+  const incrementedApplied = applied + 1;
   const applicationid  = user.unsafeMetadata.applicationid;
 let navLinks = []
   if (applicationid){
@@ -29,7 +31,8 @@ navLinks = [
         `flex items-center poppins-medium py-[16px] px-[25px] rounded-full gap-[10px] cursor-pointer ${
           isActive ? 'bg-white text-white justify-center flex' : 'bg-transparent text-black'
         }`;
-      
+        navLinks = navLinks.slice(0, incrementedApplied);
+        
   return (
     <>
     <div className='flex w-full h-screen'>

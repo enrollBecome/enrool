@@ -26,7 +26,7 @@ const {user} =useUser()
   const [application , setApplication] = useState([]);
 
   const navigate = useNavigate();
-  const appliedStatus = user.unsafeMetadata.applied;
+  let appliedStatus = user.unsafeMetadata.applied;
 
   useEffect(() => {
     if (appliedStatus === "true") {
@@ -78,9 +78,37 @@ const {user} =useUser()
 
     })
   };
+
+
   useEffect(() => {
-    if (dataUpdateApplication?.length > 0) navigate(`/education-form/${applicationid}`);
+    if (dataUpdateApplication?.length > 0){
+
+        const existingMetadata = user.unsafeMetadata || {};
+        if(appliedStatus<2){
+          appliedStatus=2;
+        }
+        user
+          .update({
+            unsafeMetadata: {
+              ...existingMetadata,
+              applied: appliedStatus,
+            },
+          })
+          .then(() => {
+            navigate(`/education-form/${applicationid}`);
+            
+          })
+          .catch((err) => {
+            console.error("Error updating unsafeMetadata:", err);
+          });
+  
+        // Update Clerk unsafeMetadata with new candidate ID
+      }
+    
+      
   }, [loadingUpdateApplication]);
+
+  
   useEffect(() => {
     if (application) {
 

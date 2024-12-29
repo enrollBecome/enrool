@@ -41,7 +41,7 @@ const StartEnrollment = () => {
   const applicationId = user?.unsafeMetadata?.applicationid;
   const [tempData, setTempData] = useState([]);
   const navigate =useNavigate();
-  const appliedStatus = user.unsafeMetadata.applied;
+  let appliedStatus = user.unsafeMetadata.applied;
 
   useEffect(() => {
     if (appliedStatus === "true") {
@@ -92,7 +92,7 @@ const StartEnrollment = () => {
           .update({
             unsafeMetadata: {
               applicationid: newCandidateId,
-              // applied:"1"
+              applied:"1"
             },
           })
           .then(() => {

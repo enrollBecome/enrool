@@ -1,108 +1,59 @@
-import OnboardingTopbar from "@/layout/onboardingTopBar";
-import { useUser } from "@clerk/clerk-react";
-import React, { useEffect, useState } from "react";
-import PaymentForm from "./paymentFrom";
-import MyApplication from "./myApplication";
-import { getApplicationById } from "@/api/apiApplication";
-import { Button } from "@/components/ui/button";
-import { getEducationByApplicationId } from "@/api/apiEducation";
-import { Download } from "lucide-react";
-import { getExperienceByApplicationId } from "@/api/apiExperience";
+import { getApplicationById } from '@/api/apiApplication';
+import { getEducationByApplicationId } from '@/api/apiEducation';
+import { getExperienceByApplicationId } from '@/api/apiExperience';
+import OnboardingTopbar from '@/layout/onboardingTopBar'
+import { Download } from 'lucide-react';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import { ClipLoader, PropagateLoader } from 'react-spinners';
 
-const CandidateDashboard = () => {
-  const { user } = useUser();
-  const applied = user?.unsafeMetadata?.applied;
+const AdminViewApplication = () => {
+    const { applicationid } = useParams();
+    const [loading, setLoading] = useState(true);
+    const [education, setEducation] = useState([]);
+    const [experience, setExperience] = useState([]);
+    const [application , setApplication] = useState([]);
+    useEffect(() => {
+        getApplicationById(applicationid)
+          .then((data) => setApplication(data))
+          .catch(() => setError("Failed to fetch applications."))
+          .finally(() => setLoading(false));
+      }, [applicationid]);
 
-  const applicationid = user?.unsafeMetadata?.applicationid;
-  const [loading, setLoading] = useState(true);
-  const [application, setApplication] = useState([]);
-  const [education, setEducation] = useState([]);
-  const [experience, setExperience] = useState([]);
-  useEffect(() => {
-    getApplicationById(applicationid)
-      .then((data) => setApplication(data))
-      .catch(() => setError("Failed to fetch applications."))
-      .finally(() => setLoading(false));
-  }, [applicationid]);
-  
-  useEffect(() => {
-    getEducationByApplicationId(applicationid)
-      .then((data) => setEducation(data))
-      .catch(() => setError("Failed to fetch applications."))
-      .finally(() => setLoading(false));
-  }, [applicationid]);
-  useEffect(() => {
-    getExperienceByApplicationId(applicationid)
-      .then((data) => setExperience(data))
-      .catch(() => setError("Failed to fetch applications."))
-      .finally(() => setLoading(false));
-  }, [applicationid]);
+
+      useEffect(() => {
+        getEducationByApplicationId(applicationid)
+          .then((data) => setEducation(data))
+          .catch(() => setError("Failed to fetch education."))
+          .finally(() => setLoading(false));
+      }, [applicationid]);
+      useEffect(() => {
+        getExperienceByApplicationId(applicationid)
+          .then((data) => setExperience(data))
+          .catch(() => setError("Failed to fetch experience."))
+          .finally(() => setLoading(false));
+      }, [applicationid]);
   return (
     <>
-      <OnboardingTopbar />
-      <div className="w-full lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white min-h-fit h-full">
-        <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
-          My Application
-        </div>
-        {application && application.status === "Approved" ? (
-          <>
-            <div className="w-4/5 min-h-full h-fit flex justify-center">
-              <span className="">
-                Your application has been successfully submitted and is
-                currently under review. Once approved, you will receive a
-                notification to complete the payment and begin your course.{" "}
-              </span>
-            </div>
-          </>
-        ) : null}
-        {application && application.status === "Submitted" ? (
-          <>
-            <div className="w-full min-h-full h-fit flex flex-col">
-              <span className="text-2xl text-gray-500 font-semibold">
-                Payment Form
-              </span>
+    <OnboardingTopbar />
+      <div className="w-full lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white min-h-fit h-full flex ">
 
-              <div className="border-t my-4"></div>
-              <div className="">
-                <div className="flex flex-col">
-                  <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
-                    Course Name
-                  </span>
-                  <span className="mb-2 text-2xl poppins-bold">
-                    {application.course_name}
-                  </span>
-                </div>
+{loading || !application ? (<div className="w-full absolute left-0 top-0 z-50 bg-white h-full min-h-fit flex justify-center items-center">
+            <PropagateLoader color="#bc9c22" />
+          </div>) :(<> 
+          
+          
+            <div className="bg-[#bc9c22] text-white mt-4 py-10 rounded-[30px]">
+              <div className="container mx-auto text-center">
+                <h1 className="text-4xl font-bold">
+                  {application.first_name}{" "}{application.last_name}
+                </h1>
+                <h2 className="text-2xl mt-2 seasons">
+                {application.email}
+                </h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div className="flex flex-col">
-                  <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
-                    Program Term
-                  </span>
-                  <span className="mb-2 text-2xl poppins-bold">
-                    {application.term}
-                  </span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
-                    Price
-                  </span>
-                  <span className="mb-2 text-2xl poppins-bold">$150</span>
-                </div>
               </div>
-              <div className="border-t mt-4 pt-8">
-              <form action="http://127.0.0.1:54321/functions/v1/create-checkout-session" method="POST">
-              <Button className="w-full h-12 rounded-full " type="submit">
-                  Complete Payment
-                </Button>
-</form>
-                
-              </div>
-            </div>
-          </>
-        ) : null}
-        {application && application.status === "Paid" ? (
-          <>
-            <div className="w-full min-h-full h-fit flex flex-col">
+              <div className="w-full min-h-full h-fit flex flex-col">
               {/* Personal Information  */}
               <div className="border-t mt-4 pt-8">
                 <span className="text-2xl font-medium  seasons text-gray-400">
@@ -645,11 +596,11 @@ const CandidateDashboard = () => {
                 </div>
               </div>
             </div>
-          </>
-        ) : null}
-      </div>
-    </>
-  );
-};
+              </>)}
 
-export default CandidateDashboard;
+    </div>
+              </>
+  )
+}
+
+export default AdminViewApplication

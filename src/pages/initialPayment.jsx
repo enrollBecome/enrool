@@ -12,7 +12,7 @@
 // // recreating the `Stripe` object on every render.
 // const stripePromise = loadStripe("pk_test_51PaGSVDTA9vHHfvpE9vMaaDnggFP3VNi3P78mVQjrrcC7qGiomlcxxQ9LXyWkMJovnxhtEh5mYEfRLzXeUxNL88J00vTTFria9");
 
-const Payment = () => {
+const InitialPayment = () => {
 //     const fetchClientSecret = useCallback(async () => {
 //         try {
 //           const response = await fetch("http://127.0.0.1:54321/functions/v1/create-checkout-session", {
@@ -44,17 +44,10 @@ const Payment = () => {
 
 //   const options = {fetchClientSecret};
 
-//   return (
-//     <div id="checkout">
-//       <EmbeddedCheckoutProvider
-//         stripe={stripePromise}
-//         options={options}
-//       >
-//         <EmbeddedCheckout />
-//       </EmbeddedCheckoutProvider>
-//     </div>
-//   )
+  return (
+  <></>
+  )
 }
 
 
-export default Payment;
+export default InitialPayment;
