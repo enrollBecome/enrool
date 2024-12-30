@@ -35,6 +35,9 @@ import ProtectedRouteAdmin from "./components/protectedRouteAdmin";
 import AdminLayout from "./layout/adminLayout";
 import AdminDashbaord from "./pages/admin/adminDashbaord";
 import AdminViewApplication from "./pages/admin/adminViewApplication";
+import AdminMail from "./pages/admin/adminMail";
+import MailsTable from "./pages/admin/mailsTable";
+import AdminPrintApplication from "./pages/admin/adminPrintApplication";
 
 function App() {
   // const [stripePromise, setStripePromise] = useState(null);
@@ -123,6 +126,15 @@ function App() {
         },{
           path: "/admin-dashboard/view/:applicationid",
           element: <AdminViewApplication/>, // Render Register without AppLayout
+        },{
+          path: "/admin-mail/:applicationid",
+          element: <AdminMail/>, // Render Register without AppLayout
+        },{
+          path: "/admin-mail",
+          element: <MailsTable/>, // Render Register without AppLayout
+        },{
+          path: "/admin-dashboard/print/:applicationid",
+          element: <AdminPrintApplication/>, // Render Register without AppLayout
         },]
       },
     {

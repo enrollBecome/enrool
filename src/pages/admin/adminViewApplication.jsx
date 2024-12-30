@@ -57,14 +57,14 @@ const AdminViewApplication = () => {
               {/* Personal Information  */}
               <div className="border-t mt-4 pt-8">
                 <span className="text-2xl font-medium  seasons text-gray-400">
-                  Perosnal Information
+                  Personal Information
                 </span>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                   <div className="flex flex-col">
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       First Name
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.first_name}
                     </span>
                   </div>
@@ -72,7 +72,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Last Name
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.last_name}
                     </span>
                   </div>
@@ -80,7 +80,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Middle Name
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.middle_name}
                     </span>
                   </div>
@@ -88,7 +88,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Former name
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.former_name}
                     </span>
                   </div>
@@ -96,7 +96,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Gender
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.gender}
                     </span>
                   </div>
@@ -104,7 +104,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Date of Birth
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.dob}
                     </span>
                   </div>
@@ -112,7 +112,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Phone Number
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.phone}
                     </span>
                   </div>
@@ -120,7 +120,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Country of Residence
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.country}
                     </span>
                   </div>
@@ -136,7 +136,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Highest Level of Education
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.highest_level_education}
                     </span>
                   </div>
@@ -144,7 +144,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       First Language
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.first_language}
                     </span>
                   </div>
@@ -160,7 +160,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Immigration
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.immigration_status}
                     </span>
                   </div>
@@ -168,7 +168,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Ancestry
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.ancestry}
                     </span>
                   </div>
@@ -184,7 +184,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Course Selection
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.course_name}
                     </span>
                   </div>
@@ -192,7 +192,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Term
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.term}
                     </span>
                   </div>
@@ -216,7 +216,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Name of Institution
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.institution_name}
                                 </p>
                               </div>
@@ -225,7 +225,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Type of Institution
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.type_of_institution}
                                 </p>
                               </div>
@@ -234,7 +234,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Country of Residence
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.country_of_residence}
                                 </p>
                               </div>
@@ -242,7 +242,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Province
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.province}
                                 </p>
                               </div>
@@ -250,7 +250,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   City
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.city}
                                 </p>
                               </div>
@@ -258,7 +258,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Completed
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.completed}
                                 </p>
                               </div>
@@ -266,7 +266,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Attended From
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.attended_from}
                                 </p>
                               </div>
@@ -274,7 +274,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Attended To
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.attended_to}
                                 </p>
                               </div>
@@ -282,7 +282,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   First Language
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.first_language}
                                 </p>
                               </div>
@@ -327,7 +327,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Name of Organization
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.organization_name}
                                 </p>
                               </div>
@@ -336,7 +336,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Type of Experience
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.type_of_experience}
                                 </p>
                               </div>
@@ -345,7 +345,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Current Professional Title
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.title}
                                 </p>
                               </div>
@@ -354,7 +354,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Start Date
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.start_date}
                                 </p>
                               </div>
@@ -362,7 +362,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   End Date
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.end_date}
                                 </p>
                               </div>
@@ -373,7 +373,7 @@ const AdminViewApplication = () => {
                                 <p className="text-sm font-light text-gray-400">
                                   Nature of Work
                                 </p>
-                                <p className="mb-2 text-2xl poppins-bold">
+                                <p className="mb-2 text-2xl ">
                                   {educate.nature_of_work}
                                 </p>
                               </div>
@@ -395,7 +395,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Personal Statement
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.statement_of_purpose}
                     </span>
                   </div>
@@ -453,7 +453,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Full Name
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.ar_name}
                     </span>
                   </div>
@@ -461,7 +461,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Phone Number
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.ar_phone}
                     </span>
                   </div>
@@ -469,7 +469,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Email Address
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.ar_email}
                     </span>
                   </div>
@@ -485,7 +485,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Full Name
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.prr_name}
                     </span>
                   </div>
@@ -493,7 +493,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Phone Number
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.prr_phone}
                     </span>
                   </div>
@@ -501,7 +501,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Email Address
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.prr_email}
                     </span>
                   </div>
@@ -517,7 +517,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Full Name
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.per_name}
                     </span>
                   </div>
@@ -525,7 +525,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Phone Number
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.per_phone}
                     </span>
                   </div>
@@ -533,7 +533,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Email Address
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.per_email}
                     </span>
                   </div>
@@ -549,7 +549,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Applicant Name
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.first_name}{" "}{application.last_name}
                     </span>
                   </div>
@@ -557,7 +557,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Program
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.course_name}
                     </span>
                   </div>
@@ -585,7 +585,7 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Enrollemnt Status
                     </span>
-                    <span className="mb-2 text-2xl poppins-bold">
+                    <span className="mb-2 text-2xl ">
                       {application.status}
                     </span>
                   </div>

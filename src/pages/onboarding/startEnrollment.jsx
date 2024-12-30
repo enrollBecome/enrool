@@ -162,7 +162,7 @@ const StartEnrollment = () => {
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
                   type="text"
-                  placeholder="Add Last Name"
+                  placeholder="Add First Name"
                   required
                   {...register("first_name")}
                 />
@@ -180,7 +180,7 @@ const StartEnrollment = () => {
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
                   type="text"
-                  placeholder="Add Last Name"
+                  placeholder="Add Middle Name"
                   {...register("middle_name")}
                 />
                  {errors.last_name && (
@@ -254,7 +254,7 @@ const StartEnrollment = () => {
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
                   type="date"
-                  placeholder="Add Last Name"
+                  placeholder="Date of Birth"
                   required
                   {...register("dob")}
                 />
@@ -271,8 +271,8 @@ const StartEnrollment = () => {
 
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
-                  type="tel"
-                  placeholder="Add Last Name"
+                  type="number"
+                  placeholder="Add Phone No"
                   required
                   {...register("phone")}
                 />

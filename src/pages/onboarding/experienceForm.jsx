@@ -304,7 +304,7 @@ const ExperienceForm = () => {
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
                   type="date"
-                  placeholder="Add Last Name"
+
                   required
                   {...register("start_date")}
                 />
@@ -322,7 +322,7 @@ const ExperienceForm = () => {
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
                   type="date"
-                  placeholder="Add Last Name"
+
                   required
                   {...register("end_date")}
                 />

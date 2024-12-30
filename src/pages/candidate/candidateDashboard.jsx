@@ -90,7 +90,7 @@ const CandidateDashboard = () => {
                 </div>
               </div>
               <div className="border-t mt-4 pt-8">
-              <form action="http://127.0.0.1:54321/functions/v1/create-checkout-session" method="POST">
+              <form action="https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/create-checkout-session" method="POST">
               <Button className="w-full h-12 rounded-full " type="submit">
                   Complete Payment
                 </Button>
@@ -106,7 +106,7 @@ const CandidateDashboard = () => {
               {/* Personal Information  */}
               <div className="border-t mt-4 pt-8">
                 <span className="text-2xl font-medium  seasons text-gray-400">
-                  Perosnal Information
+                  Personal Information
                 </span>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                   <div className="flex flex-col">

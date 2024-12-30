@@ -10,7 +10,7 @@ const CourseSchedule = () => {
 
   const [loading, setLoading] = useState(true);
   const [application, setApplication] = useState([]);
-  console.log(applicationid);
+
   useEffect(() => {
     getApplicationById(applicationid)
       .then((data) => setApplication(data))

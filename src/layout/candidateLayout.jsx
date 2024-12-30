@@ -2,10 +2,11 @@ import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import logoWhite from "./../assets/logo.png"
 import { Bell, BriefcaseBusiness, Calendar, CircleCheckBig, FilePlus2, Files, FolderUp, GraduationCap, House, ListTodo, LogOut, MessageSquarePlus, Receipt, ReceiptText, User, Users, UsersRound } from 'lucide-react';
-import { useUser } from '@clerk/clerk-react';
+import { SignOutButton, useClerk, useUser } from '@clerk/clerk-react';
 
 const CandidateLayout = () => {
   const {user} = useUser();
+  const { signOut } = useClerk()
   const applicationid  = user.unsafeMetadata.applicationid;
 let navLinks = []
   if (applicationid){
@@ -44,7 +45,7 @@ navLinks = [
       ))}
       </div>
       <button onClick={() => signOut({ redirectUrl: '/' })}><div className="items-center flex justify-center poppins-medium py-[16px] px-[25px] rounded-full gap-[10px] text-white  bg-[#bc9c22]">
-      <LogOut strokeWidth={1} /> <p>Log Out</p>
+      <LogOut strokeWidth={1} /> <p>Log Outas</p>
       </div></button>
       
     

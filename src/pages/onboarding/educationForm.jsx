@@ -461,7 +461,7 @@ const handleDelete = (educationId)=>{
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
                   type="date"
-                  placeholder="Add Last Name"
+
                   required
                   {...register("attended_from")}
                 />
@@ -479,7 +479,7 @@ const handleDelete = (educationId)=>{
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
                   type="date"
-                  placeholder="Add Last Name"
+
                   required
                   {...register("attended_to")}
                 />

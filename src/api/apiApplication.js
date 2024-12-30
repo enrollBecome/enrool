@@ -16,7 +16,19 @@ export async function addNewApplication(token, _, applicationsData) {
 
   return data;
 }
+export async function deleteApplication(applicationId) {
+  const { data, error } = await supabase
+    .from("applications")
+    .delete()
+    .eq("id", applicationId); 
 
+  if (error) {
+    console.error("Error deleting Application", error);
+    return null; 
+  }
+
+  return data; 
+}
 export async function updateApplication(token, { application_id }, applicationData) {
   
 

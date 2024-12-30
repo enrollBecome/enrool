@@ -50,7 +50,7 @@ const EditProfile = () => {
       .catch(() => setError("Failed to fetch applications."))
       .finally(() => setLoading(false));
   }, [applicationid]);
-  console.log("Application : ",application)
+
   const {
     register,
     handleSubmit,
@@ -115,7 +115,7 @@ const EditProfile = () => {
       <div className="bg-[#bc9c22] text-white mt-4 py-14 rounded-[30px]">
               <div className="container mx-auto text-center">
                 <h1 className="text-4xl font-bold">
-                  Edit Admissions Applciation
+                  Edit Profile
                 </h1>
                 <h2 className="text-2xl mt-2 seasons">
                 Please enter your application details below:

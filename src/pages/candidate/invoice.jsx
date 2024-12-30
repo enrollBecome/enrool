@@ -22,7 +22,7 @@ const Invoice = () => {
           </span>
           <span className="seasons text-2xl">Tution Fees : $5500</span>
           <form
-            action="http://127.0.0.1:54321/functions/v1/checkout-ssentif-one"
+            action="https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/checkout-ssentif-one"
             method="POST"
           >
             <Button
@@ -40,7 +40,7 @@ const Invoice = () => {
           </span>
           <span className="seasons text-2xl">Tution Fees : $5500</span>
           <form
-            action="http://127.0.0.1:54321/functions/v1/checkout-secitcarp-two"
+            action="http://tallkizetxyhcvjujgzw.supabase.co/functions/v1/checkout-secitcarp-two"
             method="POST"
           >
             <Button
