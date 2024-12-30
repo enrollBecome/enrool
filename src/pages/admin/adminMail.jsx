@@ -171,12 +171,12 @@ console.log(subject)
         </div>
         <div class="content">
           <p>${message}</p>
-          <a class="button" href="https://careers.logilink.ca/candidate-applications/view/${applicationid}" target="_blank">View Application</a>
-          <p>If you have any questions, feel free to contact our support team at <a href="mailto:info@logilink.ca">info@logilink.ca</a>.</p>
-          <p>Visit our website: <a href="https://logilink.ca" target="_blank">Logilink.ca</a></p>
+          <a class="button" href="https://enrollbecominginstitute.ca/candidate-applications/view/${applicationid}" target="_blank">View Mail</a>
+          <p>If you have any questions, feel free to contact our support team at <a href="mailto:info@enrollbecominginstitute.ca">info@enrollbecominginstitute.ca</a>.</p>
+          <p>Visit our website: <a href="https://enrollbecominginstitute.ca" target="_blank">enrollbecominginstitute.ca</a></p>
         </div>
         <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} Logilink Staffing. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Becoming Institute. All rights reserved.</p>
         </div>
       </div>
     </body>
