@@ -66,7 +66,7 @@ const [subject,setSubject] = useState("");
 data.is_candidate="true";
 setMessage(data.query)
 setSubject(data.subject)
-        // data.date_of_birth = startDate;
+       // data.date_of_birth = startDate;
         fnCreateMail({
           ...data,
          
@@ -79,13 +79,13 @@ setSubject(data.subject)
     
       useEffect(() => {
         if (dataCreateMail?.length > 0) {
-
           if (message) {
-           
+            console.log(message)
+console.log(subject) 
     
             const sendEmail = async (to, subject, message) => {
               const response = await fetch(
-                "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/resend",
+                "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-mail",
                 {
                   method: "POST",
                   headers: {
@@ -167,14 +167,16 @@ setSubject(data.subject)
     <body>
       <div class="container">
         <div class="header">
-          <h1>Enroll Becoming</h1>
+          <h1>Logilink Staffing</h1>
         </div>
         <div class="content">
           <p>${message}</p>
-          <p> ${application.first_name}</p>
+          <a class="button" href="https://careers.logilink.ca/candidate-applications/view/${applicationid}" target="_blank">View Application</a>
+          <p>If you have any questions, feel free to contact our support team at <a href="mailto:info@logilink.ca">info@logilink.ca</a>.</p>
+          <p>Visit our website: <a href="https://logilink.ca" target="_blank">Logilink.ca</a></p>
         </div>
         <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} Enroll Becoming. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Logilink Staffing. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -196,8 +198,8 @@ setSubject(data.subject)
             // Usage
             sendEmail(
               `${application.email}`,
-              `${subject}`,
-              `${message.message}`
+              "Application Status Update",
+              `${message}`
             );
           }
     
