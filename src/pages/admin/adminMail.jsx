@@ -115,7 +115,7 @@ console.log(subject)
           overflow: hidden;
         }
         .header {
-          background-color: #00bcd4; /* Cyan */
+          background-color: #bc9c22; /* Cyan */
           color: #fff;
           padding: 20px;
           text-align: center;
@@ -136,7 +136,7 @@ console.log(subject)
           padding: 12px 20px;
           margin-top: 10px;
           color: #fff;
-          background-color: #00bcd4; /* Cyan */
+          background-color: #bc9c22; /* Cyan */
           text-decoration: none;
           border-radius: 5px;
           font-size: 16px;
@@ -156,7 +156,7 @@ console.log(subject)
           font-size: 14px;
         }
         .footer a {
-          color: #00bcd4; /* Cyan */
+          color: #bc9c22; /* Cyan */
           text-decoration: none;
         }
         .footer a:hover {
@@ -167,7 +167,7 @@ console.log(subject)
     <body>
       <div class="container">
         <div class="header">
-          <h1>Logilink Staffing</h1>
+          <h1>BECOMING INSTITUTE</h1>
         </div>
         <div class="content">
           <p>${message}</p>
@@ -198,7 +198,7 @@ console.log(subject)
             // Usage
             sendEmail(
               `${application.email}`,
-              "Application Status Update",
+              `${subject}`,
               `${message}`
             );
           }
