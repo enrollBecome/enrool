@@ -32,3 +32,19 @@ export async function getMailById(applicationId) {
   
     return data; 
   }
+
+  export async function getMailByMailId(mailId) {
+  
+    const { data, error } = await supabase
+      .from("mail")
+      .select("*")
+      .eq("id", mailId)
+       
+    
+    if (error) {
+      console.error("Error fetching mail by mail ID:", error);
+      return null; 
+    }
+  
+    return data; 
+  }

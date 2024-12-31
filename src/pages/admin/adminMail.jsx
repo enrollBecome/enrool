@@ -315,9 +315,11 @@ console.log(subject)
               </div>
 
               {mail.map((ami, index) => (
-  <div
+  <div onClick={() =>
+    (window.location.href = `/admin-mail/view/${ami.id}`)
+  }
     key={index}
-    className="flex w-full mt-4 bg-[#fffcee] rounded-[20px] p-4 px-10 items-center justify-evenly shadow-md hover:shadow-lg transition-shadow"
+    className=" cursor-pointerflex w-full mt-4 bg-[#fffcee] rounded-[20px] p-4 px-10 items-center justify-evenly shadow-md hover:shadow-lg transition-shadow"
   >
        <div className="flex items-center w-1/6 gap-2">
        <p className="font-semibold text-gray-700 truncate">{new Date(ami.created_at).toLocaleDateString("en-US", {

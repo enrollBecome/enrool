@@ -4,13 +4,13 @@ const LandingPage = () => {
   return (
     <>
     <img src="https://tallkizetxyhcvjujgzw.supabase.co/storage/v1/object/public/uploads/applicationpage.png" className='w-full'/>
-    <div className='w-full flex justify-center flex-col items-center py-14'>
-        <span className='text-6xl pt-10 font-semibold seasons_regular'>Message from the Dean</span>
+    <div className='w-full flex justify-center flex-col items-center sm:py-8 md:py-14'>
+        <span className='sm:text-4xl md:text-6xl sm:pt-4 md:pt-10 font-semibold seasons_regular'>Message from the Dean</span>
         <span className='py-5 text-lg poppins-regular'>Your Success is Our Success</span>
     </div>
     <div className='md:p-20 sm:p-4 flex sm:gap-4 md:gap-20 justify-center sm:flex-col sm:items-center md:flex-row'>
         <img src="https://tallkizetxyhcvjujgzw.supabase.co/storage/v1/object/public/uploads/deanimage.png" className='rounded-full md:w-[550px] md:h-[530px] sm:w-4/5' />
-        <div className='w-1/2 '>
+        <div className='sm:w-5/6 md:w-1/2 '>
         <h1 className='poppins-regular text-lg pb-6'>Dear Student,</h1>
         <p className='poppins-regular text-lg leading-normal text-justify pb-4'>
             It gives me immense pleasure to welcome you to our registration page for the {" "}

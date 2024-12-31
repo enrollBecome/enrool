@@ -185,3 +185,32 @@ font-style: normal;
 .cl-internal-1dauvpw{
   display: none;
 }
+
+@media print {
+  body * {
+    visibility: hidden; /* Hide everything outside the printbox */
+  }
+  #printbox, #printbox * {
+    visibility: visible;
+  }
+  #printbox {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  /* Ensure the header appears on every printed page */
+  .print-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    text-align: center;
+    z-index: 1000;
+  }
+
+  .content {
+    margin-top: 150px; /* Adjust to leave space for the fixed header */
+  }
+}

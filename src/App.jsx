@@ -38,6 +38,8 @@ import AdminViewApplication from "./pages/admin/adminViewApplication";
 import AdminMail from "./pages/admin/adminMail";
 import MailsTable from "./pages/admin/mailsTable";
 import AdminPrintApplication from "./pages/admin/adminPrintApplication";
+import Signup from "./pages/signUp";
+import AdminViewMail from "./pages/admin/adminViewMail";
 
 function App() {
   // const [stripePromise, setStripePromise] = useState(null);
@@ -55,6 +57,10 @@ function App() {
     {
       path: "/sign-in",
       element: <Register />, // Render Register without AppLayout
+    },
+    {
+      path: "/sign-up",
+      element: <Signup />, // Render Register without AppLayout
     },
     // Publically Available with NavBar
     {
@@ -135,6 +141,10 @@ function App() {
         },{
           path: "/admin-dashboard/print/:applicationid",
           element: <AdminPrintApplication/>, // Render Register without AppLayout
+        },
+        {
+          path: "/admin-mail/view/:mailid",
+          element: <AdminViewMail/>, // Render Register without AppLayout
         },]
       },
     {

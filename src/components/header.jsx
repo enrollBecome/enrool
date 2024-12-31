@@ -29,7 +29,7 @@ const Header = () => {
       
   return (
     <>
-    <div className=' w-full h-[80px] bg-white flex justify-between px-20'>
+    <div className=' w-full h-[80px] bg-white flex justify-between sm:px-10 md:px-20'>
         <span className='h-full items-center flex'>
             <img src={logo} className='h-12' />
         </span>
