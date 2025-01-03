@@ -11,7 +11,7 @@ let navLinks = []
   
 navLinks = [
       { path: "/admin-dashboard", icon: <ListTodo strokeWidth={1} color="#bc9c22"/>, label: "Applications" },
-      { path: "/admin-mail", icon: <Mail strokeWidth={1} color="#bc9c22"/>, label: "Mail" },
+      // { path: "/admin-mail", icon: <Mail strokeWidth={1} color="#bc9c22"/>, label: "Mail" },
       // { path: "/admin-edit-profile", icon: <UserPen strokeWidth={1} />, label: "Edit Profile" },
       
      

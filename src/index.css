@@ -211,6 +211,6 @@ font-style: normal;
   }
 
   .content {
-    margin-top: 150px; /* Adjust to leave space for the fixed header */
+    margin-top: 100px; /* Adjust to leave space for the fixed header */
   }
 }

@@ -44,7 +44,7 @@ const CandidateDashboard = () => {
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
           My Application
         </div>
-        {application && application.status === "Approved" ? (
+        {application && application.status === "Submitted" ? (
           <>
             <div className="w-4/5 min-h-full h-fit flex justify-center">
               <span className="">
@@ -55,7 +55,7 @@ const CandidateDashboard = () => {
             </div>
           </>
         ) : null}
-        {application && application.status === "Submitted" ? (
+        {application && application.status === "Approved" ? (
           <>
             <div className="w-full min-h-full h-fit flex flex-col">
               <span className="text-2xl text-gray-500 font-semibold">

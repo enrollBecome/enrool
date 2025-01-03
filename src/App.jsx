@@ -40,6 +40,15 @@ import MailsTable from "./pages/admin/mailsTable";
 import AdminPrintApplication from "./pages/admin/adminPrintApplication";
 import Signup from "./pages/signUp";
 import AdminViewMail from "./pages/admin/adminViewMail";
+import AcademicRefernce from "./pages/references/academicReference";
+
+import PersonalRefrence from "./pages/references/perosnalReference";
+import ProfessionalRefrence from "./pages/references/professionalRefernece";
+import ViewArApplication from "./pages/references/viewArApplication";
+import ViewPerApplication from "./pages/references/viewPerApplication";
+import ViewPrrApplication from "./pages/references/viewPrrApplication";
+import Thanks from "./pages/references/thanks";
+
 
 function App() {
   // const [stripePromise, setStripePromise] = useState(null);
@@ -70,6 +79,35 @@ function App() {
           path: "/",
           element: <LandingPage />,
         },
+        {
+          path:"/academic-reference",
+          element:<AcademicRefernce />
+        },
+        {
+          path:"/personal-reference",
+          element:<PersonalRefrence />
+        },
+        {
+          path:"/professional-reference",
+          element:<ProfessionalRefrence />
+        },
+        {
+          path:"/view-ar-application",
+          element:<ViewArApplication />
+        },
+        {
+          path:"/view-per-application",
+          element:<ViewPerApplication />
+        },
+        {
+          path:"/view-prr-application",
+          element:<ViewPrrApplication />
+        },
+
+        {
+          path:"/thanks-refree",
+          element:<Thanks />
+        }
       ],
     },
     // Start Enrollment : Being signed in is required

@@ -64,6 +64,59 @@ export async function getApplicationById(applicationId) {
   return data; 
 }
 
+export async function getApplicationByIdArmail(applicationId,armail) {
+  
+  const { data, error } = await supabase
+    .from("applications")
+    .select("*")
+    .eq("id", applicationId)
+    .eq("ar_email",armail)
+    .maybeSingle();
+  
+  if (error) {
+    console.error("Error fetching Application by ID:", error);
+    return null; 
+  }
+
+  return data; 
+}
+
+export async function getApplicationByIdPrrmail(applicationId,prrmail) {
+  
+  const { data, error } = await supabase
+    .from("applications")
+    .select("*")
+    .eq("id", applicationId)
+    .eq("prr_email",prrmail)
+    .maybeSingle();
+  
+  if (error) {
+    console.error("Error fetching Application by ID:", error);
+    return null; 
+  }
+
+  return data; 
+}
+export async function getApplicationByIdPermail(applicationId,permail) {
+  
+  const { data, error } = await supabase
+    .from("applications")
+    .select("*")
+    .eq("id", applicationId)
+    .eq("per_email",permail)
+    .maybeSingle();
+  
+  if (error) {
+    console.error("Error fetching Application by ID:", error);
+    return null; 
+  }
+
+  return data; 
+}
+
+
+
+
 
 export async function getApplications() {
  
