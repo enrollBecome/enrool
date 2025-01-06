@@ -162,9 +162,9 @@ const StartEnrollment = () => {
             background-color: #bc9c22;
             padding: 20px;
             padding-top:50px;
-            paddig-bottom:50px;
+            padding-bottom:50px;
             text-align: center;
-            border-radius:60px;
+            border-radius:30px;
         }
 
         .header h1 {
@@ -226,6 +226,7 @@ const StartEnrollment = () => {
             width: 100%;
             height: auto;
             display: block;
+            border-radius:30px;
         }
 
         .apply-button {
@@ -252,7 +253,7 @@ const StartEnrollment = () => {
         <div class="image-container">
             <img src="https://tallkizetxyhcvjujgzw.supabase.co/storage/v1/object/public/uploads/Screenshot%202025-01-06%20at%2004.31.52.png" alt="Welcome Image">
         </div>
-        <a href="https://www.enrollbecominginstitute.ca/start-enrollment" class="apply-button">Start Applying</a>
+        
         <div class="header">
             <h1>Welcome to the Becoming Institute</h1>
         </div>
@@ -295,6 +296,7 @@ const StartEnrollment = () => {
             Becoming Institute Inc.<br>
             <a href="https://www.becomingmethod.com">www.becomingmethod.com</a></p>
         </div>
+        <a href="https://www.enrollbecominginstitute.ca/start-enrollment" style="color:white; font-weight:500;" class="apply-button">Start Applying</a>
         <div class="footer">
             <p>&copy; 2024 Becoming Institute Inc. All rights reserved.<br>
             Visit us at <a href="https://www.becomingmethod.com">www.becomingmethod.com</a></p>
