@@ -43,7 +43,7 @@ const StartEnrollment = () => {
   const applicationId = user?.unsafeMetadata?.applicationid;
   const [tempData, setTempData] = useState([]);
   const navigate =useNavigate();
-  const mailStatus = url.searchParams.get('mail');
+  const mailStatus = new URL(window.location.href).searchParams.get('mail');
   let appliedStatus = user.unsafeMetadata.applied;
 
   useEffect(() => {
