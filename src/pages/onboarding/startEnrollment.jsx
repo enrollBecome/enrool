@@ -20,6 +20,8 @@ import { useNavigate } from "react-router-dom";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+
 const ancestryNames = ancestryOptions.map(option => option.name);
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
@@ -41,6 +43,7 @@ gender: z.enum(GenderOptions, { errorMap: () => ({ message: "Gender must not be 
 
 });
 const StartEnrollment = () => {
+  const { toast } = useToast();
   const { user } = useUser();
   const email = user?.emailAddresses?.[0]?.emailAddress || "No email found";
   const applicationId = user?.unsafeMetadata?.applicationid;
@@ -48,7 +51,7 @@ const StartEnrollment = () => {
   const navigate =useNavigate();
   const mailStatus = new URL(window.location.href).searchParams.get('mail');
   let appliedStatus = user.unsafeMetadata.applied;
-  const { toast } = useToast()
+
   useEffect(() => {
     if (appliedStatus === "true") {
       navigate("/candidate-dashboard");
@@ -236,8 +239,7 @@ const StartEnrollment = () => {
             text-decoration: none;
             cursor: pointer;
             text-align: center;
-            margin: 20px 0; 
-            font-weight:500;
+            margin: 20px 0;
         }
 
         .apply-button:hover {
@@ -314,18 +316,15 @@ const StartEnrollment = () => {
           }
 
           const data = await response.json();
-          if(data){
-            toast({
-              title: "Uh oh! Something went wrong.",
-              description:  "There was a problem with your request.",
-              action: <ToastAction altText="Try again">Try again</ToastAction>,
-            });
-          }
+          
         };
 
         // Usage
         sendEmail(`${email}`, "Welcome to the Becoming Institute’s 12-Month Trauma Recovery Certificate Program Application!");
-      
+        toast({
+          title: "Registrtaion Successful",
+          description: "Kindly check your email for guidelines",
+        })
 
        
     }
@@ -346,7 +345,7 @@ const StartEnrollment = () => {
 
   return (
     <>
-    
+   
       <OnboardingTopbar />
       <div className="w-full  lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white h-fit ">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
