@@ -11,12 +11,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { addNewApplication } from "@/api/apiApplication";
 import ImmigrationStatus from "@/data/immigrationStatus";
 import ancestryOptions from "@/data/ancestryOptions";
-import { Button } from "@/components/ui/button";
+
+import { Button } from "@/components/ui/button"
+import { ToastAction } from "@/components/ui/toast"
 import { ClipLoader } from "react-spinners";
 import GenderOptions from "@/data/genderOptions";
 import { useNavigate } from "react-router-dom";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 const ancestryNames = ancestryOptions.map(option => option.name);
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
@@ -45,7 +48,7 @@ const StartEnrollment = () => {
   const navigate =useNavigate();
   const mailStatus = new URL(window.location.href).searchParams.get('mail');
   let appliedStatus = user.unsafeMetadata.applied;
-
+  const { toast } = useToast()
   useEffect(() => {
     if (appliedStatus === "true") {
       navigate("/candidate-dashboard");
@@ -130,9 +133,12 @@ const StartEnrollment = () => {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Becoming Institute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
     <style>
         body {
-            font-family: Arial, sans-serif;
+           font-family: 'Poppins', sans-serif;
+
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -140,23 +146,24 @@ const StartEnrollment = () => {
         }
 
         .email-container {
-            max-width: 600px;
+            max-width: 100%;
             margin: 20px auto;
             background-color: #ffffff;
-            border: 1px solid #ddd;
+            
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .header {
-            background-color: #FFD47D;
+            background-color: #bc9c22;
             padding: 20px;
             text-align: center;
+            border-radius:60px;
         }
 
         .header h1 {
-            color: #333333;
+            color: white;
             font-size: 24px;
             margin: 0;
         }
@@ -308,13 +315,11 @@ const StartEnrollment = () => {
         sendEmail(`${email}`, "Welcome to the Becoming Institute’s 12-Month Trauma Recovery Certificate Program Application!");
       
 
-      <Alert>
-  <Terminal className="h-4 w-4" />
-  <AlertTitle> Email sent successfully!</AlertTitle>
-  <AlertDescription>
-  Check your inbox for confirmation.
-  </AlertDescription>
-</Alert>
+        toast({
+          title: "Uh oh! Something went wrong.",
+          description: mailStatus.error?.message || "There was a problem with your request.",
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        });
     }
   }, [mailStatus]);
 
@@ -333,6 +338,7 @@ const StartEnrollment = () => {
 
   return (
     <>
+    
       <OnboardingTopbar />
       <div className="w-full  lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white h-fit ">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
