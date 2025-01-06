@@ -158,6 +158,8 @@ const StartEnrollment = () => {
         .header {
             background-color: #bc9c22;
             padding: 20px;
+            padding-top:50px;
+            paddig-bottom:50px;
             text-align: center;
             border-radius:60px;
         }
@@ -226,15 +228,16 @@ const StartEnrollment = () => {
         .apply-button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #FFD47D;
-            color: #333333;
+            background-color:#bc9c22;
+            color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             font-size: 16px;
             text-decoration: none;
             cursor: pointer;
             text-align: center;
-            margin: 20px 0;
+            margin: 20px 0; 
+            font-weight:500;
         }
 
         .apply-button:hover {
@@ -245,7 +248,7 @@ const StartEnrollment = () => {
 <body>
     <div class="email-container">
         <div class="image-container">
-            <img src="" alt="Welcome Image">
+            <img src="https://tallkizetxyhcvjujgzw.supabase.co/storage/v1/object/public/uploads/Screenshot%202025-01-06%20at%2004.31.52.png" alt="Welcome Image">
         </div>
         <a href="https://www.enrollbecominginstitute.ca/start-enrollment" class="apply-button">Start Applying</a>
         <div class="header">
