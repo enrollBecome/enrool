@@ -110,9 +110,8 @@ const StartEnrollment = () => {
 
   useEffect(() => {
     if (mailStatus === "true") {
-      if (message) {
-        console.log(message);
-        console.log(subject);
+      
+       
 
         const sendEmail = async (to, subject) => {
           const response = await fetch(
@@ -307,7 +306,7 @@ const StartEnrollment = () => {
 
         // Usage
         sendEmail(`${email}`, "Welcome to the Becoming Institute’s 12-Month Trauma Recovery Certificate Program Application!");
-      }
+      
 
       <Alert>
   <Terminal className="h-4 w-4" />
