@@ -23,8 +23,8 @@ const schema = z.object({
   .refine((file) => file && file[0] && file[0].type.startsWith("video/"), {
     message: "Only video files are allowed",
   })
-  .refine((file) => file && file[0] && file[0].size <= 5_000_000, { // Example: 50 MB limit
-    message: "File size must be 5 MB or less",
+  .refine((file) => file && file[0] && file[0].size <= 50_000_000, { // Example: 50 MB limit
+    message: "File size must be 50 MB or less",
   }),
 })
 const TestimonialForm = () => {

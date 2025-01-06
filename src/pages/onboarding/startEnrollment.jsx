@@ -15,6 +15,8 @@ import { Button } from "@/components/ui/button";
 import { ClipLoader } from "react-spinners";
 import GenderOptions from "@/data/genderOptions";
 import { useNavigate } from "react-router-dom";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Terminal } from "lucide-react";
 const ancestryNames = ancestryOptions.map(option => option.name);
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
@@ -41,6 +43,7 @@ const StartEnrollment = () => {
   const applicationId = user?.unsafeMetadata?.applicationid;
   const [tempData, setTempData] = useState([]);
   const navigate =useNavigate();
+  const mailStatus = url.searchParams.get('mail');
   let appliedStatus = user.unsafeMetadata.applied;
 
   useEffect(() => {
@@ -105,7 +108,216 @@ const StartEnrollment = () => {
     }
   }, [dataCreateApplciation, user]);
 
-  
+  useEffect(() => {
+    if (mailStatus === "true") {
+      if (message) {
+        console.log(message);
+        console.log(subject);
+
+        const sendEmail = async (to, subject) => {
+          const response = await fetch(
+            "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-mail",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                to,
+                subject,
+                html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Becoming Institute</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #FFD47D;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #333333;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .content h2 {
+            color: #333333;
+            font-size: 20px;
+        }
+
+        .content p {
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        .content ul {
+            margin: 10px 0;
+            padding: 0;
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .content ul li {
+            color: #666666;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background-color: #f0f0f0;
+            color: #333333;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer a {
+            color: #FFD47D;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .image-container {
+            width: 100%;
+            height: auto;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .apply-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #FFD47D;
+            color: #333333;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .apply-button:hover {
+            background-color: #e6bc6f;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="image-container">
+            <img src="" alt="Welcome Image">
+        </div>
+        <a href="https://www.enrollbecominginstitute.ca/start-enrollment" class="apply-button">Start Applying</a>
+        <div class="header">
+            <h1>Welcome to the Becoming Institute</h1>
+        </div>
+        <div class="content">
+            <p>Thank you for starting your application to the Becoming Institute Inc. We're excited that you're interested in joining our program and taking the next step in your journey toward becoming a Trauma Recovery Specialist. We know that the application process can be overwhelming, so here are some helpful tips to guide you as you complete your application.</p>
+
+            <h2>Important Information:</h2>
+            <ul>
+                <li>Your email address will serve as your login/username for the application.</li>
+                <li>We may send important, time-sensitive updates by email, so please check your inbox (including spam/junk folders) regularly. We recommend using a personal email account, such as Gmail or Yahoo, rather than a school-issued one.</li>
+            </ul>
+
+            <h2>What to Expect:</h2>
+            <ul>
+                <li><strong>Take your time:</strong> The application process requires thoughtful consideration. You can complete it at your own pace, in multiple sessions if needed. Just remember to click 'Save & continue' at the bottom of each page before taking a break.</li>
+                <li><strong>Track your progress:</strong> As you move through the application, you'll see checkmarks indicating which sections have been completed.</li>
+                <li><strong>Edit freely:</strong> Until you submit your application, you can log in at any time to add or revise any information.</li>
+            </ul>
+
+            <h2>What You'll Need:</h2>
+            <ul>
+                <li>Be prepared to provide personal identification, such as your Social Insurance Number (SIN) or other identification details to support your application.</li>
+                <li><strong>Transcripts:</strong> When filling out the 'Academic History' section, please have your transcripts on hand to ensure accurate reporting of your academic performance.</li>
+                <li><strong>Payment:</strong> Once you're ready to submit, please have your payment method ready. We accept credit card payments through the application portal. If you prefer to pay by e-transfer, please email <a href="mailto:info@becomingmethod.com">info@becomingmethod.com</a>, instructions will be provided.</li>
+            </ul>
+
+            <h2>Need Help?</h2>
+            <p>If you have any questions while completing your application, please visit the help section at the top right corner of the application portal to browse frequently asked questions. For further assistance, feel free to reach out to us directly.</p>
+
+            <h2>Contact Us:</h2>
+            <p>
+                Email: <a href="mailto:info@becomingmethod.com">info@becomingmethod.com</a><br>
+                Phone: (236) 852-2299
+            </p>
+
+            <p>We're here to support you throughout the process and look forward to reviewing your application!</p>
+
+            <p>Warm regards,<br>
+            The Admissions Team<br>
+            Becoming Institute Inc.<br>
+            <a href="https://www.becomingmethod.com">www.becomingmethod.com</a></p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Becoming Institute Inc. All rights reserved.<br>
+            Visit us at <a href="https://www.becomingmethod.com">www.becomingmethod.com</a></p>
+        </div>
+    </div>
+</body>
+</html>
+`,
+              }),
+            }
+          );
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Error sending email:", errorData);
+            return;
+          }
+
+          const data = await response.json();
+        };
+
+        // Usage
+        sendEmail(`${email}`, "Welcome to the Becoming Institute’s 12-Month Trauma Recovery Certificate Program Application!");
+      }
+
+      <Alert>
+  <Terminal className="h-4 w-4" />
+  <AlertTitle> Email sent successfully!</AlertTitle>
+  <AlertDescription>
+  Check your inbox for confirmation.
+  </AlertDescription>
+</Alert>
+    }
+  }, [mailStatus]);
 
 
 
