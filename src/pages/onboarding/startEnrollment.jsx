@@ -306,20 +306,23 @@ const StartEnrollment = () => {
             const errorData = await response.json();
             console.error("Error sending email:", errorData);
             return;
+          }else{
+            toast({
+              title: "Uh oh! Something went wrong.",
+              description:  "There was a problem with your request.",
+              action: <ToastAction altText="Try again">Try again</ToastAction>,
+            });
           }
 
           const data = await response.json();
+          console.log(data)
         };
 
         // Usage
         sendEmail(`${email}`, "Welcome to the Becoming Institute’s 12-Month Trauma Recovery Certificate Program Application!");
       
 
-        toast({
-          title: "Uh oh! Something went wrong.",
-          description: mailStatus.error?.message || "There was a problem with your request.",
-          action: <ToastAction altText="Try again">Try again</ToastAction>,
-        });
+       
     }
   }, [mailStatus]);
 
@@ -333,7 +336,7 @@ const StartEnrollment = () => {
 
 
 
-
+  
 
 
   return (
