@@ -13,8 +13,8 @@ const Register = () => {
           <div className="flex gap-4 mt-4 ">
 
             <Link to="/how-to-apply" className="font-thin text-sm text-gray-400" >How to Apply  </Link>
-            <Link to="/terms-condition" className="font-thin text-sm text-gray-400" >Terms & Condition  </Link>
-            <Link to="/privacy-policy" className="font-thin text-sm text-gray-400" >Privacy Policy</Link>
+            <Link to="/terms-condition" className="font-thin text-sm text-gray-400" >Terms & Condition</Link>
+            <Link to="/privacy-policy" className="font-thin text-sm text-gray-400" >Privascy Policy</Link>
           </div>
         </div>
         <div className=" sm: hidden md:block h-screen">

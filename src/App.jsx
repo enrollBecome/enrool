@@ -49,6 +49,9 @@ import ViewPerApplication from "./pages/references/viewPerApplication";
 import ViewPrrApplication from "./pages/references/viewPrrApplication";
 import Thanks from "./pages/references/thanks";
 import EnrollmentThanks from "./pages/onboarding/enrollmentThanks";
+import HowToApply from "./pages/howToApply";
+import TermsConditions from "./pages/termsConditions";
+import PrivacyPolicy from "./pages/privacyPolicy";
 
 
 function App() {
@@ -79,6 +82,18 @@ function App() {
         {
           path: "/",
           element: <LandingPage />,
+        },
+        {
+          path: "/how-to-apply",
+          element: <HowToApply />,
+        },
+        {
+          path: "/terms-condition",
+          element: <TermsConditions />,
+        },
+        {
+          path: "/privacy-policy",
+          element: <PrivacyPolicy />,
         },
         {
           path:"/academic-reference",

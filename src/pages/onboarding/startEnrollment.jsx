@@ -51,7 +51,7 @@ const StartEnrollment = () => {
   const navigate =useNavigate();
   const mailStatus = new URL(window.location.href).searchParams.get('mail');
   const [application,setApplication] = useState([]);
-  let applicationStatus = application.status;
+  let applicationStatus = application?.status;
   useEffect(() => {
     if(application){
     if (applicationStatus === "Approved") {
