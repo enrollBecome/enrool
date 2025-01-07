@@ -8,16 +8,18 @@ import { Button } from "@/components/ui/button";
 import { getEducationByApplicationId } from "@/api/apiEducation";
 import { Download } from "lucide-react";
 import { getExperienceByApplicationId } from "@/api/apiExperience";
+import { useNavigate } from "react-router-dom";
 
 const CandidateDashboard = () => {
   const { user } = useUser();
-  const applied = user?.unsafeMetadata?.applied;
-
+  // const applied = user?.unsafeMetadata?.applied;
+const navigate =useNavigate();
   const applicationid = user?.unsafeMetadata?.applicationid;
   const [loading, setLoading] = useState(true);
   const [application, setApplication] = useState([]);
   const [education, setEducation] = useState([]);
   const [experience, setExperience] = useState([]);
+  let applicationStatus = application?.status;
   useEffect(() => {
     getApplicationById(applicationid)
       .then((data) => setApplication(data))
@@ -37,6 +39,12 @@ const CandidateDashboard = () => {
       .catch(() => setError("Failed to fetch applications."))
       .finally(() => setLoading(false));
   }, [applicationid]);
+  useEffect(() => {
+    if (application && application.status === "Submitted") {
+      navigate(`/start-enrollment/${applicationid}`);
+    }
+  }, [application, navigate, applicationid]);
+  
   return (
     <>
       <OnboardingTopbar />
@@ -44,17 +52,7 @@ const CandidateDashboard = () => {
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
           My Application
         </div>
-        {application && application.status === "Submitted" ? (
-          <>
-            <div className="w-4/5 min-h-full h-fit flex justify-center">
-              <span className="">
-                Your application has been successfully submitted and is
-                currently under review. Once approved, you will receive a
-                notification to complete the payment and begin your course.{" "}
-              </span>
-            </div>
-          </>
-        ) : null}
+        
         {application && application.status === "Approved" ? (
           <>
             <div className="w-full min-h-full h-fit flex flex-col">

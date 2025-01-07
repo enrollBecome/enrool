@@ -42,7 +42,9 @@ const EditStartEnrollment = () => {
     const [application , setApplication] = useState([]);
   const { user } = useUser();
   const email = user?.emailAddresses?.[0]?.emailAddress || "No email found";
-  let appliedStatus = user.unsafeMetadata.applied;
+  // let appliedStatus = user.unsafeMetadata.applied;
+  let applicationStatus = application?.status;
+ 
   const navigate =useNavigate();
   useEffect(() => {
     getApplicationById(applicationid)
@@ -108,10 +110,12 @@ const EditStartEnrollment = () => {
 
 
   useEffect(() => {
-    if (appliedStatus === "true") {
+    if (applicationStatus === "Approved") {
+      navigate("/candidate-dashboard");
+    }else if(applicationStatus === "Paid"){
       navigate("/candidate-dashboard");
     }
-  }, [appliedStatus]);
+  }, [applicationStatus]);
 
   return (
     <>

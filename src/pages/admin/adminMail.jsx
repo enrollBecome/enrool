@@ -215,11 +215,87 @@ const AdminMail = () => {
               Send An Email to {application.first_name}
             </h2>
           </div>
+         
+        </div>
+        <div className="bg-[#f4f4f4] text-white mt-4  rounded-[30px]">
+          <div className="container mx-auto p-10">
+            <div className="">
+              <p className="text-xl font-semibold text-black">Applicant Details</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      First Name
+                    </span>
+                    <span className="mb-2 text-2xl text-black">
+                      {application.first_name}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      Last Name
+                    </span>
+                    <span className="mb-2 text-2xl text-black">
+                      {application.last_name}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      Middle Name
+                    </span>
+                    <span className="mb-2 text-2xl text-black">
+                      {application.middle_name}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      Former name
+                    </span>
+                    <span className="mb-2 text-2xl text-black">
+                      {application.former_name}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      Gender
+                    </span>
+                    <span className="mb-2 text-2xl text-black">
+                      {application.gender}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      Date of Birth
+                    </span>
+                    <span className="mb-2 text-2xl text-black">
+                      {application.dob}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      Phone Number
+                    </span>
+                    <span className="mb-2 text-2xl text-black">
+                      {application.phone}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      Country of Residence
+                    </span>
+                    <span className="mb-2 text-2xl text-black">
+                      {application.country}
+                    </span>
+                  </div>
+                </div>
+            
+          </div>
+         
         </div>
 
         <form onSubmit={handleSubmit(onSubmit, onError)}>
           {/* Name Information */}
-          <div className="border-t py-8">
+          <div className=" py-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"></div>
 
             <div className="flex flex-col mt-4">

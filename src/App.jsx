@@ -48,6 +48,7 @@ import ViewArApplication from "./pages/references/viewArApplication";
 import ViewPerApplication from "./pages/references/viewPerApplication";
 import ViewPrrApplication from "./pages/references/viewPrrApplication";
 import Thanks from "./pages/references/thanks";
+import EnrollmentThanks from "./pages/onboarding/enrollmentThanks";
 
 
 function App() {
@@ -153,6 +154,10 @@ function App() {
         {
           path: "/confirmation-form/:applicationid",
           element: <ConfirmationForm />,
+        },
+        {
+          path: "/confirmation-form/thanks",
+          element: <EnrollmentThanks />,
         },
       ],
     },

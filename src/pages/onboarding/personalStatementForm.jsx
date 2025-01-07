@@ -22,11 +22,14 @@ const PersonalStatementForm = () => {
     const navigate =useNavigate();
    let appliedStatus = user.unsafeMetadata.applied;
 
-    useEffect(() => {
-      if (appliedStatus === "true") {
-        navigate("/candidate-dashboard");
-      }
-    }, [appliedStatus]);
+   let applicationStatus = application.status;
+  useEffect(() => {
+    if (applicationStatus === "Approved") {
+      navigate("/candidate-dashboard");
+    }else if(applicationStatus === "Paid"){
+      navigate("/candidate-dashboard");
+    }
+  }, [applicationStatus]);
   
   useEffect(() => {
     getApplicationById(applicationid)

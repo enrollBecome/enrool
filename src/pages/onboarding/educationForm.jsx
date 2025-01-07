@@ -33,8 +33,8 @@ const schema = z.object({
   institution_name: z
     .string()
     .min(3, { message: "Institution Name is required" }),
-  province: z.string().min(3, { message: "First Name is required" }),
-  city: z.string().min(3, { message: "First Name is required" }),
+  province: z.string().min(3, { message: "Province is required" }),
+  city: z.string().min(3, { message: "City is required" }),
   first_language: z.enum(FirstLanguage, {
     errorMap: () => ({ message: "First Language must not be empty" }),
   }),
@@ -59,12 +59,15 @@ const {user} = useUser();
   const [education, setEducation] = useState([]);
   const [formOpen,setFormOpen]=useState(true);
   let appliedStatus = user.unsafeMetadata.applied;
+  let applicationStatus = application.status;
   const navigate = useNavigate();
   useEffect(() => {
-    if (appliedStatus === "true") {
+    if (applicationStatus === "Approved") {
+      navigate("/candidate-dashboard");
+    }else if(applicationStatus === "Paid"){
       navigate("/candidate-dashboard");
     }
-  }, [appliedStatus]);
+  }, [applicationStatus]);
   useEffect(() => {
     getEducationByApplicationId(applicationid)
       .then((data) => setEducation(data))

@@ -8,7 +8,7 @@ import { useUser } from "@clerk/clerk-react";
 import { z } from "zod";
 import useFetch from "@/hooks/use-fetch";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addNewApplication } from "@/api/apiApplication";
+import { addNewApplication, getApplicationById } from "@/api/apiApplication";
 import ImmigrationStatus from "@/data/immigrationStatus";
 import ancestryOptions from "@/data/ancestryOptions";
 
@@ -50,13 +50,23 @@ const StartEnrollment = () => {
   const [tempData, setTempData] = useState([]);
   const navigate =useNavigate();
   const mailStatus = new URL(window.location.href).searchParams.get('mail');
-  let appliedStatus = user.unsafeMetadata.applied;
-
+  const [application,setApplication] = useState([]);
+  let applicationStatus = application.status;
   useEffect(() => {
-    if (appliedStatus === "true") {
+    if(application){
+    if (applicationStatus === "Approved") {
+      navigate("/candidate-dashboard");
+    }else if(applicationStatus === "Paid"){
       navigate("/candidate-dashboard");
     }
-  }, [appliedStatus]);
+  }
+  }, [application]);
+  useEffect(() => {
+    getApplicationById(applicationId)
+      .then((data) => setApplication(data))
+      .catch(() => setError("Failed to fetch applications."))
+      .finally(() => setLoading(false));
+  }, [applicationId]);
   const {
     register,
     handleSubmit,

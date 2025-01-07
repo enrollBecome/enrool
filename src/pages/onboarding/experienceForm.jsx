@@ -41,11 +41,14 @@ const ExperienceForm = () => {
   const [formOpen,setFormOpen]=useState(true);
   let appliedStatus = user.unsafeMetadata.applied;
   const navigate = useNavigate();
+  let applicationStatus = application.status;
   useEffect(() => {
-    if (appliedStatus === "true") {
+    if (applicationStatus === "Approved") {
+      navigate("/candidate-dashboard");
+    }else if(appliedStatus === "Paid"){
       navigate("/candidate-dashboard");
     }
-  }, [appliedStatus]);
+  }, [applicationStatus]);
   useEffect(()=>{
     if(experience.length>0){
       setFormOpen(false);

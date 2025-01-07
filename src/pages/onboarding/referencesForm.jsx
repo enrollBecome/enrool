@@ -43,12 +43,14 @@ const ReferencesForm = () => {
   const navigate =useNavigate();
 
   let appliedStatus = user.unsafeMetadata.applied;
-
+  let applicationStatus = application.status;
   useEffect(() => {
-    if (appliedStatus === "true") {
+    if (applicationStatus === "Approved") {
+      navigate("/candidate-dashboard");
+    }else if(applicationStatus === "Paid"){
       navigate("/candidate-dashboard");
     }
-  }, [appliedStatus]);
+  }, [applicationStatus]);
   useEffect(() => {
     getApplicationById(applicationid)
       .then((data) => setApplication(data))
