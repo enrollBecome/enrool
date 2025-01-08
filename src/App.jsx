@@ -52,6 +52,8 @@ import EnrollmentThanks from "./pages/onboarding/enrollmentThanks";
 import HowToApply from "./pages/howToApply";
 import TermsConditions from "./pages/termsConditions";
 import PrivacyPolicy from "./pages/privacyPolicy";
+import InitialPaymentSuccess from "./pages/onboarding/initialPaymentSuccess";
+import PaymentForm from "./pages/onboarding/paymentForm";
 
 
 function App() {
@@ -173,6 +175,14 @@ function App() {
         {
           path: "/confirmation-form/thanks",
           element: <EnrollmentThanks />,
+        },
+        {
+          path: "/confirmation-payment-i",
+          element: <InitialPaymentSuccess />,
+        },
+        {
+          path: "/initial-payment/:applicationid",
+          element: <PaymentForm />,
         },
       ],
     },

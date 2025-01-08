@@ -55,7 +55,7 @@ const ConfirmationForm = () => {
   } = useFetch(updateApplication);
 
   const onSubmit = (data) => {
-    data.status = "Submitted";
+    
     fnUpdateApplication({
       applicationData: data,
       application_id: applicationid,
@@ -647,18 +647,21 @@ const ConfirmationForm = () => {
       //   description: "Kindly check your email for guidelines",
       // })
 
-
+ 
 
       const existingMetadata = user.unsafeMetadata || {};
+      if(appliedStatus<8){
+        appliedStatus=8;
+      }
       user
         .update({
           unsafeMetadata: {
             ...existingMetadata,
-            applied: "true",
+            applied: appliedStatus,
           },
         })
         .then(() => {
-          navigate("/confirmation-form/thanks");
+          navigate(`/initial-payment/${applicationid}`);
         })
         .catch((err) => {
           console.error("Error updating unsafeMetadata:", err);

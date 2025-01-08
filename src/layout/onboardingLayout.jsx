@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import logoWhite from "./../assets/logo.png"
-import { Bell, BriefcaseBusiness, CircleCheckBig, FilePlus2, Files, FolderUp, GraduationCap, House, ListTodo, LogOut, User, Users, UsersRound } from 'lucide-react';
+import { Bell, BriefcaseBusiness, CircleCheckBig, CircleDollarSign, FilePlus2, Files, FolderUp, GraduationCap, House, ListTodo, LogOut, User, Users, UsersRound } from 'lucide-react';
 import { useClerk, useUser } from '@clerk/clerk-react';
 
 const OnboardingLayout = () => {
@@ -21,6 +21,7 @@ const OnboardingLayout = () => {
     { path: `/testimonial-form${applicationid ? `/${applicationid}` : ''}`, icon: <FolderUp strokeWidth={1} color="#bc9c22" />, label: "Testimonial" },
     { path: `/references-form${applicationid ? `/${applicationid}` : ''}`, icon: <UsersRound strokeWidth={1} color="#bc9c22" />, label: "References" },
     { path: `/confirmation-form${applicationid ? `/${applicationid}` : ''}`, icon: <CircleCheckBig strokeWidth={1} color="#bc9c22" />, label: "Confirmation" },
+    { path: `/initial-payment${applicationid ? `/${applicationid}` : ''}`, icon: <CircleDollarSign strokeWidth={1} color="#bc9c22" />, label: "Payment" },
   ];
 
   const navLinkClass = (isActive, isDisabled) =>
