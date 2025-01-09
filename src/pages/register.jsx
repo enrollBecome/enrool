@@ -5,19 +5,19 @@ import { Link } from "react-router-dom";
 const Register = () => {
   return (
     <>
-      <div className="w-full min-h-screen flex items-center bg-white">
-        <div className="sm:w-full md:w-1/2 h-screen flex justify-center items-center flex-col">
+      <div className="flex items-center w-full min-h-screen bg-white">
+        <div className="flex flex-col items-center justify-center h-screen sm:w-full md:w-1/2">
           <img className="w-24" src={logo} />
           <SignIn />
 
           <div className="flex gap-4 mt-4 ">
 
-            <Link to="/how-to-apply" className="font-thin text-sm text-gray-400" >How to Apply  </Link>
-            <Link to="/terms-condition" className="font-thin text-sm text-gray-400" >Terms & Condition</Link>
-            <Link to="/privacy-policy" className="font-thin text-sm text-gray-400" >Privascy Policy</Link>
+            <Link to="/how-to-apply" className="text-sm font-thin text-gray-400" >How to Apply  </Link>
+            <Link to="/terms-condition" className="text-sm font-thin text-gray-400" >Terms & Condition</Link>
+            <Link to="/privacy-policy" className="text-sm font-thin text-gray-400" >Privacy Policy</Link>
           </div>
         </div>
-        <div className=" sm: hidden md:block h-screen">
+        <div className="hidden h-screen  sm: md:block">
           <img
             className="h-full"
             src="https://tallkizetxyhcvjujgzw.supabase.co/storage/v1/object/public/uploads/Image%20(2).png"
