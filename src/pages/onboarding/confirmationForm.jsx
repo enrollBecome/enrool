@@ -748,7 +748,7 @@ const ConfirmationForm = () => {
           {errorUpdateApplication?.message && (
             <p className="text-red-500">{errorUpdateApplication.message}</p>
           )}
-{application.status === "Submitted"?(<> <Button
+{application.status !== "Submitted"?(<> <Button
             type="submit"
             className={`rounded-full px-10 py-6 mt-[40px] flex justify-center items-center ${
               !isCheckboxChecked 
