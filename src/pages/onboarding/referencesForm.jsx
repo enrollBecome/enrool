@@ -175,7 +175,7 @@ const ReferencesForm = () => {
 
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
-                  type="text"
+                  type="number"
                   placeholder="Add Phone"
                   required
                   {...register("ar_phone")}
@@ -193,7 +193,7 @@ const ReferencesForm = () => {
 
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
-                  type="text"
+                  type="email"
                   placeholder="Add Email"
                   required
                   {...register("ar_email")}
@@ -234,7 +234,7 @@ const ReferencesForm = () => {
 
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
-                  type="text"
+                  type="number"
                   placeholder="Add Phone"
                   required
                   {...register("prr_phone")}
@@ -252,7 +252,7 @@ const ReferencesForm = () => {
 
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
-                  type="text"
+                  type="email"
                   placeholder="Add Email"
                   required
                   {...register("prr_email")}
@@ -294,7 +294,7 @@ const ReferencesForm = () => {
 
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
-                  type="text"
+                  type="number"
                   placeholder="Add Phone"
                   required
                   {...register("per_phone")}
@@ -312,7 +312,7 @@ const ReferencesForm = () => {
 
                 <input
                   className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
-                  type="text"
+                  type="email"
                   placeholder="Add Email"
                   required
                   {...register("per_email")}

@@ -10,7 +10,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import { z } from 'zod';
 const schema =z.object({
-   statement_of_purpose:z.string().min(3, { message: "Nature of Work is required" }),
+   statement_of_purpose:z.string().min(1500, { message: "Minimum 1500 characters are required" }),
 })
 const PersonalStatementForm = () => {
 
@@ -142,7 +142,7 @@ const PersonalStatementForm = () => {
 
   <textarea
     className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 w-full h-40 rounded-[30px] p-4 text-base resize-none"
-    placeholder="Add statement of purpose"
+    placeholder="Minimum 1500 characters are required"
     required
     {...register("statement_of_purpose")}
   ></textarea>

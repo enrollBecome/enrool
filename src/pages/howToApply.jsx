@@ -5,8 +5,10 @@ import {
     AccordionTrigger,
   } from "@/components/ui/accordion"
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 
 const HowToApply = () => {
+  const navigate = useNavigate();
   return (
    <>
    <div className='w-full justify-center flex'>
@@ -38,7 +40,7 @@ const HowToApply = () => {
       <li>Review the program's admission requirements.</li>
       <li>
         If you meet the requirements, click the 
-        <button className="ml-2 text-blue-600 font-medium underline hover:text-blue-800 focus:outline-none">
+        <button className="ml-2 text-blue-600 font-medium underline hover:text-blue-800 focus:outline-none" onClick={() => navigate("/sign-in")}>
           APPLY NOW
         </button> 
         button to access the online application portal.

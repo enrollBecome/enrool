@@ -343,7 +343,7 @@ const ExperienceForm = () => {
 
               <textarea
                 className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 w-full h-40 rounded-[30px] p-4 text-base resize-none"
-                placeholder="Add Nature of Work"
+                placeholder="Minimum 500 characters are required"
                 required
                 {...register("nature_of_work")}></textarea>
 

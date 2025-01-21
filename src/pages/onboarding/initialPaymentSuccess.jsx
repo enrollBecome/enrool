@@ -88,7 +88,7 @@ const InitialPaymentSuccess = () => {
             </div>
             <button
               className="mt-4 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow hover:bg-blue-700"
-              onClick={() => (window.location.href = "/dashboard")}
+              onClick={() => (window.location.href = `/initial-payment/${applicationid}`)}
             >
               Go to Dashboard
             </button>

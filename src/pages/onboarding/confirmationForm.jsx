@@ -738,7 +738,7 @@ const ConfirmationForm = () => {
             <span className="">
               Note: you can only submit one application per term. If you require
               changes to your information after your application has been
-              submitted, notify info@becomingmethod.com. If you find any errors
+              submitted, notify admission@becominginstitute.ca. If you find any errors
               above, please go back to make the changes necessary.
             </span>
           </div>
