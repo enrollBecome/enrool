@@ -1,12 +1,13 @@
-import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import logoWhite from "./../assets/logo.png"
-import { Bell, BriefcaseBusiness, Calendar, CircleCheckBig, FilePlus2, Files, FolderUp, GraduationCap, House, ListTodo, LogOut, MessageSquarePlus, Receipt, ReceiptText, User, Users, UsersRound } from 'lucide-react';
+import { Bell, BriefcaseBusiness, Calendar, CircleCheckBig, FilePlus2, Files, FolderUp, GraduationCap, House, ListTodo, LogOut, MessageSquarePlus, Receipt, ReceiptText, User, Users, UsersRound, X } from 'lucide-react';
 import { SignOutButton, useClerk, useUser } from '@clerk/clerk-react';
 
 const CandidateLayout = () => {
   const {user} = useUser();
-  const { signOut } = useClerk()
+  const { signOut } = useClerk();
+  const location = useLocation();
   const applicationid  = user.unsafeMetadata.applicationid;
 let navLinks = []
   if (applicationid){
@@ -29,13 +30,29 @@ navLinks = [
         `flex items-center poppins-medium py-[16px] px-[25px] rounded-full gap-[10px] cursor-pointer ${
           isActive ? 'bg-white text-white justify-center flex' : 'bg-transparent text-black'
         }`;
-      
+      const handleMenuClose =() =>{
+            const menu = document.getElementById("mobile-menu");
+            if (menu) {
+              menu.classList.add("sm:hidden"); // Add or remove the "hidden" class
+            }
+          }
+          useEffect(() => {
+            handleMenuClose();
+          }, [location]);
   return (
     <>
     <div className='flex w-full h-screen'>
-<div className='w-1/5 bg-[#fff8e0] flex flex-col items-center'>
-<img src={logoWhite} className='h-14 m-4' />
-<div className='flex flex-col justify-between h-full p-[30px] w-full '>
+    <div id="mobile-menu" className='z-10 sm:w-full sm:hidden md:block md:w-1/5 bg-[#fff8e0] flex flex-col items-center sm:fixed md:relative h-screen overflow-y-auto top-0 left-0'>
+    <div className='text-[25px] poppins-bold items-center align-middle flex sm:justify-between md:justify-center w-full h-[80px] sm:p-[20px] md:p-0 '>
+        <span className=' opacity-0 md:hidden'>
+0
+        </span>
+        <img onClick={() => { window.location.href = "/"; }}  className='cursor-pointer sm:h-[50px] md:h-[60px] mt-3' src={logoWhite} height={80}/>
+        
+        
+        <X strokeWidth={2} size={30}  className='md:hidden' onClick={handleMenuClose}/>
+      </div>
+<div className='flex flex-col justify-between h-full min-h-fit p-[30px] w-full '>
         <div className='flex flex-col w-full'>
       {navLinks.map(({ path, icon, label }) => (
         <NavLink key={path} to={path} className={({ isActive }) => navLinkClass(isActive)}>

@@ -1,11 +1,12 @@
-import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import logoWhite from "./../assets/logo.png"
-import { Bell, BriefcaseBusiness, CircleCheckBig, CircleDollarSign, FilePlus2, Files, FolderUp, GraduationCap, House, ListTodo, LogOut, User, Users, UsersRound } from 'lucide-react';
+import { Bell, BriefcaseBusiness, CircleCheckBig, CircleDollarSign, FilePlus2, Files, FolderUp, GraduationCap, House, ListTodo, LogOut, User, Users, UsersRound, X } from 'lucide-react';
 import { useClerk, useUser } from '@clerk/clerk-react';
 
 const OnboardingLayout = () => {
   const { user } = useUser();
+  const location = useLocation();
   const { signOut } = useClerk()
   let applied = parseInt(user?.unsafeMetadata?.applied || "0", 10);
   const incrementedApplied = applied + 1;
@@ -28,12 +29,31 @@ const OnboardingLayout = () => {
     `flex items-center poppins-medium py-[16px] px-[25px] rounded-full gap-[10px] cursor-pointer ${
       isActive && !isDisabled ? 'bg-white text-white justify-center flex' : 'bg-transparent text-black'
     } ${isDisabled ? 'text-gray-400 pointer-events-none' : ''}`;
-
+    const handleMenuClose =() =>{
+      const menu = document.getElementById("mobile-menu");
+      if (menu) {
+        menu.classList.add("sm:hidden"); // Add or remove the "hidden" class
+      }
+    }
+    useEffect(() => {
+      handleMenuClose();
+    }, [location]);
   return (
     <>
-      <div className='flex w-full h-screen'>
-        <div className='w-1/5 bg-[#fff8e0] flex flex-col items-center'>
-          <img src={logoWhite} className='h-14 m-4' />
+      <div className='flex w-screen h-screen'>
+        <div id="mobile-menu" className='z-10 sm:w-full sm:hidden md:block md:w-1/5 bg-[#fff8e0] flex flex-col items-center sm:fixed md:relative h-screen overflow-y-auto top-0 left-0'>
+
+          {/* <img src={logoWhite} className='h-14 m-4' />
+           */}
+           <div className='text-[25px] poppins-bold items-center align-middle flex sm:justify-between md:justify-center w-full h-[80px] sm:p-[20px] md:p-0 '>
+        <span className=' opacity-0 md:hidden'>
+0
+        </span>
+        <img onClick={() => { window.location.href = "/"; }}  className='cursor-pointer sm:h-[50px] md:h-[60px] mt-3' src={logoWhite} height={80}/>
+        
+        
+        <X strokeWidth={2} size={30}  className='md:hidden' onClick={handleMenuClose}/>
+      </div>
           <div className='flex flex-col justify-between h-full p-[30px] w-full '>
             <div className='flex flex-col w-full'>
               {navLinks.map(({ path, icon, label }, index) => {
@@ -58,7 +78,7 @@ const OnboardingLayout = () => {
             </button>
           </div>
         </div>
-        <div className='flex flex-col md:w-4/5 sm:w-full sm:pr-0 md:pr-[60px] pb-[60px] min-h-screen bg-[#fff8e0] overflow-y-auto'>
+        <div className='z-0 flex flex-col sm:w-full md:w-4/5 sm:pr-0 md:pr-[60px] pb-[60px]  min-h-screen bg-[#fff8e0] overflow-y-auto'>
           <Outlet />
         </div>
       </div>

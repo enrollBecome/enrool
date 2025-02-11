@@ -138,7 +138,7 @@ const TestimonialForm = () => {
   return (
    <>
    <OnboardingTopbar />
-      <div className="w-full  lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white h-fit ">
+      <div className="w-full  lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit ">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
         Resume and Video Testimonial
         </div>
@@ -178,7 +178,7 @@ const TestimonialForm = () => {
 
 <div className="flex flex-col pb-4">
       <span className="mb-2 text-[13px] poppins-regular">
-        Upload Your Recoreded Video Testimonial Here
+        Upload Your Recoreded Video Testimonial Here (Video file must not be more then 50mb)
       </span>
       <input
         className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 flex justify-center rounded-full p-4 text-base"

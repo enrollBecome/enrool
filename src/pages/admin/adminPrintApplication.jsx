@@ -40,7 +40,7 @@ const AdminPrintApplication = () => {
           Print
         </Button>{" "}
       </div>
-      <div className="w-full lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white min-h-fit h-full flex ">
+      <div className="w-full lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white min-h-fit h-full flex ">
         {loading || !application ? (
           <div className="w-full absolute left-0 top-0 z-50 bg-white h-full min-h-fit flex justify-center items-center">
             <PropagateLoader color="#bc9c22" />

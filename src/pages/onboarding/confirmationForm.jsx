@@ -256,6 +256,7 @@ const ConfirmationForm = () => {
         const data = await response.json();
         
       };
+      
       const sendPrrEmail = async (to, subject) => {
         const response = await fetch(
           "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-mail",
@@ -638,10 +639,203 @@ const ConfirmationForm = () => {
         const data = await response.json();
         
       };
+
+      const sendAdminEmail = async (to, subject) => {
+        const response = await fetch(
+          "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-mail",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              to,
+              subject,
+              html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confidential Reference Verification</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+      body {
+         font-family: 'Poppins', sans-serif;
+         line-height: 1.6;
+         margin: 0;
+         padding: 0;
+         background-color: #f8f8f8;
+      }
+
+      .email-container {
+          max-width: 100%;
+          margin: 20px auto;
+          background-color: #ffffff;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .header {
+          background-color: #bc9c22;
+        margin-top:20px;
+          padding: 40px;
+          text-align: center;
+          border-radius: 30px;
+      }
+
+      .header h1 {
+          color: white;
+          font-size: 24px;
+          margin: 0;
+      }
+
+      .content {
+          padding: 20px;
+      }
+
+      .content h2 {
+          color: #333333;
+          font-size: 20px;
+      }
+
+      .content p {
+          color: #666666;
+          margin-bottom: 20px;
+      }
+
+      .content ul {
+          margin: 10px 0;
+          padding: 0;
+          list-style-type: disc;
+          padding-left: 20px;
+      }
+
+      .content ul li {
+          color: #666666;
+          margin-bottom: 10px;
+      }
+
+      .footer {
+          background-color: #f0f0f0;
+          color: #333333;
+          text-align: center;
+          padding: 20px;
+          font-size: 14px;
+          border-top: 1px solid #ddd;
+      }
+
+      .footer a {
+          color: #FFD47D;
+          text-decoration: none;
+      }
+
+      .footer a:hover {
+          text-decoration: underline;
+      }
+
+      .image-container {
+          width: 100%;
+          height: auto;
+      }
+
+      .image-container img {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: 30px;
+      }
+
+      .apply-button {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #bc9c22;
+          color: white;
+          border: none;
+          border-radius: 10px;
+          font-size: 16px;
+          text-decoration: none;
+          cursor: pointer;
+          text-align: center;
+          margin: 20px 0;
+      }
+
+      .apply-button:hover {
+          background-color: #e6bc6f;
+      }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+      <div class="image-container">
+          <img src="https://tallkizetxyhcvjujgzw.supabase.co/storage/v1/object/public/uploads/Screenshot%202025-01-06%20at%2004.31.52.png" alt="Welcome Image">
+      </div>
+      
+      <div class="header">
+          <h1>New User Registration Request</h1>
+      </div>
+      <div class="content">
+          <p>Dear Admin,</p>
+
+          <p>We are reaching out as one of our students, <strong>${application.first_name}</strong>, has registered on your platform enrollbecominginstitute.ca. To ensure the integrity and confidentiality of this process, we kindly request you to verify the details provided by the applicant and submit your recommendation through our secure portal.</p>
+
+          <h2>Applicant Details</h2>
+          <ul>
+              <li><strong>Applicant First Name:</strong> ${application.first_name}</li>
+              
+              <li><strong>Application ID:</strong> ${application.id}</li>
+          </ul>
+
+          <p>To view complete application, please click the button below to access the <strong>Student Application</strong>. You can then approve or decline your recommendation securely.</p>
+
+          <a href="https://www.enrollbecominginstitute.ca//admin-dashboard/view/${application.id}" class="apply-button">Review Student Application</a>
+
+          <h2>Need Assistance?</h2>
+          <p>If you have any questions or need support during the process, visit the Help section in the top-right corner of the portal. Alternatively, you can contact us directly at the details below.</p>
+
+          <h2>Contact Us</h2>
+          <p>
+              Email: <a href="mailto:info@becomingmethod.com">info@becomingmethod.com</a><br>
+              Phone: (236) 852-2299
+          </p>
+
+          <p>We value your input and thank you for your cooperation in this confidential process.</p>
+
+          <p>Warm regards,<br>
+          The Admissions Team<br>
+          Becoming Institute Inc.<br>
+          <a href="https://www.becomingmethod.com">www.becomingmethod.com</a></p>
+      </div>
+      
+      <div class="footer">
+          <p>&copy; 2024 Becoming Institute Inc. All rights reserved.<br>
+          Visit us at <a href="https://www.becomingmethod.com">www.becomingmethod.com</a></p>
+      </div>
+  </div>
+</body>
+</html>
+`,
+            }),
+          }
+        );
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("Error sending email:", errorData);
+          return;
+        }else{
+          
+        }
+
+        const data = await response.json();
+        
+      };
       // Usage
       sendArEmail(`${application.ar_email}`, "Confidential Reference Verification Request");
       sendPrrEmail(`${application.prr_email}`, "Confidential Reference Verification Request");
       sendPerEmail(`${application.per_email}`, "Confidential Reference Verification Request");
+      sendAdminEmail("admission@becominginstitute.ca", "New Application Registration Request");
       // toast({
       //   title: "Registrtaion Successful",
       //   description: "Kindly check your email for guidelines",
@@ -688,7 +882,7 @@ const ConfirmationForm = () => {
   return (
     <>
       <OnboardingTopbar />
-      <div className="w-full lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white h-fit">
+      <div className="w-full lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
           Application Confirmation
         </div>

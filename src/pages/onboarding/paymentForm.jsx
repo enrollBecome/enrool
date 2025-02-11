@@ -27,7 +27,7 @@ const PaymentForm = () => {
   return (
    <>
      <OnboardingTopbar />
-      <div className="w-full lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white h-fit">
+      <div className="w-full lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit">
        
           
           {application.status === "Submitted"?(<>

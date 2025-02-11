@@ -6,7 +6,7 @@ const Invoice = () => {
   return (
     <>
       <OnboardingTopbar />
-      <div className="w-full  lg:rounded-[60px] lg:p-[60px] mt-[20px] flex-col bg-white h-full min-h-fit  flex gap-6">
+      <div className="w-full  lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-full min-h-fit  flex gap-6">
         <div className="bg-[#bc9c22] text-white mt-4 py-14 rounded-[30px]">
           <div className="container mx-auto text-center">
             <h1 className="text-4xl font-bold">Invoices</h1>
@@ -16,7 +16,7 @@ const Invoice = () => {
           </div>
         </div>
         {/* Payment of Term 1 */}
-        <div className="w-full rounded-[30px] bg-[#fff8d7] border border-[#bc9c22] p-8 flex items-center justify-between">
+        <div className="w-full rounded-[30px] bg-[#fff8d7] border border-[#bc9c22] p-8 flex sm:flex-col md:flex-row sm:text-center md:text-left sm:gap-6 md:items-center md:justify-between">
           <span className="poppins-bold text-2xl text-[#483d0d] ">
             Term 1 : Mindfull Fitness
           </span>
@@ -34,7 +34,7 @@ const Invoice = () => {
           </form>
         </div>
         {/* Payment of Term 2 */}
-        <div className="w-full rounded-[30px] bg-[#fff8d7] border border-[#bc9c22] p-8 flex items-center justify-between">
+        <div className="w-full rounded-[30px] bg-[#fff8d7] border border-[#bc9c22] p-8 flex sm:flex-col md:flex-row sm:text-center md:text-left sm:gap-6 md:items-center md:justify-between">
           <span className="poppins-bold text-2xl text-[#483d0d] ">
             Term 2 : Theory & Practices
           </span>
@@ -53,7 +53,7 @@ const Invoice = () => {
         </div>
 
         {/* Payment of Term 3 */}
-        <div className="w-full rounded-[30px] bg-[#fff8d7] border border-[#bc9c22] p-8 flex items-center justify-between">
+        <div className="w-full rounded-[30px] bg-[#fff8d7] border border-[#bc9c22] p-8 flex sm:flex-col md:flex-row sm:text-center md:text-left sm:gap-6 md:items-center md:justify-between">
           <span className="poppins-bold text-2xl text-[#483d0d] ">
             Term 3 : Practicuum
           </span>

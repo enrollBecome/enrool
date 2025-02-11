@@ -75,7 +75,7 @@ function App() {
     },
     {
       path: "/sign-up",
-      element: <Signup />, // Render Register without AppLayout
+      element: <Signup/>, // Render Register without AppLayout
     },
     // Publically Available with NavBar
     {
