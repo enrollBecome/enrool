@@ -58,7 +58,7 @@ const PrivacyPolicy = () => {
 
   <h2 className="text-xl font-semibold mb-2">Contact Information</h2>
   <p className="mb-4">
-    If you have any questions about this Privacy Policy, please contact us at <a href="mailto:privacy@becomingmethod.com" className="text-blue-600 hover:underline">privacy@becomingmethod.com</a>.
+    If you have any questions about this Privacy Policy, please contact us at <a href="mailto:privacy@becominginstitute.ca" className="text-blue-600 hover:underline">privacy@becominginstitute.ca</a>.
   </p>
 </div>
 </div>            </div>          

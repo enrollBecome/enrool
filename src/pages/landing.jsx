@@ -4,11 +4,11 @@ const LandingPage = () => {
   return (
     <>
     <img src="https://tallkizetxyhcvjujgzw.supabase.co/storage/v1/object/public/uploads/applicationpage.png" className='w-full'/>
-    <div className='w-full flex justify-center flex-col items-center sm:py-8 md:py-14'>
+    <div className='w-full flex justify-center flex-col items-center sm:py-8 md:pt-14 md:pb-5'>
         <span className='sm:text-4xl md:text-6xl sm:pt-4 md:pt-10 font-semibold seasons_regular'>Message from the Dean</span>
         <span className='py-5 text-lg poppins-regular'>Your Success is Our Success</span>
     </div>
-    <div className='md:p-20 sm:p-4 flex sm:gap-4 md:gap-20 justify-center sm:flex-col sm:items-center md:flex-row'>
+    <div className='md:px-20 sm:p-4 flex sm:gap-4 md:gap-20 justify-center sm:flex-col sm:items-center md:flex-row'>
         <img src="https://tallkizetxyhcvjujgzw.supabase.co/storage/v1/object/public/uploads/deanimage.png" className='rounded-full md:w-[550px] md:h-[530px] sm:w-4/5' />
         <div className='sm:w-[95%] md:w-1/2 '>
         <h1 className='poppins-regular text-lg pb-6'>Dear Student,</h1>
@@ -22,7 +22,7 @@ const LandingPage = () => {
         </p>
         <p className='poppins-regular text-lg leading-normal text-justify pb-4'>
             As you navigate through the registration process, please know that our team is here to support you every step of the way. Should you have any questions or require assistance, do not hesitate to email our admissions staff at 
-            <a href="mailto:info@becomingmethod.com" className='text-[#bc9c22] cursor-pointer'>{" "}info@becomingmethod.com{" "}</a>. We are dedicated to ensuring a smooth and seamless experience for all our prospective students.
+            <a href="mailto:hello@becominginstitute.ca" className='text-[#bc9c22] cursor-pointer'>{" "}hello@becominginstitute.ca{" "}</a>. We are dedicated to ensuring a smooth and seamless experience for all our prospective students.
         </p>
         <p className='poppins-regular text-lg leading-normal text-justify pb-10'>
             Thank you for choosing to apply to the Becoming Institute for your educational and professional aspirations. 

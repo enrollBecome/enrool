@@ -24,7 +24,7 @@ const HowToApply = () => {
               </div>
             </div>
 
-            <div className='w-1/2 mt-10'>
+            <div className='sm:w-full sm:px-5 md:p-0 md:w-1/2 mt-10'>
             <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1">
         <AccordionTrigger className="text-2xl font-light">Steps To Apply</AccordionTrigger>
@@ -43,7 +43,7 @@ const HowToApply = () => {
         <button className="ml-2 text-blue-600 font-medium underline hover:text-blue-800 focus:outline-none" onClick={() => navigate("/sign-in")}>
           APPLY NOW
         </button> 
-        button to access the online application portal.
+        {" "}button to access the online application portal.
       </li>
       <li>Create your student profile.</li>
       <li>Submit your application with all relevant information.</li>

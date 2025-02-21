@@ -20,7 +20,7 @@ const Register = () => {
         <div className="hidden h-screen  sm: md:block">
           <img
             className="h-full"
-            src="https://tallkizetxyhcvjujgzw.supabase.co/storage/v1/object/public/uploads/Image%20(2).png"
+            src="https://tallkizetxyhcvjujgzw.supabase.co/storage/v1/object/public/uploads//Inspire%20Healing,%20Lead%20with%20Vision.jpg"
           />
         </div>
       </div>

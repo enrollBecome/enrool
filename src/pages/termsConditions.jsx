@@ -80,7 +80,7 @@ const TermsConditions = () => {
 
   <h2 className="text-xl seasons font-semibold mb-2">Contact Information</h2>
   <p className="mb-4">
-    For any questions or concerns regarding these terms and conditions, please contact us at <a href="mailto:info@becomingmethod.com" className="text-blue-600 hover:underline">info@becomingmethod.com</a>.
+    For any questions or concerns regarding these terms and conditions, please contact us at <a href="mailto:hello@becominginstitute.ca" className="text-blue-600 hover:underline">hello@becominginstitute.ca</a>.
   </p>
 
   <p className="text-center font-medium mt-6">
