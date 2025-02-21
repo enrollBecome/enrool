@@ -591,7 +591,7 @@ const AdminViewApplication = () => {
                   </div>
                   <div className="mt-4">
                   <span className="text-gray-400">
-                  Note: you can only submit one application per term. If you require changes to your information after your application has been submitted, notify info@becomingmethod.com. If you find any errors above, please go back to make the changes necessary.
+                  Note: you can only submit one application per term. If you require changes to your admission@becominginstitute.ca. If you find any errors above, please go back to make the changes necessary.
                   </span>
                 </div>
               </div>
