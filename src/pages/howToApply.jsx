@@ -112,7 +112,7 @@ const HowToApply = () => {
 
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="item-3">
+      {/* <AccordionItem value="item-3">
         <AccordionTrigger className="text-2xl font-light">Admissions Process</AccordionTrigger>
         <AccordionContent>
         <div className="p-6 ">
@@ -139,7 +139,7 @@ const HowToApply = () => {
 </div>
 
         </AccordionContent>
-      </AccordionItem>
+      </AccordionItem> */}
       <AccordionItem value="item-4">
         <AccordionTrigger className="text-2xl font-light">Admission Deadline</AccordionTrigger>
         <AccordionContent>
