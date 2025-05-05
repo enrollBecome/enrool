@@ -14,7 +14,7 @@ const Signup = () => {
 
             <Link to="/how-to-apply" className="font-thin text-sm text-gray-400" >How to Apply  </Link>
             <Link to="/terms-condition" className="font-thin text-sm text-gray-400" >Terms & Condition  </Link>
-            <Link to="/privacy-policy" className="font-thin text-sm text-gray-400" >Privacy Policy</Link>
+            <Link to="/privacy-policy" className="font-thin text-sm text-gray-400" >Privacy Policies</Link>
           </div></div>
     <div className=' sm: hidden md:block h-screen'><img className='h-full' src="https://tallkizetxyhcvjujgzw.supabase.co/storage/v1/object/public/uploads//Inspire%20Healing,%20Lead%20with%20Vision.jpg"/></div>
     
