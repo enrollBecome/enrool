@@ -128,21 +128,21 @@ const {user} =useUser()
     <OnboardingTopbar />
       <div className="w-full  lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit ">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
-          Start Term Selection
+         Choose Your Program Start Date
         </div>
         <p className=" font-thin mb-4">
-        Your application to the Becoming Institute is now in progress. Complete the application carefully.
+You're one step closer to joining the Becoming Institute. Please select your desired program and start term to continue.
         </p>
 
         <form onSubmit={handleSubmit(onSubmit, onError)}>
           {/* Name Information */}
           <div className="border-t py-8">
-            <span className="text-2xl font-medium">Term Selection</span>
+            <span className="text-2xl font-medium">Program & Start Term</span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
 
            <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
-                  Course Name
+                Program Name
                 </span>
                 <Controller
   name="course_name"
@@ -157,7 +157,7 @@ const {user} =useUser()
           errors.course_name ? "border-red-400 border-2" : ""
         }`}>
         <option value="" disabled className="text-neutral-400">
-          Select Level of Education
+          Select Program
         </option>
         {CourseOptions.map((edu,index) => (
           <option key={index} value={edu}  className="text-zinc-950">
@@ -174,7 +174,7 @@ const {user} =useUser()
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
-                  Term
+                  Start Term
                 </span>
                 <Controller
   name="term"
@@ -206,6 +206,7 @@ const {user} =useUser()
               </div>
 
             </div>
+            <p className='pt-3 text-sm font-thin'>Select the program you're applying for and your preferred start term. <br />If unsure, choose the next available term.</p>
           </div>
           {errorUpdateApplication?.message && (
   <p className="text-red-500">{errorUpdateApplication.message}</p>
@@ -217,7 +218,7 @@ const {user} =useUser()
               {loadingUpdateApplication ? (
                 <ClipLoader color="white" size={24} />
               ) : (
-                "Submit"
+                "Save & Continue"
               )}
             </Button>
         </form>

@@ -884,7 +884,7 @@ const ConfirmationForm = () => {
       <OnboardingTopbar />
       <div className="w-full lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
-          Application Confirmation
+        Final Step: Confirm and Submit Your Application
         </div>
 
         <form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -915,25 +915,18 @@ const ConfirmationForm = () => {
           </div>
           <div className="my-4">
             <span className="">
-              I certify that the information I have submitted on this
-              application is accurate to the best of my knowledge. I authorize
-              Becoming Institute’s Admissions Committee to access the
-              information, contact my reference if required and evaluate my
-              admissibility to the 12-month Trauma Recovery program.
+            I confirm that the information provided in this application is complete and accurate to the best of my knowledge. I authorize the Becoming Institute Admissions Committee to review my submission, contact my references if necessary, and evaluate my eligibility for the 12-Month Trauma Recovery Program.
             </span>
           </div>
           <div className="flex flex-col my-8">
             <p className="text-sm font-light text-gray-400">
               Enrollment Status
             </p>
-            <p className="text-xl">{application.status}</p>
+            <p className="text-xl">{application.status === "In Progress" ? "Application Ready to Submit":application.status}</p>
           </div>
           <div className="my-8">
             <span className="">
-              Note: you can only submit one application per term. If you require
-              changes to your information after your application has been
-              submitted, notify admission@becominginstitute.ca. If you find any errors
-              above, please go back to make the changes necessary.
+            Important: You may only submit one application per term. If you need to make changes after submission, please email us at admission@becominginstitute.ca. If you notice any errors now, please return to the relevant section to make corrections before proceeding.
             </span>
           </div>
 
@@ -954,7 +947,7 @@ const ConfirmationForm = () => {
             {loadingUpdateApplication ? (
               <ClipLoader color="white" size={24} />
             ) : (
-              "Submit"
+              "Submit Application"
             )}
           </Button></>):null}
          

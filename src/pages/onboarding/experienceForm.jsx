@@ -21,7 +21,7 @@ const schema = z.object({
   start_date: z.string().date(),
   end_date: z.string().date(),
   type_of_experience: z.enum(ExperienceType, {
-    errorMap: () => ({ message: "Type of Experience must not be empty" }),
+    errorMap: () => ({ message: "Experience Type must not be empty" }),
   }),
 
   organization_name: z
@@ -143,11 +143,10 @@ const ExperienceForm = () => {
       <OnboardingTopbar />
       <div className="w-full  lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit ">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
-          Professional Experience
+          Work and Professional Experience
         </div>
         <p className=" font-thin mb-4">
-          Please provide detailed information about your professional
-          experience.
+        Provide a summary of your relevant professional roles, including titles, organizations, and responsibilities.
         </p>
 
         {experience && experience.length > 0 ? (
@@ -168,14 +167,14 @@ const ExperienceForm = () => {
 
                       <div className="flex flex-col">
                         <p className="text-sm font-light text-gray-400">
-                          Type of Experience
+                          Experience Type
                         </p>
                         <p className="text-xl">{educate.type_of_experience}</p>
                       </div>
 
                       <div className="flex flex-col">
                         <p className="text-sm font-light text-gray-400">
-                          Current Professional Title
+Position / Title
                         </p>
                         <p className="text-xl">{educate.title}</p>
                       </div>
@@ -224,7 +223,7 @@ const ExperienceForm = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
-                  Type of Experience
+                  Experience Type
                 </span>
                 <Controller
                   name="type_of_experience"
@@ -241,7 +240,7 @@ const ExperienceForm = () => {
                             : ""
                         }`}>
                         <option value="" disabled className="text-neutral-400">
-                          Select Type of Experience
+                          Select Experience Type
                         </option>
                         {ExperienceType.map((edu, index) => (
                           <option
@@ -282,7 +281,7 @@ const ExperienceForm = () => {
 
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
-                  Current Professional Title
+Position / Title
                 </span>
 
                 <input
@@ -338,12 +337,12 @@ const ExperienceForm = () => {
             </div>
             <div className="flex flex-col pt-4">
               <span className="mb-2 text-[13px] poppins-regular">
-                Nature of Work
+Role Description
               </span>
 
               <textarea
                 className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 w-full h-40 rounded-[30px] p-4 text-base resize-none"
-                placeholder="Minimum 500 characters are required"
+                placeholder="Describe your key responsibilities, areas of focus, and any achievements in this role (minimum 500 characters)."
                 required
                 {...register("nature_of_work")}></textarea>
 
@@ -364,11 +363,11 @@ const ExperienceForm = () => {
             {loadingCreateExperience ? (
               <ClipLoader color="white" size={24} />
             ) : (
-              "Add"
+              "Save & Continue"
             )}
           </Button>
           {experience && experience.length > 0?(<>
-            <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Next</Button>
+            <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Save & Continue</Button>
           </>):null}
           </div>
         </form>):(<>
@@ -380,7 +379,7 @@ const ExperienceForm = () => {
            <Plus strokeWidth={2} size={40} color="white" /> Add
         </Button>
         
-          <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Next</Button>
+          <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Save & Continue</Button>
        
         
         </div>

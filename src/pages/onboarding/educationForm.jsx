@@ -12,15 +12,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import useFetch from "@/hooks/use-fetch";
 import countries from "@/data/countries";
 import InstitutionType from "@/data/institutionType";
-import FirstLanguage from "@/data/firstLanguage";
+// import FirstLanguage from "@/data/firstLanguage";
 import YesNo from "@/data/yesNo";
 import {
   addNewEducation,
   deleteEducation,
   getEducationByApplicationId,
 } from "@/api/apiEducation";
-import { Download, Plus, Trash2 } from "lucide-react";
+import { Download, Info, Plus, Trash2 } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
+import ProgramCompleted from "@/data/programCompleted";
 const schema = z.object({
   attended_from: z.string().date(),
   attended_to: z.string().date(),
@@ -35,10 +36,10 @@ const schema = z.object({
     .min(3, { message: "Institution Name is required" }),
   province: z.string().min(3, { message: "Province is required" }),
   city: z.string().min(3, { message: "City is required" }),
-  first_language: z.enum(FirstLanguage, {
-    errorMap: () => ({ message: "First Language must not be empty" }),
-  }),
-  completed: z.enum(YesNo, {
+  // first_language: z.enum(FirstLanguage, {
+  //   errorMap: () => ({ message: "First Language must not be empty" }),
+  // }),
+  completed: z.enum(ProgramCompleted, {
     errorMap: () => ({ message: "Completed must not be empty" }),
   }),
 
@@ -167,10 +168,10 @@ const handleDelete = (educationId)=>{
       <OnboardingTopbar />
       <div className="w-full  lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit ">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
-          Educational Background
+          Academic History
         </div>
         <p className=" font-thin mb-4">
-          Provide detailed information about your academic background.
+          Detail your educational history, including institutions, programs and credentials earned.
         </p>
 
 
@@ -204,7 +205,7 @@ const handleDelete = (educationId)=>{
 
                             <div className="flex flex-col">
                               <p className="text-sm font-light text-gray-400">
-                                Country of Residence
+                                Country of Institute
                               </p>
                               <p className="text-xl">
                                 {educate.country_of_residence}
@@ -242,14 +243,14 @@ const handleDelete = (educationId)=>{
                               </p>
                               <p className="text-xl">{educate.attended_to}</p>
                             </div>
-                            <div className="flex flex-col">
+                            {/* <div className="flex flex-col">
                               <p className="text-sm font-light text-gray-400">
                                 First Language
                               </p>
                               <p className="text-xl">
                                 {educate.first_language}
                               </p>
-                            </div>
+                            </div> */}
                             <div></div>
                             <div className="flex flex-col">
                               
@@ -286,7 +287,7 @@ const handleDelete = (educationId)=>{
             {/* Education */}
            
 
-            <span className="text-2xl font-medium">Academic Institution</span>
+            <span className="text-2xl font-medium">Institution Details</span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -307,9 +308,12 @@ const handleDelete = (educationId)=>{
                 )}
               </div>
               <div className="flex flex-col">
+                <div className=" flex gap-4">
                 <span className="mb-2 text-[13px] poppins-regular">
-                  Type of Institution
+                  Type of Institution 
                 </span>
+                <span className="italic text-xs font-light flex gap-2" ><Info  size={17}/> Select the type that best describes this institution.</span>
+                </div>
                 <Controller
                   name="type_of_institution"
                   control={control}
@@ -347,7 +351,7 @@ const handleDelete = (educationId)=>{
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
-                  Country of Residence
+                  Country of Institute
                 </span>
                 <Controller
                   name="country_of_residence"
@@ -364,7 +368,7 @@ const handleDelete = (educationId)=>{
                             : ""
                         }`}>
                         <option value="" disabled className="text-neutral-400">
-                          Select Country of Residence
+                          Select Country of Institute
                         </option>
                         {countries.map((edu, index) => (
                           <option
@@ -421,7 +425,7 @@ const handleDelete = (educationId)=>{
 
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
-                  Completed
+                Program Completed
                 </span>
                 <Controller
                   name="completed"
@@ -436,9 +440,9 @@ const handleDelete = (educationId)=>{
                           errors.completed ? "border-red-400 border-2" : ""
                         }`}>
                         <option value="" disabled className="text-neutral-400">
-                          Select Type of Institutoin
+                          Select program completed
                         </option>
-                        {YesNo.map((edu, index) => (
+                        {ProgramCompleted.map((edu, index) => (
                           <option
                             key={index}
                             value={edu}
@@ -492,7 +496,7 @@ const handleDelete = (educationId)=>{
                   </p>
                 )}
               </div>
-              <div className="flex flex-col">
+              {/* <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   First Language
                 </span>
@@ -528,7 +532,7 @@ const handleDelete = (educationId)=>{
                     </div>
                   )}
                 />
-              </div>
+              </div> */}
               <div className="flex flex-col ">
                 <span className="mb-2 text-[13px] poppins-regular">
                   Upload Your Transcript
@@ -558,11 +562,11 @@ const handleDelete = (educationId)=>{
             {loadingCreateEductaion ? (
               <ClipLoader color="white" size={24} />
             ) : (
-              "Save"
+              "Save & Continue"
             )}
           </Button>
           {education && education.length > 0?(<>
-            <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Next</Button>
+            <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Save & Continue</Button>
           </>):null}
           
           </div>
@@ -575,7 +579,7 @@ const handleDelete = (educationId)=>{
              <Plus strokeWidth={2} size={40} color="white" /> Add
           </Button>
           
-            <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Next</Button>
+            <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Save & Continue</Button>
          
           
           </div>

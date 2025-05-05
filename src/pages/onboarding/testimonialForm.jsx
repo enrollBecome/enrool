@@ -140,7 +140,7 @@ const TestimonialForm = () => {
    <OnboardingTopbar />
       <div className="w-full  lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit ">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
-        Resume and Video Testimonial
+Resume & Video Introduction
         </div>
         <p className=" font-thin mb-4">
         Please upload a copy of your resume here:
@@ -171,14 +171,19 @@ const TestimonialForm = () => {
 
           </div>
 
-          <div className="border-t py-4">
-          Upload a short, 3-minute video answering the following questions. Make sure to speak clearly and concisely, and ensure that your responses are authentic and reflective of your true self. This video is an opportunity for us to get to know you beyond your written application.
+          <div className="border-t py-4 font-light">
+          Please upload a 3-minute video responding to the questions below.<br /><br />
+
+1. What motivated you to pursue a Trauma Recovery Certificate?<br />
+2. What do you hope to achieve by completing this program?<br />
+3. Why would you be an ideal candidate for admission into the program?<br /><br />
+This is a chance for us to hear directly from you and get a sense of who you are beyond your written application. Speak clearly, and share authentically-there's no need for perfection; just be yourself.
           </div>
           <div className="border-t py-8">
 
 <div className="flex flex-col pb-4">
       <span className="mb-2 text-[13px] poppins-regular">
-        Upload Your Recoreded Video Testimonial Here (Video file must not be more then 50mb)
+        Upload Your Recoreded Video Testimonial Here (must not exceed 50MB)
       </span>
       <input
         className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 flex justify-center rounded-full p-4 text-base"
@@ -195,11 +200,11 @@ const TestimonialForm = () => {
     </div>
 
 
-    <div className="border-t py-4 flex flex-col gap-4">
+    {/* <div className="border-t py-4 flex flex-col gap-4">
 <span className='text-xl  font-semibold'>Video Resume Questions</span>
 <span className=''>
     What motivated you to pursue a Trauma Recovery Certificate, and what do you hope to achieve by completing this program? Why would you be an ideal candidate for admission into the program?
-    </span> </div>
+    </span> </div> */}
 
 </div>
           {errorUpdateApplication?.message && (
@@ -212,7 +217,7 @@ const TestimonialForm = () => {
               {loadingUpdateApplication ? (
                 <ClipLoader color="white" size={24} />
               ) : (
-                "Submit"
+                "Save & Continue"
               )}
             </Button>
           </form>

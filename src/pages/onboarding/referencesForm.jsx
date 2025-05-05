@@ -135,10 +135,10 @@ const ReferencesForm = () => {
 <OnboardingTopbar />
       <div className="w-full  lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit ">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
-        Resume and Video Testimonial
+        References
         </div>
         <p className=" font-thin mb-4">
-        List the names and contact information of referees who are willing to complete a confidential assessment on your behalf.
+        Please provide contact details for three individuals who can speak to your character, academic ability, and/or professional readiness.
         </p>
 
 
@@ -146,8 +146,9 @@ const ReferencesForm = () => {
 
           
           <div className="border-t py-8">
-<div className='pb-4'>
+<div className='pb-8 flex flex-col gap-2 '>
 <span className='text-2xl font-bold '>Academic Reference</span>
+<span className="text-sm font-light text-neutral-600">Someone who can speak to your learning ability, intellectual curiosity, or academic background (e.g., teacher, instructor, mentor).</span>
 </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
           <div className="flex flex-col">
@@ -205,8 +206,9 @@ const ReferencesForm = () => {
                 )}
               </div>
             </div>
-            <div className='py-4'>
+            <div className='py-8 flex flex-col gap-2'>
 <span className='text-2xl font-bold '>Professional Reference</span>
+<span className="text-sm font-light text-neutral-600">Someone who has supervised you in a workplace, volunteer, or community leadership role.</span>
 </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
           <div className="flex flex-col">
@@ -265,8 +267,9 @@ const ReferencesForm = () => {
               </div>
             
             </div>
-            <div className='py-4'>
+            <div className='py-8 flex flex-col gap-2'>
 <span className='text-2xl font-bold '>Personal Reference</span>
+<span className="text-sm font-light text-neutral-600">Someone who knows you well and can speak to your character, motivation, and commitment (not a family member).</span>
 </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
           <div className="flex flex-col">
@@ -335,7 +338,7 @@ const ReferencesForm = () => {
               {loadingUpdateApplication ? (
                 <ClipLoader color="white" size={24} />
               ) : (
-                "Submit"
+                "Save & Continue"
               )}
             </Button>
             </form></div>

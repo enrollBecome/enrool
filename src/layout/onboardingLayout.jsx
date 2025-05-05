@@ -16,7 +16,7 @@ const OnboardingLayout = () => {
   const navLinks = [
     { path: `/start-enrollment${applicationid ? `/${applicationid}` : ''}`, icon: <User strokeWidth={1} color="#bc9c22" />, label: "Personal Information" },
     { path: `/term-selection-form${applicationid ? `/${applicationid}` : ''}`, icon: <ListTodo strokeWidth={1} color="#bc9c22" />, label: "Term Selection" },
-    { path: `/education-form${applicationid ? `/${applicationid}` : ''}`, icon: <GraduationCap strokeWidth={1} color="#bc9c22" />, label: "Education" },
+    { path: `/education-form${applicationid ? `/${applicationid}` : ''}`, icon: <GraduationCap strokeWidth={1} color="#bc9c22" />, label: "Academic History" },
     { path: `/experience-form${applicationid ? `/${applicationid}` : ''}`, icon: <BriefcaseBusiness strokeWidth={1} color="#bc9c22" />, label: "Experience" },
     { path: `/personal-statement-form${applicationid ? `/${applicationid}` : ''}`, icon: <Bell strokeWidth={1} color="#bc9c22" />, label: "Personal Statement" },
     { path: `/testimonial-form${applicationid ? `/${applicationid}` : ''}`, icon: <FolderUp strokeWidth={1} color="#bc9c22" />, label: "Testimonial" },

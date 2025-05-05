@@ -370,7 +370,7 @@ const StartEnrollment = () => {
         <form onSubmit={handleSubmit(onSubmit, onError)}>
           {/* Name Information */}
           <div className="border-t py-8">
-            <span className="text-2xl font-medium">Name Information</span>
+            <span className="text-2xl font-medium">Applicant Name</span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -447,7 +447,7 @@ const StartEnrollment = () => {
           </div>
           {/* Personal Details */}
           <div className="border-t py-8">
-            <span className="text-2xl font-medium">Personal Details</span>
+            <span className="text-2xl font-medium">Contact & Demographic Information</span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -555,7 +555,7 @@ const StartEnrollment = () => {
           </div>
           {/* Education & Language */}
           <div className="border-t py-8">
-            <span className="text-2xl font-medium">Personal Details</span>
+            <span className="text-2xl font-medium">Educational Background</span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               
               <div className="flex flex-col">
@@ -607,7 +607,7 @@ const StartEnrollment = () => {
           errors.first_language ? "border-red-400 border-2" : ""
         }`}>
         <option value="" disabled className="text-neutral-400">
-          Select Level of Education
+          Select First Language
         </option>
         {FirstLanguage.map((edu,index) => (
           <option key={index} value={edu} className="text-zinc-950">
@@ -627,7 +627,7 @@ const StartEnrollment = () => {
           </div>
           {/* Immigration & Ancestry */}
           <div className="border-t py-8">
-            <span className="text-2xl font-medium">Immigration & Ancestry</span>
+            <span className="text-2xl font-medium">Citizen & Immigration Status</span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               
               <div className="flex flex-col">
@@ -647,7 +647,7 @@ const StartEnrollment = () => {
           errors.immigration_status ? "border-red-400 border-2" : ""
         }`}>
         <option value="" disabled className="text-neutral-400">
-          Select Level of Education
+          Select Citizenship Status
         </option>
         {ImmigrationStatus.map((edu,index) => (
           <option key={index} value={edu} className="text-zinc-950">
@@ -664,7 +664,7 @@ const StartEnrollment = () => {
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
-                  First Language
+Heritage & Ancestry
                 </span>
                 <Controller
   name="ancestry"
@@ -679,7 +679,7 @@ const StartEnrollment = () => {
           errors.ancestry ? "border-red-400 border-2" : ""
         }`}>
         <option value="" disabled className="text-neutral-400">
-          Select Level of Education
+          Select Your Heritage & Ancestry
         </option>
         {ancestryOptions.map((edu,index) => (
           <option key={index} value={edu.name} disabled={edu.isCategoryTrue} className="text-zinc-950">
@@ -707,7 +707,7 @@ const StartEnrollment = () => {
               {loadingCreateApplication ? (
                 <ClipLoader color="white" size={24} />
               ) : (
-                "Submit"
+                "Save & Continue"
               )}
             </Button>
         </form>

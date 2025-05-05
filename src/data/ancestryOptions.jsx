@@ -1,4 +1,5 @@
 const ancestryOptions = [
+  {name:"I am Not of African or Indigenous Ancestry", isCategoryFalse:true},
   { name: "African Ancestry", isCategoryTrue: true },
   { name: "Indigenous African Canadian (e.g., African Nova Scotian, Black Loyalists, Black Refugees from War of 1812)", isCategoryFalse: true },
   { name: "African Canadian (recent immigrant or descendant)", isCategoryFalse: true },

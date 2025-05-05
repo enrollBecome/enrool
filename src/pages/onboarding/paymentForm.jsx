@@ -40,25 +40,27 @@ const PaymentForm = () => {
               </span>
               </div></>):(<> 
                 <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
-          Payment
+        Confirm Your Enrollment
           </div> 
             <div className="w-full min-h-full h-fit flex flex-col">
               <span className="text-2xl text-gray-500 font-semibold">
-                Payment Form
+              You're one step away from beginning your training to become a Trauma Recovery Specialist.
               </span>
 
               <div className="border-t my-4"></div>
               <div className="">
                 <div className="flex flex-col">
-                  <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
-                    Course Name
+                  <span className="mb-2 text-gray-500 text-sm poppins-regular">
+                  To move forward with your application to the 12-Month Trauma Recovery Certificate Program, please complete the $150 processing fee below.
+                  <br /> <br />
+                  This non-refundable fee supports the review of your application, coordination of your interview, and early access to orientation materials that will help you prepare for this transformative journey.
                   </span>
-                  <span className="mb-2 text-2xl poppins-bold">
+                  {/* <span className="mb-2 text-2xl poppins-bold">
                     {application.course_name}
-                  </span>
+                  </span> */}
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div className="flex flex-col">
                   <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                     Program Term
@@ -73,7 +75,7 @@ const PaymentForm = () => {
                   </span>
                   <span className="mb-2 text-2xl poppins-bold">$150</span>
                 </div>
-              </div>
+              </div> */}
               <div className="border-t mt-4 pt-8">
               <form action="https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/create-checkout-session" method="POST">
               <Button className="w-full h-12 rounded-full " type="submit">

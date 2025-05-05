@@ -130,7 +130,7 @@ const PersonalStatementForm = () => {
           Statement of Purpose
         </div>
         <p className=" font-thin mb-4">
-          Please provide detailed information about your professional experience.
+        Your Statement of Purpose helps us get to know you beyond your transcripts and resume. It's an opportunity to share what draws you to this program, what experiences have shaped your path, and how you hope to grow through your time at the Becoming Institute. Please focus on what feels most relevant to your journey, your readiness, and your intentions for the work ahead.
         </p>
 
 
@@ -142,7 +142,7 @@ const PersonalStatementForm = () => {
 
   <textarea
     className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 w-full h-40 rounded-[30px] p-4 text-base resize-none"
-    placeholder="Minimum 1500 characters are required"
+    placeholder="Maximun 1 Page, Single-Spaced (~500-600 words)"
     required
     {...register("statement_of_purpose")}
   ></textarea>
@@ -166,7 +166,7 @@ const PersonalStatementForm = () => {
             {loadingUpdateApplication ? (
               <ClipLoader color="white" size={24} />
             ) : (
-              "Add"
+              "Save & Continue"
             )}
           </Button>
             
