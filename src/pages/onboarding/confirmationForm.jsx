@@ -845,7 +845,7 @@ setTimeout(() => {
 }, 10000);
 
 setTimeout(() => {
-  sendAdminEmail("webserviceszion@becominginstitute.ca", "New Application Registration Request");
+  sendAdminEmail("admissions@becominginstitute.ca", "New Application Registration Request");
 }, 15000);
       // toast({
       //   title: "Registrtaion Successful",
