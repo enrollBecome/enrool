@@ -67,7 +67,7 @@ const ConfirmationForm = () => {
 
       const sendArEmail = async (to, subject) => {
         const response = await fetch(
-          "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-mail",
+          "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-emaile",
           {
             method: "POST",
             headers: {
@@ -259,7 +259,7 @@ const ConfirmationForm = () => {
       
       const sendPrrEmail = async (to, subject) => {
         const response = await fetch(
-          "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-mail",
+          "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-emaile",
           {
             method: "POST",
             headers: {
@@ -450,7 +450,7 @@ const ConfirmationForm = () => {
       };
       const sendPerEmail = async (to, subject) => {
         const response = await fetch(
-          "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-mail",
+          "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-emaile",
           {
             method: "POST",
             headers: {
@@ -642,7 +642,7 @@ const ConfirmationForm = () => {
 
       const sendAdminEmail = async (to, subject) => {
         const response = await fetch(
-          "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-mail",
+          "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-emaile",
           {
             method: "POST",
             headers: {
