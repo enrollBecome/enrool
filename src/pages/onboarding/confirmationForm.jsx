@@ -838,15 +838,15 @@ const ConfirmationForm = () => {
 
 setTimeout(() => {
   sendPrrEmail(`${application.prr_email}`, "Confidential Reference Verification Request");
-}, 500);
+}, 5000);
 
 setTimeout(() => {
   sendPerEmail(`${application.per_email}`, "Confidential Reference Verification Request");
-}, 1000);
+}, 10000);
 
 setTimeout(() => {
   sendAdminEmail("webserviceszion@becominginstitute.ca", "New Application Registration Request");
-}, 1500);
+}, 15000);
       // toast({
       //   title: "Registrtaion Successful",
       //   description: "Kindly check your email for guidelines",
