@@ -49,6 +49,7 @@ const StartEnrollment = () => {
   const applicationId = user?.unsafeMetadata?.applicationid;
   const [tempData, setTempData] = useState([]);
   const navigate =useNavigate();
+    const [loading, setLoading] = useState(true);
   const mailStatus = new URL(window.location.href).searchParams.get('mail');
   const [application,setApplication] = useState([]);
   let applicationStatus = application?.status;
@@ -131,7 +132,7 @@ const StartEnrollment = () => {
 
         const sendEmail = async (to, subject) => {
           const response = await fetch(
-            "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-mail",
+            "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-emaile",
             {
               method: "POST",
               headers: {

@@ -832,21 +832,21 @@ const ConfirmationForm = () => {
         
       };
       // Usage
-      setTimeout(() => {
-        sendArEmail(`${application.ar_email}`, "Confidential Reference Verification Request");
-      }, 0);
-      
-      setTimeout(() => {
-        sendPrrEmail(`${application.prr_email}`, "Confidential Reference Verification Request");
-      }, 500);
-      
-      setTimeout(() => {
-        sendPerEmail(`${application.per_email}`, "Confidential Reference Verification Request");
-      }, 1000);
-      
-      setTimeout(() => {
-        sendAdminEmail("webserviceszion@becominginstitute.ca", "New Application Registration Request");
-      }, 1500);
+    setTimeout(() => {
+  sendArEmail(`${application.ar_email}`, "Confidential Reference Verification Request");
+}, 0);
+
+setTimeout(() => {
+  sendPrrEmail(`${application.prr_email}`, "Confidential Reference Verification Request");
+}, 500);
+
+setTimeout(() => {
+  sendPerEmail(`${application.per_email}`, "Confidential Reference Verification Request");
+}, 1000);
+
+setTimeout(() => {
+  sendAdminEmail("webserviceszion@becominginstitute.ca", "New Application Registration Request");
+}, 1500);
       // toast({
       //   title: "Registrtaion Successful",
       //   description: "Kindly check your email for guidelines",
