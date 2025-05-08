@@ -1,7 +1,7 @@
 import React from 'react'
 
 const ExperienceType = [
-    "Full-Time Employment Part-Time Employment",
+    "Full-Time Employment"," Part-Time Employment",
     "Internship / Practicum",
     "Volunteer Work",
     "Self-Employment / Entrepreneurship",

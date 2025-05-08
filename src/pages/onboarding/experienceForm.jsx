@@ -368,7 +368,7 @@ Role Description
             )}
           </Button>
           {experience && experience.length > 0?(<>
-            <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Save & Continue</Button>
+            <Button className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center" onClick={handleNext}>Add</Button>
           </>):null}
           </div>
         </form>):(<>

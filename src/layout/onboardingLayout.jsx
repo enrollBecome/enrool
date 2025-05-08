@@ -48,7 +48,7 @@ const OnboardingLayout = () => {
     }, [location]);
   return (
     <>
-      <div className='flex w-screen max-h-screen'>
+      <div className='flex w-screen  h-screen'>
         <div id="mobile-menu" className='z-10 sm:w-full sm:hidden md:block md:w-1/5 bg-[#fff8e0] flex flex-col items-center sm:fixed md:relative h-screen overflow-y-auto top-0 left-0'>
 
           {/* <img src={logoWhite} className='h-14 m-4' />
@@ -62,20 +62,28 @@ const OnboardingLayout = () => {
         
         <X strokeWidth={2} size={30}  className='md:hidden' onClick={handleMenuClose}/>
       </div>
-          <div className='flex flex-col justify-between h-full p-[30px] w-full '>
+          <div className='flex flex-col justify-between h-fit gap-10 p-[30px] w-full '>
             <div className='flex flex-col w-full'>
             {navLinks.map(({ path, icon, label, status }, index) => {
   const isCompleted = Boolean(status);
+  const isDisabled = !applicationid && index !== 0;
 
   return (
     <NavLink 
       key={path} 
       to={path} 
-      className={({ isActive }) => navLinkClass(isActive, false)} // No disabling logic now
+      className={({ isActive }) => 
+        navLinkClass(isActive, isDisabled)
+      }
+      onClick={e => {
+        if (isDisabled) e.preventDefault(); // prevent navigation if disabled
+      }}
     >
       <div className="flex items-center justify-between w-full">
-        <div className=' flex '>{icon}
-        <p className="ml-2 text-[#bc9c22] font-normal text-base">{label}</p></div>
+        <div className='flex items-center'>
+          {icon}
+          <p className="ml-2 text-[#bc9c22] font-normal text-base">{label}</p>
+        </div>
         <div className="ml-2">
           {isCompleted ? (
             <CircleCheck strokeWidth={1.5} color="green" size={18} />
@@ -87,6 +95,7 @@ const OnboardingLayout = () => {
     </NavLink>
   );
 })}
+
             </div>
             <button onClick={() => signOut({ redirectUrl: '/' })}>
               <div className="items-center flex justify-center poppins-medium py-[16px] px-[25px] rounded-full gap-[10px] text-white  bg-[#bc9c22]">

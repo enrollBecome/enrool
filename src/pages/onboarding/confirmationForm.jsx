@@ -32,6 +32,7 @@ const ConfirmationForm = () => {
   let stage5 = user.unsafeMetadata.stage5;
   let stage6 = user.unsafeMetadata.stage6;
   let stage7 = user.unsafeMetadata.stage7;
+  let stage8 = user?.unsafeMetadata?.stage8;
 
   const navigate = useNavigate();
 
@@ -995,22 +996,27 @@ const ConfirmationForm = () => {
   </Button>
 
   {/* Inline error message */}
-  {!isCheckboxChecked && (
-    <div className="flex items-center gap-2 text-red-600 mt-2 text-sm">
-      <CircleAlert className="w-4 h-4" />
-      <p>Please agree to the terms and conditions to proceed.</p>
-    </div>
-  )}
 
-  {isCheckboxChecked &&
-    ![stage1, stage2, stage3, stage4, stage5, stage6, stage7].every(
-      (stage) => stage === "completed"
-    ) && (
+  {stage8 !== "completed" && (
+  <>
+    {!isCheckboxChecked && (
       <div className="flex items-center gap-2 text-red-600 mt-2 text-sm">
         <CircleAlert className="w-4 h-4" />
-        <p>Kindly complete all the before stages to submit your application.</p>
+        <p>Please agree to the terms and conditions to proceed.</p>
       </div>
     )}
+
+    {isCheckboxChecked &&
+      ![stage1, stage2, stage3, stage4, stage5, stage6, stage7].every(
+        (stage) => stage === "completed"
+      ) && (
+        <div className="flex items-center gap-2 text-red-600 mt-2 text-sm">
+          <CircleAlert className="w-4 h-4" />
+          <p>Kindly complete all the previous stages to submit your application.</p>
+        </div>
+      )}
+  </>
+)}
 </div>
 
 ) : null}
