@@ -4,6 +4,7 @@ import useFetch from "@/hooks/use-fetch";
 import OnboardingTopbar from "@/layout/onboardingTopBar";
 import { useUser } from "@clerk/clerk-react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CircleAlert } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -21,9 +22,17 @@ const ConfirmationForm = () => {
   const { applicationid } = useParams();
   const [loading, setLoading] = useState(true);
   const [application, setApplication] = useState([]);
-  const [isCheckboxChecked , setIsCheckboxChecked] = useState(false); // State for checkbox
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false); // State for checkbox
   let applicationStatus = application.status;
   let appliedStatus = user.unsafeMetadata.applied;
+  let stage1 = user.unsafeMetadata.stage1;
+  let stage2 = user.unsafeMetadata.stage2;
+  let stage3 = user.unsafeMetadata.stage3;
+  let stage4 = user.unsafeMetadata.stage4;
+  let stage5 = user.unsafeMetadata.stage5;
+  let stage6 = user.unsafeMetadata.stage6;
+  let stage7 = user.unsafeMetadata.stage7;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,7 +64,6 @@ const ConfirmationForm = () => {
   } = useFetch(updateApplication);
 
   const onSubmit = (data) => {
-    
     fnUpdateApplication({
       applicationData: data,
       application_id: applicationid,
@@ -64,7 +72,6 @@ const ConfirmationForm = () => {
 
   useEffect(() => {
     if (dataUpdateApplication?.length > 0) {
-
       const sendArEmail = async (to, subject) => {
         const response = await fetch(
           "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-emaile",
@@ -249,14 +256,12 @@ const ConfirmationForm = () => {
           const errorData = await response.json();
           console.error("Error sending email:", errorData);
           return;
-        }else{
-          
+        } else {
         }
 
         const data = await response.json();
-        
       };
-      
+
       const sendPrrEmail = async (to, subject) => {
         const response = await fetch(
           "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-emaile",
@@ -441,12 +446,10 @@ const ConfirmationForm = () => {
           const errorData = await response.json();
           console.error("Error sending email:", errorData);
           return;
-        }else{
-          
+        } else {
         }
 
         const data = await response.json();
-        
       };
       const sendPerEmail = async (to, subject) => {
         const response = await fetch(
@@ -632,12 +635,10 @@ const ConfirmationForm = () => {
           const errorData = await response.json();
           console.error("Error sending email:", errorData);
           return;
-        }else{
-          
+        } else {
         }
 
         const data = await response.json();
-        
       };
 
       const sendAdminEmail = async (to, subject) => {
@@ -824,45 +825,54 @@ const ConfirmationForm = () => {
           const errorData = await response.json();
           console.error("Error sending email:", errorData);
           return;
-        }else{
-          
+        } else {
         }
 
         const data = await response.json();
-        
       };
       // Usage
-    setTimeout(() => {
-  sendArEmail(`${application.ar_email}`, "Confidential Reference Verification Request");
-}, 0);
+      setTimeout(() => {
+        sendArEmail(
+          `${application.ar_email}`,
+          "Confidential Reference Verification Request"
+        );
+      }, 0);
 
-setTimeout(() => {
-  sendPrrEmail(`${application.prr_email}`, "Confidential Reference Verification Request");
-}, 5000);
+      setTimeout(() => {
+        sendPrrEmail(
+          `${application.prr_email}`,
+          "Confidential Reference Verification Request"
+        );
+      }, 5000);
 
-setTimeout(() => {
-  sendPerEmail(`${application.per_email}`, "Confidential Reference Verification Request");
-}, 10000);
+      setTimeout(() => {
+        sendPerEmail(
+          `${application.per_email}`,
+          "Confidential Reference Verification Request"
+        );
+      }, 10000);
 
-setTimeout(() => {
-  sendAdminEmail("admissions@becominginstitute.ca", "New Application Registration Request");
-}, 15000);
+      setTimeout(() => {
+        sendAdminEmail(
+          "admissions@becominginstitute.ca",
+          "New Application Registration Request"
+        );
+      }, 15000);
       // toast({
       //   title: "Registrtaion Successful",
       //   description: "Kindly check your email for guidelines",
       // })
 
- 
-
       const existingMetadata = user.unsafeMetadata || {};
-      if(appliedStatus<8){
-        appliedStatus=8;
+      if (appliedStatus < 8) {
+        appliedStatus = 8;
       }
       user
         .update({
           unsafeMetadata: {
             ...existingMetadata,
             applied: appliedStatus,
+            stage8: "completed",
           },
         })
         .then(() => {
@@ -885,7 +895,7 @@ setTimeout(() => {
   useEffect(() => {
     if (applicationStatus === "Approved") {
       navigate("/candidate-dashboard");
-    }else if(applicationStatus === "Paid"){
+    } else if (applicationStatus === "Paid") {
       navigate("/candidate-dashboard");
     }
   }, [applicationStatus]);
@@ -895,7 +905,7 @@ setTimeout(() => {
       <OnboardingTopbar />
       <div className="w-full lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
-        Final Step: Confirm and Submit Your Application
+          Final Step: Confirm and Submit Your Application
         </div>
 
         <form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -926,18 +936,30 @@ setTimeout(() => {
           </div>
           <div className="my-4">
             <span className="">
-            I confirm that the information provided in this application is complete and accurate to the best of my knowledge. I authorize the Becoming Institute Admissions Committee to review my submission, contact my references if necessary, and evaluate my eligibility for the 12-Month Trauma Recovery Program.
+              I confirm that the information provided in this application is
+              complete and accurate to the best of my knowledge. I authorize the
+              Becoming Institute Admissions Committee to review my submission,
+              contact my references if necessary, and evaluate my eligibility
+              for the 12-Month Trauma Recovery Program.
             </span>
           </div>
           <div className="flex flex-col my-8">
             <p className="text-sm font-light text-gray-400">
               Enrollment Status
             </p>
-            <p className="text-xl">{application.status === "In Progress" ? "Application Ready to Submit":application.status}</p>
+            <p className="text-xl">
+              {application.status === "In Progress"
+                ? "Application Ready to Submit"
+                : application.status}
+            </p>
           </div>
           <div className="my-8">
             <span className="">
-            Important: You may only submit one application per term. If you need to make changes after submission, please email us at admission@becominginstitute.ca. If you notice any errors now, please return to the relevant section to make corrections before proceeding.
+              Important: You may only submit one application per term. If you
+              need to make changes after submission, please email us at
+              admission@becominginstitute.ca. If you notice any errors now,
+              please return to the relevant section to make corrections before
+              proceeding.
             </span>
           </div>
 
@@ -946,22 +968,53 @@ setTimeout(() => {
           {errorUpdateApplication?.message && (
             <p className="text-red-500">{errorUpdateApplication.message}</p>
           )}
-{application.status !== "Submitted"?(<> <Button
-            type="submit"
-            className={`rounded-full px-10 py-6 mt-[40px] flex justify-center items-center ${
-              !isCheckboxChecked 
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-[#bc9c22]"
-            }`}
-            disabled={!isCheckboxChecked } // Disable button when checkbox is not checked
-          >
-            {loadingUpdateApplication ? (
-              <ClipLoader color="white" size={24} />
-            ) : (
-              "Submit Application"
-            )}
-          </Button></>):null}
-         
+         {application.status !== "Submitted" ? (
+  <div className="flex items-center gap-5 mt-10">
+  <Button
+    type="submit"
+    className={`rounded-full px-10 py-6 flex justify-center items-center ${
+      isCheckboxChecked &&
+      [stage1, stage2, stage3, stage4, stage5, stage6, stage7].every(
+        (stage) => stage === "completed"
+      )
+        ? "bg-[#bc9c22]"
+        : "bg-gray-400 cursor-not-allowed"
+    }`}
+    disabled={
+      !isCheckboxChecked ||
+      ![stage1, stage2, stage3, stage4, stage5, stage6, stage7].every(
+        (stage) => stage === "completed"
+      )
+    }
+  >
+    {loadingUpdateApplication ? (
+      <ClipLoader color="white" size={24} />
+    ) : (
+      "Submit Application"
+    )}
+  </Button>
+
+  {/* Inline error message */}
+  {!isCheckboxChecked && (
+    <div className="flex items-center gap-2 text-red-600 mt-2 text-sm">
+      <CircleAlert className="w-4 h-4" />
+      <p>Please agree to the terms and conditions to proceed.</p>
+    </div>
+  )}
+
+  {isCheckboxChecked &&
+    ![stage1, stage2, stage3, stage4, stage5, stage6, stage7].every(
+      (stage) => stage === "completed"
+    ) && (
+      <div className="flex items-center gap-2 text-red-600 mt-2 text-sm">
+        <CircleAlert className="w-4 h-4" />
+        <p>Kindly complete all the before stages to submit your application.</p>
+      </div>
+    )}
+</div>
+
+) : null}
+
         </form>
       </div>
     </>

@@ -8,14 +8,18 @@ import { useUser } from "@clerk/clerk-react";
 import { z } from "zod";
 import useFetch from "@/hooks/use-fetch";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addNewApplication, getApplicationById, updateApplication } from "@/api/apiApplication";
+import {
+  addNewApplication,
+  getApplicationById,
+  updateApplication,
+} from "@/api/apiApplication";
 import ImmigrationStatus from "@/data/immigrationStatus";
 import ancestryOptions from "@/data/ancestryOptions";
 import { Button } from "@/components/ui/button";
 import { ClipLoader } from "react-spinners";
 import GenderOptions from "@/data/genderOptions";
 import { useNavigate, useParams } from "react-router-dom";
-const ancestryNames = ancestryOptions.map(option => option.name);
+const ancestryNames = ancestryOptions.map((option) => option.name);
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
   last_name: z.string().min(3, { message: "Last name is required" }),
@@ -23,29 +27,42 @@ const schema = z.object({
     /^[+]?[0-9]{7,15}$/, // Validates phone numbers with optional "+" and 7-15 digits
     "Invalid phone number. Must contain digits and start with '+'"
   ),
-  
-  dob: z.string().date(),
-  middle_name:z.string().optional(),
-  former_name:z.string().optional(),
-  country: z.enum(countries, { errorMap: () => ({ message: "Country of Residence must not be empty" }) }),
-highest_level_education: z.enum(EducationLevel, { errorMap: () => ({ message: "Highest Level of Education must not be empty" }) }),
-first_language: z.enum(FirstLanguage, { errorMap: () => ({ message: "First Language must not be empty" }) }),
-immigration_status: z.enum(ImmigrationStatus, { errorMap: () => ({ message: "Immigration Status must not be empty" }) }),
-ancestry: z.enum(ancestryNames, { errorMap: () => ({ message: "Ancestry must not be empty" }) }),
-gender: z.enum(GenderOptions, { errorMap: () => ({ message: "Gender must not be empty" }) }),
 
+  dob: z.string().date(),
+  middle_name: z.string().optional(),
+  former_name: z.string().optional(),
+  country: z.enum(countries, {
+    errorMap: () => ({ message: "Country of Residence must not be empty" }),
+  }),
+  highest_level_education: z.enum(EducationLevel, {
+    errorMap: () => ({
+      message: "Highest Level of Education must not be empty",
+    }),
+  }),
+  first_language: z.enum(FirstLanguage, {
+    errorMap: () => ({ message: "First Language must not be empty" }),
+  }),
+  immigration_status: z.enum(ImmigrationStatus, {
+    errorMap: () => ({ message: "Immigration Status must not be empty" }),
+  }),
+  ancestry: z.enum(ancestryNames, {
+    errorMap: () => ({ message: "Ancestry must not be empty" }),
+  }),
+  gender: z.enum(GenderOptions, {
+    errorMap: () => ({ message: "Gender must not be empty" }),
+  }),
 });
 const EditStartEnrollment = () => {
-    const { applicationid } = useParams();
-    const [loading, setLoading] = useState(true);
+  const { applicationid } = useParams();
+  const [loading, setLoading] = useState(true);
 
-    const [application , setApplication] = useState([]);
+  const [application, setApplication] = useState([]);
   const { user } = useUser();
   const email = user?.emailAddresses?.[0]?.emailAddress || "No email found";
   // let appliedStatus = user.unsafeMetadata.applied;
   let applicationStatus = application?.status;
- 
-  const navigate =useNavigate();
+
+  const navigate = useNavigate();
   useEffect(() => {
     getApplicationById(applicationid)
       .then((data) => setApplication(data))
@@ -65,54 +82,36 @@ const EditStartEnrollment = () => {
   });
 
   const onError = (errors) => {
-    console.log('Form errors:', errors);
+    console.log("Form errors:", errors);
   };
-  
-  const {
-    loading : loadingUpdateApplication ,
-    error : errorUpdateApplication,
-    data : dataUpdateApplication,
-    fn : fnUpdateApplication
 
+  const {
+    loading: loadingUpdateApplication,
+    error: errorUpdateApplication,
+    data: dataUpdateApplication,
+    fn: fnUpdateApplication,
   } = useFetch(updateApplication);
 
   const onSubmit = (data) => {
-
     fnUpdateApplication({
-
-    applicationData: data,
-    application_id:applicationid,
-
-    })
+      applicationData: data,
+      application_id: applicationid,
+    });
   };
   useEffect(() => {
-    if (dataUpdateApplication?.length > 0) navigate(`/term-selection-form/${applicationid}`);
+    if (dataUpdateApplication?.length > 0)
+      navigate(`/term-selection-form/${applicationid}`);
   }, [loadingUpdateApplication]);
   useEffect(() => {
     if (application) {
-
       reset(application); // Populate form with fetched job data
     }
   }, [application]);
-  
-
-  
-
-
-
-
-
-
-
-
-
-
-
 
   useEffect(() => {
     if (applicationStatus === "Approved") {
       navigate("/candidate-dashboard");
-    }else if(applicationStatus === "Paid"){
+    } else if (applicationStatus === "Paid") {
       navigate("/candidate-dashboard");
     }
   }, [applicationStatus]);
@@ -147,10 +146,10 @@ const EditStartEnrollment = () => {
                   {...register("last_name")}
                 />
                 {errors.last_name && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.last_name.message}
-                    </p>
-                  )}
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.last_name.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -164,11 +163,11 @@ const EditStartEnrollment = () => {
                   required
                   {...register("first_name")}
                 />
-                 {errors.first_name && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.first_name.message}
-                    </p>
-                  )}
+                {errors.first_name && (
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.first_name.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -181,11 +180,11 @@ const EditStartEnrollment = () => {
                   placeholder="Add Middle Name"
                   {...register("middle_name")}
                 />
-                 {errors.last_name && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.last_name.message}
-                    </p>
-                  )}
+                {errors.last_name && (
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.last_name.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -198,51 +197,57 @@ const EditStartEnrollment = () => {
                   placeholder="Add Former Name if any"
                   {...register("former_name")}
                 />
-                 {errors.former_name && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.former_name.message}
-                    </p>
-                  )}
+                {errors.former_name && (
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.former_name.message}
+                  </p>
+                )}
               </div>
-
             </div>
           </div>
           {/* Personal Details */}
           <div className="border-t py-8">
-            <span className="text-2xl font-medium">Contact & Demographic Information</span>
+            <span className="text-2xl font-medium">
+              Contact & Demographic Information
+            </span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div className="flex flex-col">
-                <span className="mb-2 text-[13px] poppins-regular">
-                  Gender
-                </span>
+                <span className="mb-2 text-[13px] poppins-regular">Gender</span>
 
                 <Controller
-  name="gender"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.gender ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select Gender
-        </option>
-        {GenderOptions.map((gender,index) => (
-          <option key={index} value={gender} className="text-zinc-950">
-            {gender}
-          </option>
-        ))}
-      </select>
-      {errors.gender && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.gender.message}</p>
-  )}
-    </div>
-  )}
-/>
+                  name="gender"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.gender ? "border-red-400 border-2" : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select Gender
+                        </option>
+                        {GenderOptions.map((gender, index) => (
+                          <option
+                            key={index}
+                            value={gender}
+                            className="text-zinc-950"
+                          >
+                            {gender}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.gender && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.gender.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -257,10 +262,10 @@ const EditStartEnrollment = () => {
                   {...register("dob")}
                 />
                 {errors.date && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.date.message}
-                    </p>
-                  )}
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.date.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -275,203 +280,247 @@ const EditStartEnrollment = () => {
                   {...register("phone")}
                 />
                 {errors.phone && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.phone.message}
-                    </p>
-                  )}
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.phone.message}
+                  </p>
+                )}
               </div>
+            </div>
+          </div>
+
+          {/* Address */}
+          <div className="border-t py-8">
+            <span className="text-2xl font-medium">Address</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   Country of Residence
                 </span>
                 <Controller
-  name="country"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.country ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select Country
-        </option>
-        {countries.map((country,index) => (
-          <option key={index} value={country} className="text-zinc-950">
-            {country}
-          </option>
-        ))}
-      </select>
-      {errors.country && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.country.message}</p>
-  )}
-    </div>
-  )}
-/>
-              </div>
-
-            </div>
+                  name="country"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.country ? "border-red-400 border-2" : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select Country
+                        </option>
+                        {countries.map((country, index) => (
+                          <option
+                            key={index}
+                            value={country}
+                            className="text-zinc-950"
+                          >
+                            {country}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.country && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.country.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+              </div>{" "}
+            </div>{" "}
           </div>
           {/* Education & Language */}
           <div className="border-t py-8">
             <span className="text-2xl font-medium">Educational Background</span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   What is Your Highest Level of Education?
                 </span>
                 <Controller
-  name="highest_level_education"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.highest_level_education ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select Level of Education
-        </option>
-        {EducationLevel.map((edu,index) => (
-          <option key={index} value={edu} className="text-zinc-950">
-            {edu}
-          </option>
-        ))}
-      </select>
-      {errors.highest_level_education && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.highest_level_education.message}</p>
-  )}
-    </div>
-  )}
-/>
+                  name="highest_level_education"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.highest_level_education
+                            ? "border-red-400 border-2"
+                            : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select Level of Education
+                        </option>
+                        {EducationLevel.map((edu, index) => (
+                          <option
+                            key={index}
+                            value={edu}
+                            className="text-zinc-950"
+                          >
+                            {edu}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.highest_level_education && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.highest_level_education.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   First Language
                 </span>
                 <Controller
-  name="first_language"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.first_language ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select First Language
-        </option>
-        {FirstLanguage.map((edu,index) => (
-          <option key={index} value={edu} className="text-zinc-950">
-            {edu}
-          </option>
-        ))}
-      </select>
-      {errors.first_language && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.first_language.message}</p>
-  )}
-    </div>
-  )}
-/>
+                  name="first_language"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.first_language ? "border-red-400 border-2" : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select First Language
+                        </option>
+                        {FirstLanguage.map((edu, index) => (
+                          <option
+                            key={index}
+                            value={edu}
+                            className="text-zinc-950"
+                          >
+                            {edu}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.first_language && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.first_language.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
               </div>
-
             </div>
           </div>
           {/* Immigration & Ancestry */}
           <div className="border-t py-8">
-            <span className="text-2xl font-medium">Citizen & Immigration Status </span>
+            <span className="text-2xl font-medium">
+              Citizen & Immigration Status{" "}
+            </span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
-                Immigration Status
+                  Immigration Status
                 </span>
                 <Controller
-  name="immigration_status"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.immigration_status ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select Citizenship Status
-        </option>
-        {ImmigrationStatus.map((edu,index) => (
-          <option key={index} value={edu} className="text-zinc-950">
-            {edu}
-          </option>
-        ))}
-      </select>
-      {errors.immigration_status && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.immigration_status.message}</p>
-  )}
-    </div>
-  )}
-/>
+                  name="immigration_status"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.immigration_status
+                            ? "border-red-400 border-2"
+                            : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select Citizenship Status
+                        </option>
+                        {ImmigrationStatus.map((edu, index) => (
+                          <option
+                            key={index}
+                            value={edu}
+                            className="text-zinc-950"
+                          >
+                            {edu}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.immigration_status && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.immigration_status.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   Heritage & Ancestry
                 </span>
                 <Controller
-  name="ancestry"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.ancestry ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select your Heritage & Ancestry
-        </option>
-        {ancestryOptions.map((edu,index) => (
-          <option key={index} value={edu.name} disabled={edu.isCategoryTrue} className="text-zinc-950">
-            {edu.name}
-          </option>
-        ))}
-      </select>
-      {errors.ancestry && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.ancestry.message}</p>
-  )}
-    </div>
-  )}
-/>
+                  name="ancestry"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.ancestry ? "border-red-400 border-2" : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select your Heritage & Ancestry
+                        </option>
+                        {ancestryOptions.map((edu, index) => (
+                          <option
+                            key={index}
+                            value={edu.name}
+                            disabled={edu.isCategoryTrue}
+                            className="text-zinc-950"
+                          >
+                            {edu.name}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.ancestry && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.ancestry.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
               </div>
-
             </div>
           </div>
           {errorUpdateApplication?.message && (
-  <p className="text-red-500">{errorUpdateApplication.message}</p>
-)}
+            <p className="text-red-500">{errorUpdateApplication.message}</p>
+          )}
           <Button
-              type="submit"
-
-              className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center">
-              {loadingUpdateApplication ? (
-                <ClipLoader color="white" size={24} />
-              ) : (
-                "Save & Continue"
-              )}
-            </Button>
+            type="submit"
+            className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center"
+          >
+            {loadingUpdateApplication ? (
+              <ClipLoader color="white" size={24} />
+            ) : (
+              "Save & Continue"
+            )}
+          </Button>
         </form>
       </div>
     </>

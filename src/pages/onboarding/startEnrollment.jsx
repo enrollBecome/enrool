@@ -12,8 +12,8 @@ import { addNewApplication, getApplicationById } from "@/api/apiApplication";
 import ImmigrationStatus from "@/data/immigrationStatus";
 import ancestryOptions from "@/data/ancestryOptions";
 
-import { Button } from "@/components/ui/button"
-import { ToastAction } from "@/components/ui/toast"
+import { Button } from "@/components/ui/button";
+import { ToastAction } from "@/components/ui/toast";
 import { ClipLoader } from "react-spinners";
 import GenderOptions from "@/data/genderOptions";
 import { useNavigate } from "react-router-dom";
@@ -21,8 +21,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-
-const ancestryNames = ancestryOptions.map(option => option.name);
+const ancestryNames = ancestryOptions.map((option) => option.name);
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
   last_name: z.string().min(3, { message: "Last name is required" }),
@@ -30,17 +29,30 @@ const schema = z.object({
     /^[+]?[0-9]{7,15}$/, // Validates phone numbers with optional "+" and 7-15 digits
     "Invalid phone number. Must contain digits and start with '+'"
   ),
-  
-  dob: z.string().date(),
-  middle_name:z.string().optional(),
-  former_name:z.string().optional(),
-  country: z.enum(countries, { errorMap: () => ({ message: "Country of Residence must not be empty" }) }),
-highest_level_education: z.enum(EducationLevel, { errorMap: () => ({ message: "Highest Level of Education must not be empty" }) }),
-first_language: z.enum(FirstLanguage, { errorMap: () => ({ message: "First Language must not be empty" }) }),
-immigration_status: z.enum(ImmigrationStatus, { errorMap: () => ({ message: "Immigration Status must not be empty" }) }),
-ancestry: z.enum(ancestryNames, { errorMap: () => ({ message: "Ancestry must not be empty" }) }),
-gender: z.enum(GenderOptions, { errorMap: () => ({ message: "Gender must not be empty" }) }),
 
+  dob: z.string().date(),
+  middle_name: z.string().optional(),
+  former_name: z.string().optional(),
+  country: z.enum(countries, {
+    errorMap: () => ({ message: "Country of Residence must not be empty" }),
+  }),
+  highest_level_education: z.enum(EducationLevel, {
+    errorMap: () => ({
+      message: "Highest Level of Education must not be empty",
+    }),
+  }),
+  first_language: z.enum(FirstLanguage, {
+    errorMap: () => ({ message: "First Language must not be empty" }),
+  }),
+  immigration_status: z.enum(ImmigrationStatus, {
+    errorMap: () => ({ message: "Immigration Status must not be empty" }),
+  }),
+  ancestry: z.enum(ancestryNames, {
+    errorMap: () => ({ message: "Ancestry must not be empty" }),
+  }),
+  gender: z.enum(GenderOptions, {
+    errorMap: () => ({ message: "Gender must not be empty" }),
+  }),
 });
 const StartEnrollment = () => {
   const { toast } = useToast();
@@ -48,19 +60,19 @@ const StartEnrollment = () => {
   const email = user?.emailAddresses?.[0]?.emailAddress || "No email found";
   const applicationId = user?.unsafeMetadata?.applicationid;
   const [tempData, setTempData] = useState([]);
-  const navigate =useNavigate();
-    const [loading, setLoading] = useState(true);
-  const mailStatus = new URL(window.location.href).searchParams.get('mail');
-  const [application,setApplication] = useState([]);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const mailStatus = new URL(window.location.href).searchParams.get("mail");
+  const [application, setApplication] = useState([]);
   let applicationStatus = application?.status;
   useEffect(() => {
-    if(application){
-    if (applicationStatus === "Approved") {
-      navigate("/candidate-dashboard");
-    }else if(applicationStatus === "Paid"){
-      navigate("/candidate-dashboard");
+    if (application) {
+      if (applicationStatus === "Approved") {
+        navigate("/candidate-dashboard");
+      } else if (applicationStatus === "Paid") {
+        navigate("/candidate-dashboard");
+      }
     }
-  }
   }, [application]);
   useEffect(() => {
     getApplicationById(applicationId)
@@ -76,8 +88,7 @@ const StartEnrollment = () => {
     reset, // To reset form fields
     formState: { errors },
   } = useForm({
-    resolver: zodResolver (schema),
-    
+    resolver: zodResolver(schema),
   });
 
   const {
@@ -89,22 +100,19 @@ const StartEnrollment = () => {
 
   const onSubmit = (data) => {
     data.email = email;
-    data.status="In Progress";
+    data.status = "In Progress";
     // data.date_of_birth = startDate;
     fnCreateApplication({
       ...data,
-     
     });
   };
   const onError = (errors) => {
     console.log("Form errors:", errors);
   };
-  
 
   useEffect(() => {
     if (dataCreateApplciation) {
       const newCandidateId = dataCreateApplciation[0]?.id;
-      
 
       // Update Clerk unsafeMetadata with new candidate ID
       if (!user?.unsafeMetadata?.applicationid && newCandidateId) {
@@ -112,7 +120,8 @@ const StartEnrollment = () => {
           .update({
             unsafeMetadata: {
               applicationid: newCandidateId,
-              applied:"1"
+              applied: "1",
+              stage1: "completed",
             },
           })
           .then(() => {
@@ -127,21 +136,18 @@ const StartEnrollment = () => {
 
   useEffect(() => {
     if (mailStatus === "true") {
-      
-       
-
-        const sendEmail = async (to, subject) => {
-          const response = await fetch(
-            "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-emaile",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                to,
-                subject,
-                html: `<!DOCTYPE html>
+      const sendEmail = async (to, subject) => {
+        const response = await fetch(
+          "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-emaile",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              to,
+              subject,
+              html: `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -316,49 +322,34 @@ const StartEnrollment = () => {
 </body>
 </html>
 `,
-              }),
-            }
-          );
-
-          if (!response.ok) {
-            const errorData = await response.json();
-            console.error("Error sending email:", errorData);
-            return;
-          }else{
-            
+            }),
           }
+        );
 
-          const data = await response.json();
-          
-        };
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("Error sending email:", errorData);
+          return;
+        } else {
+        }
 
-        // Usage
-        sendEmail(`${email}`, "Welcome to the Becoming Institute’s 12-Month Trauma Recovery Certificate Program Application!");
-        toast({
-          title: "Registrtaion Successful",
-          description: "Kindly check your email for guidelines",
-        })
+        const data = await response.json();
+      };
 
-       
+      // Usage
+      sendEmail(
+        `${email}`,
+        "Welcome to the Becoming Institute’s 12-Month Trauma Recovery Certificate Program Application!"
+      );
+      toast({
+        title: "Registrtaion Successful",
+        description: "Kindly check your email for guidelines",
+      });
     }
   }, [mailStatus]);
 
-
-
-
-
-
-
-
-
-
-
-  
-
-
   return (
     <>
-   
       <OnboardingTopbar />
       <div className="w-full  lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit ">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
@@ -386,10 +377,10 @@ const StartEnrollment = () => {
                   {...register("last_name")}
                 />
                 {errors.last_name && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.last_name.message}
-                    </p>
-                  )}
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.last_name.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -403,11 +394,11 @@ const StartEnrollment = () => {
                   required
                   {...register("first_name")}
                 />
-                 {errors.first_name && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.first_name.message}
-                    </p>
-                  )}
+                {errors.first_name && (
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.first_name.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -420,11 +411,11 @@ const StartEnrollment = () => {
                   placeholder="Add Middle Name"
                   {...register("middle_name")}
                 />
-                 {errors.last_name && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.last_name.message}
-                    </p>
-                  )}
+                {errors.last_name && (
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.last_name.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -437,51 +428,57 @@ const StartEnrollment = () => {
                   placeholder="Add Former Name if any"
                   {...register("former_name")}
                 />
-                 {errors.former_name && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.former_name.message}
-                    </p>
-                  )}
+                {errors.former_name && (
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.former_name.message}
+                  </p>
+                )}
               </div>
-
             </div>
           </div>
           {/* Personal Details */}
           <div className="border-t py-8">
-            <span className="text-2xl font-medium">Contact & Demographic Information</span>
+            <span className="text-2xl font-medium">
+              Contact & Demographic Information
+            </span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div className="flex flex-col">
-                <span className="mb-2 text-[13px] poppins-regular">
-                  Gender
-                </span>
+                <span className="mb-2 text-[13px] poppins-regular">Gender</span>
 
                 <Controller
-  name="gender"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.gender ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select Gender
-        </option>
-        {GenderOptions.map((gender,index) => (
-          <option key={index} value={gender} className="text-zinc-950">
-            {gender}
-          </option>
-        ))}
-      </select>
-      {errors.gender && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.gender.message}</p>
-  )}
-    </div>
-  )}
-/>
+                  name="gender"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.gender ? "border-red-400 border-2" : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select Gender
+                        </option>
+                        {GenderOptions.map((gender, index) => (
+                          <option
+                            key={index}
+                            value={gender}
+                            className="text-zinc-950"
+                          >
+                            {gender}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.gender && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.gender.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -496,10 +493,10 @@ const StartEnrollment = () => {
                   {...register("dob")}
                 />
                 {errors.dob && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.dob.message}
-                    </p>
-                  )}
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.dob.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
@@ -514,203 +511,246 @@ const StartEnrollment = () => {
                   {...register("phone")}
                 />
                 {errors.phone && (
-                    <p className="text-red-400 text-sm px-4 py-2">
-                      {errors.phone.message}
-                    </p>
-                  )}
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.phone.message}
+                  </p>
+                )}
               </div>
+            </div>
+          </div>
+          {/* Address */}
+          <div className="border-t py-8">
+            <span className="text-2xl font-medium">Address</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   Country of Residence
                 </span>
                 <Controller
-  name="country"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.country ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select Country
-        </option>
-        {countries.map((country,index) => (
-          <option key={index} value={country} className="text-zinc-950">
-            {country}
-          </option>
-        ))}
-      </select>
-      {errors.country && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.country.message}</p>
-  )}
-    </div>
-  )}
-/>
-              </div>
-
-            </div>
+                  name="country"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.country ? "border-red-400 border-2" : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select Country
+                        </option>
+                        {countries.map((country, index) => (
+                          <option
+                            key={index}
+                            value={country}
+                            className="text-zinc-950"
+                          >
+                            {country}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.country && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.country.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+              </div>{" "}
+            </div>{" "}
           </div>
           {/* Education & Language */}
           <div className="border-t py-8">
             <span className="text-2xl font-medium">Educational Background</span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   What is Your Highest Level of Education?
                 </span>
                 <Controller
-  name="highest_level_education"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.highest_level_education ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select Level of Education
-        </option>
-        {EducationLevel.map((edu,index) => (
-          <option key={index} value={edu} className="text-zinc-950">
-            {edu}
-          </option>
-        ))}
-      </select>
-      {errors.highest_level_education && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.highest_level_education.message}</p>
-  )}
-    </div>
-  )}
-/>
+                  name="highest_level_education"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.highest_level_education
+                            ? "border-red-400 border-2"
+                            : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select Level of Education
+                        </option>
+                        {EducationLevel.map((edu, index) => (
+                          <option
+                            key={index}
+                            value={edu}
+                            className="text-zinc-950"
+                          >
+                            {edu}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.highest_level_education && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.highest_level_education.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   First Language
                 </span>
                 <Controller
-  name="first_language"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.first_language ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select First Language
-        </option>
-        {FirstLanguage.map((edu,index) => (
-          <option key={index} value={edu} className="text-zinc-950">
-            {edu}
-          </option>
-        ))}
-      </select>
-      {errors.first_language && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.first_language.message}</p>
-  )}
-    </div>
-  )}
-/>
+                  name="first_language"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.first_language ? "border-red-400 border-2" : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select First Language
+                        </option>
+                        {FirstLanguage.map((edu, index) => (
+                          <option
+                            key={index}
+                            value={edu}
+                            className="text-zinc-950"
+                          >
+                            {edu}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.first_language && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.first_language.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
               </div>
-
             </div>
           </div>
           {/* Immigration & Ancestry */}
           <div className="border-t py-8">
-            <span className="text-2xl font-medium">Citizen & Immigration Status</span>
+            <span className="text-2xl font-medium">
+              Citizen & Immigration Status
+            </span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
-                Immigration Status
+                  Immigration Status
                 </span>
                 <Controller
-  name="immigration_status"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.immigration_status ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select Citizenship Status
-        </option>
-        {ImmigrationStatus.map((edu,index) => (
-          <option key={index} value={edu} className="text-zinc-950">
-            {edu}
-          </option>
-        ))}
-      </select>
-      {errors.immigration_status && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.immigration_status.message}</p>
-  )}
-    </div>
-  )}
-/>
+                  name="immigration_status"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.immigration_status
+                            ? "border-red-400 border-2"
+                            : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select Citizenship Status
+                        </option>
+                        {ImmigrationStatus.map((edu, index) => (
+                          <option
+                            key={index}
+                            value={edu}
+                            className="text-zinc-950"
+                          >
+                            {edu}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.immigration_status && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.immigration_status.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
-Heritage & Ancestry
+                  Heritage & Ancestry
                 </span>
                 <Controller
-  name="ancestry"
-  control={control}
-  render={({ field }) => (
-    <div className="relative">
-      <select
-        {...field}
-        value={field.value || ""}
-        onChange={(e) => field.onChange(e.target.value)}
-        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
-          errors.ancestry ? "border-red-400 border-2" : ""
-        }`}>
-        <option value="" disabled className="text-neutral-400">
-          Select Your Heritage & Ancestry
-        </option>
-        {ancestryOptions.map((edu,index) => (
-          <option key={index} value={edu.name} disabled={edu.isCategoryTrue} className="text-zinc-950">
-            {edu.name}
-          </option>
-        ))}
-      </select>
-      {errors.ancestry && (
-    <p className="text-red-400 text-sm px-4 py-2">{errors.ancestry.message}</p>
-  )}
-    </div>
-  )}
-/>
+                  name="ancestry"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="relative">
+                      <select
+                        {...field}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                          errors.ancestry ? "border-red-400 border-2" : ""
+                        }`}
+                      >
+                        <option value="" disabled className="text-neutral-400">
+                          Select Your Heritage & Ancestry
+                        </option>
+                        {ancestryOptions.map((edu, index) => (
+                          <option
+                            key={index}
+                            value={edu.name}
+                            disabled={edu.isCategoryTrue}
+                            className="text-zinc-950"
+                          >
+                            {edu.name}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.ancestry && (
+                        <p className="text-red-400 text-sm px-4 py-2">
+                          {errors.ancestry.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
               </div>
-
             </div>
           </div>
           {errorCreateApplication?.message && (
-  <p className="text-red-500">{errorCreateApplication.message}</p>
-)}
+            <p className="text-red-500">{errorCreateApplication.message}</p>
+          )}
           <Button
-              type="submit"
-
-              className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center">
-              {loadingCreateApplication ? (
-                <ClipLoader color="white" size={24} />
-              ) : (
-                "Save & Continue"
-              )}
-            </Button>
+            type="submit"
+            className="rounded-full px-10 py-6  bg-[#bc9c22] flex justify-center items-center"
+          >
+            {loadingCreateApplication ? (
+              <ClipLoader color="white" size={24} />
+            ) : (
+              "Save & Continue"
+            )}
+          </Button>
         </form>
       </div>
     </>

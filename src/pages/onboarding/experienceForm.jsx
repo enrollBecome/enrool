@@ -103,6 +103,7 @@ const ExperienceForm = () => {
             unsafeMetadata: {
               ...existingMetadata,
               applied: appliedStatus,
+              stage4:"completed"
             },
           })
           .then(() => {

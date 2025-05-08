@@ -103,6 +103,7 @@ const ReferencesForm = () => {
             unsafeMetadata: {
               ...existingMetadata,
               applied: appliedStatus,
+              stage7:"completed"
             },
           })
           .then(() => {

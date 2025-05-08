@@ -1,6 +1,8 @@
 import { getApplicationById } from '@/api/apiApplication';
 import { Button } from '@/components/ui/button';
 import OnboardingTopbar from '@/layout/onboardingTopBar'
+import { useUser } from '@clerk/clerk-react';
+import { CircleAlert } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -8,7 +10,11 @@ const PaymentForm = () => {
     const { applicationid } = useParams();
     const [loading, setLoading] = useState(true);
     const [application, setApplication] = useState([]);
+    const {user} = useUser();
+    let stage8 = user.unsafeMetadata.stage8 ;
+    
     let applicationStatus = application.status;
+ 
 
     const navigate = useNavigate();
 
@@ -77,10 +83,25 @@ const PaymentForm = () => {
                 </div>
               </div> */}
               <div className="border-t mt-4 pt-8">
-              <form action="https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/create-checkout-session" method="POST">
-              <Button className="w-full h-12 rounded-full " type="submit">
-                  Complete Payment
-                </Button>
+              <form
+  action="https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/create-checkout-session"
+  method="POST"
+  className="flex flex-col items-center gap-2"
+>
+  <Button
+    className="w-full h-12 rounded-full"
+    type="submit"
+    disabled={stage8 !== "completed"}
+  >
+    Complete Payment
+  </Button>
+
+  {stage8 !== "completed" && (
+    <p className="text-red-600 text-sm flex items-center gap-1">
+      <CircleAlert className="w-4 h-4" />
+      Please complete the confirmation stage of the application to proceed further.
+    </p>
+  )}
 </form>
                 
               </div>

@@ -126,6 +126,7 @@ if(education.length>0){
             unsafeMetadata: {
               ...existingMetadata,
               applied: appliedStatus,
+              stage3:"completed"
             },
           })
           .then(() => {

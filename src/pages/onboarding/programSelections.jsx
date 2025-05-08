@@ -95,6 +95,7 @@ const {user} =useUser()
             unsafeMetadata: {
               ...existingMetadata,
               applied: appliedStatus,
+              stage2:"completed",
             },
           })
           .then(() => {

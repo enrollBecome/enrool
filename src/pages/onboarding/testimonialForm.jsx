@@ -98,6 +98,7 @@ const TestimonialForm = () => {
               unsafeMetadata: {
                 ...existingMetadata,
                 applied: appliedStatus,
+                stage6:"completed"
               },
             })
             .then(() => {
