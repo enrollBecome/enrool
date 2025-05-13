@@ -30,7 +30,7 @@ const schema = z.object({
   title: z
     .string()
     .min(3, { message: "Current Professional Title is required" }),
-  nature_of_work: z.string().min(3, { message: "Nature of Work is required" }),
+  nature_of_work: z.string().min(3, { message: "Role Description is required" }),
 });
 const ExperienceForm = () => {
   const { applicationid } = useParams();
@@ -197,7 +197,7 @@ Position / Title
 
                       <div className="flex flex-col">
                         <p className="text-sm font-light text-gray-400">
-                          Nature of Work
+Role Description
                         </p>
                         <p className="text-xl">{educate.nature_of_work}</p>
                       </div>

@@ -163,6 +163,17 @@ Resume & Video Introduction
                   {...register("resume")}
                   required
                 />
+               {application.resume_url && (
+  <a
+    href={application.resume_url}
+    className="inline-block mt-3 p-2 text-yellow-600 italic cursor-pointer"
+    download
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Download Uploaded Resume
+  </a>
+)}
                 {errors.resume && (
                   <p className="text-red-400 text-sm px-4 py-2">
                     {errors.resume.message}
@@ -193,6 +204,18 @@ This is a chance for us to hear directly from you and get a sense of who you are
         {...register("video")}
         required
       />
+
+{application.video_url && (
+  <a
+    href={application.video_url}
+    className="inline-block mt-3 p-2 text-yellow-600 italic cursor-pointer"
+    download
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Download Uploaded Video
+  </a>
+)}
       {errors.video && (
         <p className="text-red-400 text-sm px-4 py-2">
           {errors.video.message}

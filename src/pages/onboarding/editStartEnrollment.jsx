@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { ClipLoader } from "react-spinners";
 import GenderOptions from "@/data/genderOptions";
 import { useNavigate, useParams } from "react-router-dom";
+import { Info } from "lucide-react";
 const ancestryNames = ancestryOptions.map((option) => option.name);
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
@@ -51,6 +52,11 @@ const schema = z.object({
   gender: z.enum(GenderOptions, {
     errorMap: () => ({ message: "Gender must not be empty" }),
   }),
+  address: z.string().min(3, { message: "Address is required" }),
+  address2: z.string().optional(),
+  town : z.string().min(3, { message: "Town / City is required" }),
+  province :  z.string().min(3, { message: "Province / State is required" }),
+  pin:z.string().min(3, { message: "Postal Code is required" }),
 });
 const EditStartEnrollment = () => {
   const { applicationid } = useParams();
@@ -121,7 +127,7 @@ const EditStartEnrollment = () => {
       <OnboardingTopbar />
       <div className="w-full  lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit ">
         <div className="poppins-bold sm:text-[20px] sm:text-center lg:text-left lg:mb-5 sm:mb-3 lg:text-[38px] sm:leading-tight lg:leading-none">
-          Edit Admissions Application
+Admissions Application.
         </div>
         <p className=" font-thin mb-4">
           Please enter your application details below:
@@ -268,8 +274,8 @@ const EditStartEnrollment = () => {
                 )}
               </div>
               <div className="flex flex-col">
-                <span className="mb-2 text-[13px] poppins-regular">
-                  Phone Number
+                <span className="mb-2 text-[13px] poppins-regular flex ">
+                  Phone Number <span className="inline-flex items-center pl-3 gap-2 italic text-neutral-500"> <Info size={15} /> Use international format, e.g., +1 416 123 4567.</span>
                 </span>
 
                 <input
@@ -292,6 +298,104 @@ const EditStartEnrollment = () => {
           <div className="border-t py-8">
             <span className="text-2xl font-medium">Address</span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            
+              <div className="flex flex-col">
+              <span className="mb-2 text-[13px] poppins-regular">
+                  Address
+                </span>
+
+                <input
+                  className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
+                  type="text"
+                  placeholder="Street Address"
+                  required
+                  {...register("address")}
+                />
+                {errors.address && (
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.address.message}
+                  </p>
+                )
+                }
+              </div>{" "}
+              <div className="flex flex-col">
+              <span className="mb-2 text-[13px] poppins-regular">
+            Address 2
+                </span>
+
+                <input
+                  className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
+                  type="text"
+                  placeholder=" Apartment, Suit, Unit etc."
+                  required
+                  {...register("address2")}
+                />
+                {errors.address2 && (
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.address2.message}
+                  </p>
+                )
+                }
+              </div>{" "}
+              <div className="flex flex-col">
+              <span className="mb-2 text-[13px] poppins-regular">
+         Town / City
+                </span>
+
+                <input
+                  className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
+                  type="text"
+                  placeholder=" Town / City"
+                  required
+                  {...register("town")}
+                />
+                {errors.town && (
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.town.message}
+                  </p>
+                )
+                }
+              </div>{" "}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+              <div className="flex flex-col">
+              <span className="mb-2 text-[13px] poppins-regular">
+        Province/State
+                </span>
+
+                <input
+                  className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
+                  type="text"
+                  placeholder=" Province/State"
+                  required
+                  {...register("province")}
+                />
+                {errors.province && (
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.province.message}
+                  </p>
+                )
+                }
+              </div>{" "}
+              <div className="flex flex-col">
+              <span className="mb-2 text-[13px] poppins-regular">
+Postal Code
+                </span>
+
+                <input
+                  className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
+                  type="text"
+                  placeholder="PIN"
+                  required
+                  {...register("pin")}
+                />
+                {errors.pin && (
+                  <p className="text-red-400 text-sm px-4 py-2">
+                    {errors.pin.message}
+                  </p>
+                )
+                }
+              </div>{" "}
+              </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
                   Country of Residence
