@@ -63,3 +63,20 @@ export async function addNewOrder(token, _, orderData) {
   
     return data; 
   }
+
+  export async function findLastOrderForApplication(applicationId) {
+    const { data, error } = await supabase
+      .from("orders")
+      .select("*")
+      .eq("application_id", applicationId)
+      .order("created_at", { ascending: false }) // or use 'id' if you don't have 'created_at'
+      .limit(1);
+  
+    if (error) {
+      console.error("Error fetching last order", error);
+      return null;
+    }
+  
+    return data[0] || null;
+  }
+  

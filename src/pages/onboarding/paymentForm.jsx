@@ -4,6 +4,17 @@ import {
   getOrdersByApplicationId,
   deleteOrder,
 } from "@/api/apiOrders";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button";
 import countries from "@/data/countries";
 import OnboardingTopbar from "@/layout/onboardingTopBar";
@@ -16,6 +27,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useFetch from "@/hooks/use-fetch";
 import { ClipLoader } from "react-spinners";
+// import { AlertDialog } from "radix-ui";
 
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
@@ -37,13 +49,17 @@ const schema = z.object({
   pin: z.string().min(3, { message: "Postal Code is required" }),
 });
 const PaymentForm = () => {
+  const [open, setOpen] = useState(false);
+
   const { applicationid } = useParams();
   const [loading, setLoading] = useState(true);
   const [application, setApplication] = useState([]);
   const [order, setOrder] = useState([]);
+
   const { user } = useUser();
   let appliedStatus = user.unsafeMetadata.applied;
   let stage8 = user.unsafeMetadata.stage8;
+  let stage9 = user.unsafeMetadata.stage9;
 
   let applicationStatus = application.status;
 
@@ -54,7 +70,8 @@ const PaymentForm = () => {
       navigate("/candidate-dashboard");
     }
   }, [applicationStatus]);
-  useEffect(() => {}, [order]);
+ 
+  
   useEffect(() => {
     getOrdersByApplicationId(applicationid)
       .then((data) => setOrder(data))
@@ -80,8 +97,9 @@ const PaymentForm = () => {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
+    defaultValues: order,
   });
-
+  
   const onError = (errors) => {
     console.log("Form errors:", errors);
   };
@@ -92,63 +110,43 @@ const PaymentForm = () => {
     data: dataCreateOrder,
     fn: fnCreateOrder,
   } = useFetch(addNewOrder);
-  const onSubmit = async (data) => {
+
+  const onSubmit = (data) => {
     fnCreateOrder({
       ...data,
 
       application_id: applicationid,
     });
-    const response = await fetch(
-      "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/create-checkout-session",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      }
-    );
-  
-    const result = await response.json();
-    if (result.url) {
-      window.location.href = result.url; // Redirect to checkout
-    } else {
-      console.error("Failed to start checkout session", result);
-    }
   };
- 
 
   useEffect(() => {
     if (dataCreateOrder?.length > 0) {
-      const updateMetadataAndFetch = async () => {
-        try {
-         
-  
-          await user.update({
-            unsafeMetadata: {
-              ...existingMetadata,
-              applied: updatedStatus,
-              stage10: "completed",
-            },
-          });
-  
-          await fetch(
-            "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/create-checkout-session",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            }
-          );
-        } catch (err) {
-          console.error("Error updating unsafeMetadata or creating checkout session:", err);
-        }
-      };
-  
-      updateMetadataAndFetch();
+      const existingMetadata = user.unsafeMetadata || {};
+      if (appliedStatus < 4) {
+        appliedStatus = 4;
+      }
+      user
+        .update({
+          unsafeMetadata: {
+            ...existingMetadata,
+            applied: appliedStatus,
+
+          },
+        })
+        .then(() => {
+          setOpen(true);
+console.log("set open is set to true")
+        })
+        .catch((err) => {
+          console.error("Error updating unsafeMetadata:", err);
+        });
+
+      // Update Clerk unsafeMetadata with new candidate ID
     }
   }, [loadingCreateOrder]);
-  
   return (
     <>
+     
       <OnboardingTopbar />
       <div className="w-full lg:rounded-[60px] lg:p-[60px] sm:p-[20px] sm:mt-0 md:mt-[20px] flex-col bg-white h-fit">
         {application.status === "Submitted" ? (
@@ -427,18 +425,17 @@ const PaymentForm = () => {
               </div>
               <div className="border-t mt-4 pt-8">
                 <div className="flex flex-col items-center gap-2">
-               
-          <Button
-            type="submit"
-            className="rounded-full w-full py-6  bg-black flex justify-center items-center">
-            {loadingCreateOrder ? (
-              <ClipLoader color="white" size={24} />
-            ) : (
-              "Proceed"
-            )}
-          </Button>
-          
-          
+                  <Button
+                    type="submit"
+                    className="rounded-full w-full py-6  bg-black flex justify-center items-center"
+                    disabled={ stage9 && stage9 !== ""}
+                  >
+                    {loadingCreateOrder ? (
+                      <ClipLoader color="white" size={24} />
+                    ) : (
+                      "Proceed"
+                    )}
+                  </Button>
 
                   {stage8 !== "completed" && (
                     <p className="text-red-600 text-sm flex items-center gap-1">
@@ -453,6 +450,40 @@ const PaymentForm = () => {
           </>
         )}
       </div>
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Proceed with Payment?</AlertDialogTitle>
+            <AlertDialogDescription>
+            Would you like to proceed with the payment?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+
+          <form
+            action="https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/create-checkout-session"
+            method="POST"
+          >
+            {/* Any required form data can go here */}
+            <div className="flex justify-end gap-2">
+            <AlertDialogCancel onClick={() => {setOpen(false);
+              navigate("/");
+            }}>Cancel</AlertDialogCancel>
+              <AlertDialogAction type="submit"
+                className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700" onClick={() => {
+
+              // Put your confirm logic here
+              
+            }}>
+Proceed To Pay
+            </AlertDialogAction>
+            </div>
+          </form>
+           
+          
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 };
