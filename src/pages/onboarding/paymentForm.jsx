@@ -118,28 +118,35 @@ const PaymentForm = () => {
 
   useEffect(() => {
     if (dataCreateOrder?.length > 0) {
-      const existingMetadata = user.unsafeMetadata || {};
-      if (appliedStatus < 4) {
-        appliedStatus = 4;
-      }
-      user
-        .update({
-          unsafeMetadata: {
-            ...existingMetadata,
-            applied: appliedStatus,
-            stage10: "completed",
-          },
-        })
-        .then(() => {
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.error("Error updating unsafeMetadata:", err);
-        });
-
-      // Update Clerk unsafeMetadata with new candidate ID
+      const updateMetadataAndFetch = async () => {
+        try {
+         
+  
+          await user.update({
+            unsafeMetadata: {
+              ...existingMetadata,
+              applied: updatedStatus,
+              stage10: "completed",
+            },
+          });
+  
+          await fetch(
+            "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/create-checkout-session",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            }
+          );
+        } catch (err) {
+          console.error("Error updating unsafeMetadata or creating checkout session:", err);
+        }
+      };
+  
+      updateMetadataAndFetch();
     }
   }, [loadingCreateOrder]);
+  
   return (
     <>
       <OnboardingTopbar />
