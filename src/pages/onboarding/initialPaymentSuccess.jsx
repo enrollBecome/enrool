@@ -58,89 +58,81 @@ const InitialPaymentSuccess = () => {
           });
         })
         .then(()=>{
-          if (mail === false) {
-            const sendInvoiceEmail = async () => {
-              try {
-                const response = await fetch("https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-emaile", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    to: order.email,
-                    subject: "Invoice for Application Fee – Becoming Institute",
-                    html: `<!DOCTYPE html>
-                      <html lang="en">
-                      <head>
-                          <meta charset="UTF-8" />
-                          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-                          <title>Invoice – Becoming Institute</title>
-                          <style>
-                              body { font-family: 'Poppins', sans-serif; background: #f9f9f9; margin: 0; padding: 20px; }
-                              .container { background: #fff; max-width: 600px; margin: 0 auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); overflow: hidden; }
-                              .header { background: #bc9c22; padding: 30px; text-align: center; color: #fff; }
-                              .header h1 { margin: 0; font-size: 22px; }
-                              .content { padding: 30px; color: #333; }
-                              .content h2 { font-size: 18px; margin-bottom: 10px; }
-                              .content p { line-height: 1.6; }
-                              .details { background: #f3f3f3; padding: 15px; border-radius: 6px; margin: 20px 0; }
-                              .details p { margin: 4px 0; }
-                              .footer { background: #f0f0f0; padding: 20px; font-size: 14px; text-align: center; color: #555; }
-                          </style>
-                      </head>
-                      <body>
-                          <div class="container">
-                              <div class="header">
-                                  <h1>Invoice – Application Processing Fee</h1>
-                              </div>
-                              <div class="content">
-                                  <p>Dear ${order.first_name} ${order.last_name},</p>
-                                  <p>Thank you for your interest in the <strong>Becoming Institute’s 12-Month Trauma Recovery Certificate Program</strong>.</p>
-                                  <p>To move forward with your application, please complete the $150 processing fee below. This <strong>non-refundable fee</strong> supports the review of your application, coordination of your interview, and early access to orientation materials that will help you prepare for this transformative journey.</p>
-          
-                                  <h2>Billing Information</h2>
-                                  <div class="details">
-                                      <p><strong>Name:</strong> ${order.first_name} ${order.last_name}</p>
-                                      <p><strong>Email:</strong> ${order.email}</p>
-                                      <p><strong>Phone:</strong> ${order.phone}</p>
-                                      <p><strong>Address:</strong> ${order.address}, ${order.address2}, ${order.town}, ${order.province}, ${order.pin}</p>
-                                  </div>
-          
-                                  <h2>Invoice Summary</h2>
-                                  <div class="details">
-                                      <p><strong>Application Fee:</strong> $150 USD</p>
-                                      <p><strong>Status:</strong> Paid</p>
-                                      <p><strong>Note:</strong> This fee is non-refundable.</p>
-                                  </div>
-          
-                                  <p>Please proceed to the application portal to make the payment.</p>
-                                  <p>Warm regards,<br>The Admissions Team<br>Becoming Institute Inc.<br><a href="https://www.becomingmethod.com">www.becomingmethod.com</a></p>
-                              </div>
-                              <div class="footer">
-                                  &copy; 2024 Becoming Institute Inc. All rights reserved.
-                              </div>
-                          </div>
-                      </body>
-                      </html>`
-                  }),
-                });
-          
-                if (!response.ok) {
-                  const error = await response.json();
-                  console.error("Error sending invoice email:", error);
-                  // Handle the error appropriately (e.g., show an error message)
-                } else {
-                  console.log("Invoice email sent successfully.");
-                }
-              } catch (error) {
-                console.error("Unexpected error sending invoice email:", error);
-                // Handle the error appropriately
+          const sendInvoiceEmail = async () => {
+            const response = await fetch(
+              "https://tallkizetxyhcvjujgzw.supabase.co/functions/v1/send-emaile",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  to: order.email,
+                  subject: "Invoice for Application Fee – Becoming Institute",
+                  html: `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <title>Invoice – Becoming Institute</title>
+            <style>
+                body { font-family: 'Poppins', sans-serif; background: #f9f9f9; margin: 0; padding: 20px; }
+                .container { background: #fff; max-width: 600px; margin: 0 auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); overflow: hidden; }
+                .header { background: #bc9c22; padding: 30px; text-align: center; color: #fff; }
+                .header h1 { margin: 0; font-size: 22px; }
+                .content { padding: 30px; color: #333; }
+                .content h2 { font-size: 18px; margin-bottom: 10px; }
+                .content p { line-height: 1.6; }
+                .details { background: #f3f3f3; padding: 15px; border-radius: 6px; margin: 20px 0; }
+                .details p { margin: 4px 0; }
+                .footer { background: #f0f0f0; padding: 20px; font-size: 14px; text-align: center; color: #555; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>Invoice – Application Processing Fee</h1>
+                </div>
+                <div class="content">
+                    <p>Dear ${order.first_name} ${order.last_name},</p>
+                    <p>Thank you for your interest in the <strong>Becoming Institute’s 12-Month Trauma Recovery Certificate Program</strong>.</p>
+                    <p>To move forward with your application, please complete the $150 processing fee below. This <strong>non-refundable fee</strong> supports the review of your application, coordination of your interview, and early access to orientation materials that will help you prepare for this transformative journey.</p>
+        
+                    <h2>Billing Information</h2>
+                    <div class="details">
+                        <p><strong>Name:</strong> ${order.first_name} ${order.last_name}</p>
+                        <p><strong>Email:</strong> ${order.email}</p>
+                        <p><strong>Phone:</strong> ${order.phone}</p>
+                        <p><strong>Address:</strong> ${order.address}, ${order.address2}, ${order.town}, ${order.province}, ${order.pin}</p>
+                    </div>
+        
+                    <h2>Invoice Summary</h2>
+                    <div class="details">
+                        <p><strong>Application Fee:</strong> $150 USD</p>
+                        <p><strong>Status:</strong> Paid</p>
+                        <p><strong>Note:</strong> This fee is non-refundable.</p>
+                    </div>
+        
+                    <p>Please proceed to the application portal to make the payment.</p>
+                    <p>Warm regards,<br>The Admissions Team<br>Becoming Institute Inc.<br><a href="https://www.becomingmethod.com">www.becomingmethod.com</a></p>
+                </div>
+                <div class="footer">
+                    &copy; 2024 Becoming Institute Inc. All rights reserved.
+                </div>
+            </div>
+        </body>
+        </html>`
+                }),
               }
-            };
-          
-            sendInvoiceEmail();
-            setMail(true);
-          }
+            );
+        
+            if (!response.ok) {
+              const error = await response.json();
+              console.error("Error sending invoice email:", error);
+            }
+          };
+        
+          sendInvoiceEmail();
         
         
         })
@@ -148,7 +140,7 @@ const InitialPaymentSuccess = () => {
           console.error("Error in application update or metadata update:", err);
         });
     }
-  }, [applicationid,order, session, user, fnUpdateApplication]); // Add relevant dependencies
+  }, [order]); // Add relevant dependencies
 
 
 
