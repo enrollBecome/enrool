@@ -25,9 +25,9 @@ const ancestryNames = ancestryOptions.map((option) => option.name);
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
   last_name: z.string().min(3, { message: "Last name is required" }),
-  phone: z.string().regex(
-    /^[+]?[0-9]{7,15}$/, // Validates phone numbers with optional "+" and 7-15 digits
-    "Invalid phone number. Must contain digits and start with '+'"
+phone: z.string().regex(
+    /^\+[0-9]{7,15}$/,
+    "Invalid phone number. Must start with '+' and contain 7 to 15 digits with no spaces"
   ),
 
   dob: z.string().date(),

@@ -24,10 +24,10 @@ const ancestryNames = ancestryOptions.map((option) => option.name);
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
   last_name: z.string().min(3, { message: "Last name is required" }),
-  phone: z.string().regex(
-    /^[+]?[0-9]{7,15}$/, // Validates phone numbers with optional "+" and 7-15 digits
-    "Invalid phone number. Must contain digits and start with '+'"
-  ),
+ phone: z.string().regex(
+  /^\+[0-9]{7,15}$/,
+  "Invalid phone number. Must start with '+' and contain 7 to 15 digits with no spaces"
+),
 
   dob: z.string().date(),
   middle_name: z.string().optional(),
@@ -275,7 +275,7 @@ Admissions Application.
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular flex ">
-                  Phone Number <span className="inline-flex items-center pl-3 gap-2 italic text-neutral-500"> <Info size={15} /> Use international format, e.g., +1 416 123 4567.</span>
+                  Phone Number <span className="inline-flex items-center pl-3 gap-2 italic text-neutral-500"> <Info size={15} /> Use international format, e.g., +14161234567.</span>
                 </span>
 
                 <input

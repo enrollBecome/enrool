@@ -126,6 +126,64 @@ const AdminViewApplication = () => {
                   </div>
                 </div>
               </div>
+              {/* Address Information  */}
+              <div className="border-t mt-4 pt-8">
+                <span className="text-2xl font-medium  seasons text-gray-400">
+                  Address
+                </span>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      Address
+                    </span>
+                    <span className="mb-2 text-2xl ">
+                      {application.address}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      Address 2
+                    </span>
+                    <span className="mb-2 text-2xl ">
+                      {application.address2}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                     Town / City
+                    </span>
+                    <span className="mb-2 text-2xl ">
+                      {application.town}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      Province / State
+                    </span>
+                    <span className="mb-2 text-2xl ">
+                      {application.province}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                     Postal Code
+                    </span>
+                    <span className="mb-2 text-2xl ">
+                      {application.pin}
+                    </span>
+                  </div>
+                 
+                
+                  <div className="flex flex-col">
+                    <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
+                      Country of Residence
+                    </span>
+                    <span className="mb-2 text-2xl ">
+                      {application.country}
+                    </span>
+                  </div>
+                </div>
+              </div>
               {/* Education & Language  */}
               <div className="border-t mt-4 pt-8">
                 <span className="text-2xl font-medium  seasons text-gray-400">
