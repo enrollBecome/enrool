@@ -32,10 +32,8 @@ import { ClipLoader } from "react-spinners";
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
   last_name: z.string().min(3, { message: "Last name is required" }),
-  phone: z.string().regex(
-    /^[+]?[0-9]{7,15}$/, // Validates phone numbers with optional "+" and 7-15 digits
-    "Invalid phone number. Must contain digits and start with '+'"
-  ),
+phone: z.string().min(9, { message: "Please Enter a Correct Phone Number" }),
+
   email: z.string().email({ message: "Invalid email address" }),
 
   country: z.enum(countries, {
@@ -374,7 +372,7 @@ console.log("set open is set to true")
 
                     <input
                       className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
-                      type="text"
+                      type="number"
                       placeholder="Phone"
                       required
                       {...register("phone")}
