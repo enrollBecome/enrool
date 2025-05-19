@@ -20,16 +20,18 @@ import { useNavigate } from "react-router-dom";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Info, Terminal } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import CountryCode from "@/data/phoneCode";
 
 const ancestryNames = ancestryOptions.map((option) => option.name);
 const schema = z.object({
   first_name: z.string().min(3, { message: "First Name is required" }),
   last_name: z.string().min(3, { message: "Last name is required" }),
-phone: z.string().regex(
-    /^\+[0-9]{7,15}$/,
-    "Invalid phone number. Must start with '+' and contain 7 to 15 digits with no spaces"
-  ),
-
+  phone: z.string().min(9, { message: "Please Enter a Correct Phone Number" }),
+  country_code: z.enum(CountryCode, {
+    errorMap: () => ({
+      message: "Country Code must not be empty",
+    }),
+  }),
   dob: z.string().date(),
   middle_name: z.string().optional(),
   former_name: z.string().optional(),
@@ -55,9 +57,9 @@ phone: z.string().regex(
   }),
   address: z.string().min(3, { message: "Address is required" }),
   address2: z.string().optional(),
-  town : z.string().min(3, { message: "Town / City is required" }),
-  province :  z.string().min(3, { message: "Province / State is required" }),
-  pin:z.string().min(3, { message: "Postal Code is required" }),
+  town: z.string().min(3, { message: "Town / City is required" }),
+  province: z.string().min(3, { message: "Province / State is required" }),
+  pin: z.string().min(3, { message: "Postal Code is required" }),
 });
 const StartEnrollment = () => {
   const { toast } = useToast();
@@ -505,21 +507,67 @@ const StartEnrollment = () => {
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
-                  Phone Number<span className="inline-flex items-center pl-3 gap-2 italic text-neutral-500"> <Info size={15} /> Use international format, e.g., +1 416 123 4567.</span>
+                  Phone Number
+                  {/* <span className="inline-flex items-center pl-3 gap-2 italic text-neutral-500"> <Info size={15} /> Use international format, e.g., +1 416 123 4567.</span> */}
                 </span>
-
-                <input
-                  className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
-                  type="number"
-                  placeholder="Add Phone No"
-                  required
-                  {...register("phone")}
-                />
-                {errors.phone && (
-                  <p className="text-red-400 text-sm px-4 py-2">
-                    {errors.phone.message}
-                  </p>
-                )}
+                <div className="w-full flex">
+                  <div className="w-1/5 pr-4">
+                    <Controller
+                      name="country_code"
+                      control={control}
+                      render={({ field }) => (
+                        <div className="relative">
+                          <select
+                            {...field}
+                            value={field.value || ""}
+                            onChange={(e) => field.onChange(e.target.value)}
+                            className={`focus:border-stone-400 text-[1rem] focus:outline-none border-[1px] text-neutral-400 focus:text-zinc-950 focus:border-[1px] h-14 border-opacity-20 rounded-full p-4 text-base w-full ${
+                              errors.country_code
+                                ? "border-red-400 border-2"
+                                : ""
+                            }`}
+                          >
+                            <option
+                              value=""
+                              disabled
+                              className="text-neutral-400"
+                            >
+                              Country Code
+                            </option>
+                            {CountryCode.map((country_code, index) => (
+                              <option
+                                key={index}
+                                value={country_code}
+                                className="text-zinc-950"
+                              >
+                                {country_code}
+                              </option>
+                            ))}
+                          </select>
+                          {errors.country_code && (
+                            <p className="text-red-400 text-sm px-4 py-2">
+                              {errors.country_code.message}
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    />
+                  </div>
+                  <div className="flex flex-col w-4/5">
+                    <input
+                      className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
+                      type="number"
+                      placeholder="Add Phone No"
+                      required
+                      {...register("phone")}
+                    />
+                    {errors.phone && (
+                      <p className="text-red-400 text-sm px-4 py-2">
+                        {errors.phone.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -527,9 +575,8 @@ const StartEnrollment = () => {
           <div className="border-t py-8">
             <span className="text-2xl font-medium">Address</span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            
               <div className="flex flex-col">
-              <span className="mb-2 text-[13px] poppins-regular">
+                <span className="mb-2 text-[13px] poppins-regular">
                   Address
                 </span>
 
@@ -544,12 +591,11 @@ const StartEnrollment = () => {
                   <p className="text-red-400 text-sm px-4 py-2">
                     {errors.address.message}
                   </p>
-                )
-                }
+                )}
               </div>{" "}
               <div className="flex flex-col">
-              <span className="mb-2 text-[13px] poppins-regular">
-            Address 2
+                <span className="mb-2 text-[13px] poppins-regular">
+                  Address 2
                 </span>
 
                 <input
@@ -563,12 +609,11 @@ const StartEnrollment = () => {
                   <p className="text-red-400 text-sm px-4 py-2">
                     {errors.address2.message}
                   </p>
-                )
-                }
+                )}
               </div>{" "}
               <div className="flex flex-col">
-              <span className="mb-2 text-[13px] poppins-regular">
-         Town / City
+                <span className="mb-2 text-[13px] poppins-regular">
+                  Town / City
                 </span>
 
                 <input
@@ -582,48 +627,45 @@ const StartEnrollment = () => {
                   <p className="text-red-400 text-sm px-4 py-2">
                     {errors.town.message}
                   </p>
-                )
-                }
+                )}
               </div>{" "}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-              <div className="flex flex-col">
-              <span className="mb-2 text-[13px] poppins-regular">
-        Province/State
-                </span>
+                <div className="flex flex-col">
+                  <span className="mb-2 text-[13px] poppins-regular">
+                    Province/State
+                  </span>
 
-                <input
-                  className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
-                  type="text"
-                  placeholder=" Province/State"
-                  required
-                  {...register("province")}
-                />
-                {errors.province && (
-                  <p className="text-red-400 text-sm px-4 py-2">
-                    {errors.province.message}
-                  </p>
-                )
-                }
-              </div>{" "}
-              <div className="flex flex-col">
-              <span className="mb-2 text-[13px] poppins-regular">
-Postal Code
-                </span>
+                  <input
+                    className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
+                    type="text"
+                    placeholder=" Province/State"
+                    required
+                    {...register("province")}
+                  />
+                  {errors.province && (
+                    <p className="text-red-400 text-sm px-4 py-2">
+                      {errors.province.message}
+                    </p>
+                  )}
+                </div>{" "}
+                <div className="flex flex-col">
+                  <span className="mb-2 text-[13px] poppins-regular">
+                    Postal Code
+                  </span>
 
-                <input
-                  className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
-                  type="text"
-                  placeholder="PIN"
-                  required
-                  {...register("pin")}
-                />
-                {errors.pin && (
-                  <p className="text-red-400 text-sm px-4 py-2">
-                    {errors.pin.message}
-                  </p>
-                )
-                }
-              </div>{" "}
+                  <input
+                    className="focus:border-stone-400 focus:outline-none border-[1px] border-opacity-20 rounded-full p-4 text-base"
+                    type="text"
+                    placeholder="PIN"
+                    required
+                    {...register("pin")}
+                  />
+                  {errors.pin && (
+                    <p className="text-red-400 text-sm px-4 py-2">
+                      {errors.pin.message}
+                    </p>
+                  )}
+                </div>{" "}
               </div>
               <div className="flex flex-col">
                 <span className="mb-2 text-[13px] poppins-regular">
