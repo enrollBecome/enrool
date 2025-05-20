@@ -6,7 +6,7 @@ import { Download } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { ClipLoader, PropagateLoader } from 'react-spinners';
-
+import DOMPurify from 'dompurify';
 const AdminViewApplication = () => {
     const { applicationid } = useParams();
     const [loading, setLoading] = useState(true);
@@ -453,8 +453,10 @@ const AdminViewApplication = () => {
                     <span className="mb-2 text-gray-500 text-[13px] poppins-regular">
                       Personal Statement
                     </span>
-                    <span className="mb-2 text-2xl ">
-                    dangerouslySetInnerHTML={{ __html: application.statement_of_purpose }}
+                    <span className="mb-2 text-2xl "    dangerouslySetInnerHTML={{
+    __html: DOMPurify.sanitize(application.statement_of_purpose),
+  }}>
+                 
                     </span>
                   </div>
                 </div>
