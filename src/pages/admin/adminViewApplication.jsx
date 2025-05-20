@@ -113,7 +113,7 @@ const AdminViewApplication = () => {
                       Phone Number
                     </span>
                     <span className="mb-2 text-2xl ">
-                      {application.phone}
+                     {application.country_code}{" - "} {application.phone}
                     </span>
                   </div>
                   <div className="flex flex-col">
@@ -454,7 +454,7 @@ const AdminViewApplication = () => {
                       Personal Statement
                     </span>
                     <span className="mb-2 text-2xl ">
-                      {application.statement_of_purpose}
+                    dangerouslySetInnerHTML={{ __html: application.statement_of_purpose }}
                     </span>
                   </div>
                 </div>
