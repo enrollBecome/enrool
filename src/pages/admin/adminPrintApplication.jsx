@@ -415,7 +415,9 @@ const AdminPrintApplication = () => {
                       Personal Statement :
                     </label>
                     <div className="text-xl w-full bg-slate-100 p-4 rounded ">
-                      {application.statement_of_purpose}
+                         <span className="mb-2 text-2xl "    dangerouslySetInnerHTML={{
+                         __html: DOMPurify.sanitize(application.statement_of_purpose),
+                       }}></span>
                     </div>
                   </div>
 
